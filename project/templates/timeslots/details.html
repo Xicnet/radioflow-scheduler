@@ -1,0 +1,21 @@
+{% load thumbnail %}
+{% load tz %}
+
+<span class="details-streamer">{{ timeslot.streamer.name }}</span>
+{% localtime off %}
+<br/>
+<br/>on {{ timeslot.slot }} (<a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time" target="_blank">UTC</a>)
+{% endlocaltime %}
+<br />
+<div class="details-logo">
+	{% if timeslot.streamer.image %}
+		<img src="{% thumbnail timeslot.streamer.image_path 160x160 crop=smart %}" alt="" />
+	{% else %}
+		<img src="/media/img/streamer-default.jpg" alt="" />
+	{% endif %}
+</div>
+<br />
+{{ timeslot.streamer.description|linebreaks }}
+<br />
+<br />
+<a href="{{ timeslot.streamer.web }}" target="_blank">{{ timeslot.streamer.web }}</a>

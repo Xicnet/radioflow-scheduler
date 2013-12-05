@@ -1,0 +1,78 @@
+	<script language="javascript">
+		$(document).ready(function() {
+		 $("body").on("submit", "#suscription-form", function(event){
+			$.ajax({
+				url: action,
+				type: 'POST',
+				data: $(this).serialize(),
+				success: function(data){
+					$('.error-message').html('');
+					$('.field-error').removeClass('field-error');
+					if (data.errors){ 
+						for (field in data.errors){
+							var error_msg = data.errors[field] + '<br />';
+							var field_error = $('#'+field+'-error');
+							field_error.html(error_msg);
+							field_error.parent().addClass('field-error');
+						}
+						return false;
+					}
+					streamer_data = '';
+					if(data.taken_delta) {
+						streamer_data += '<div class="just-taken red-bold">';
+						streamer_data += 'We are sorry, the slot was taken ' + data.taken_delta + ' seconds before you!';
+						streamer_data += '<br />Please, choose another one.';
+						streamer_data += '</div>';
+					} else {
+						streamer_data += '<a href="#" class="details" id="streamer-details-'+data.streamer_id+'">'+data.name+'</a>';
+						thisParent.html(streamer_data);
+						thisParent.addClass('taken');
+						thisParent.addClass('reserved');
+						thisParent.append('(reserved)');
+						thisParent.append('<br />Check your e-mail to confirm your reservation!');
+						thisParent.append('<br /><span class="red-bold">Also check your spam folder.</span>');
+						thisParent.append('<br />');
+						thisParent.append('<br />In case you don\'t confirm your reservation within 1 hour, it will be cancelled.');
+						thisParent.append('<br />');
+						thisParent.append("<br />If you don't receive our verification e-mail");
+						thisParent.append('<br />feel free to contact us at: <a href="mailto:streamers@babelfest.tk">streamers@babelfest.tk</a>');
+					}
+					$(window).scrollTop($('#'+slot_cell).offset().top);
+				}
+			});
+		});
+
+		$(function() {
+			AjaxUploadWidget.autoDiscover();
+		});
+
+		$("body").on("click", ".suscription-close", function(){
+		   	$("#suscription-form").slideUp();
+		});
+	});
+
+	</script>
+
+
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form id="suscription-form" action="/suscription_save/" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="suscription-close">[X]</div>
+
+    <table class="suscription-form">
+    {% for field in suscription_form %}
+        <div class="fieldWrapper">
+            <tr><th class="suscription-label">{{ field.label_tag }} {% if field.help_text %}<br/>( {{ field.help_text }} ) {% endif %}</th><td>{{ field }}<br/> <span id="{{ field.name }}-error" class="error-message"></span></td></tr>
+        </div>
+    {% endfor %}
+    </table>
+
+    <input type="hidden" name="hour" value="{{ hour }}" />
+    <input type="hidden" name="day" value="{{ day }}" />
+    <center><input class="submit" type="submit" value="Get my slot!" /></center>
+    </form>
+
+    {{ programs }}
+    {% for program in programs %}
+	{{ program.name }}<br/>...
+    {% endfor %}

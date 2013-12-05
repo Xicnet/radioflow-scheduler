@@ -1,0 +1,7 @@
+virtualenv --no-site-packages --no-setuptools .
+. bin/activate
+pip install distribute
+python bootstrap.py
+bin/buildout -v -N
+#cd tools ; ./loaddata
+#bin/django collectstatic

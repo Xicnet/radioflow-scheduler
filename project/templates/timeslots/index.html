@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block headcustom %}
+
+{% endblock %}
+
+{% block body %}
+
+
+{% for program in programs %}
+
+	{{ program.name }} - {{ program.start }} - {{ program.end }}<br>
+
+{% endfor %}
+
+
+{% endblock %}
