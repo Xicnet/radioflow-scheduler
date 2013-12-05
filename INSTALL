@@ -5,3 +5,8 @@ python bootstrap.py
 bin/buildout -v -N
 #cd tools ; ./loaddata
 #bin/django collectstatic
+
+# su - postgres
+# createuser -P rna
+# createdb rna -O rna
+
