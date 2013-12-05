@@ -17,3 +17,4 @@ buildout/
 share/
 static/
 media/
+local/
