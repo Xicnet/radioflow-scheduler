@@ -48,12 +48,8 @@ def program(request, program_id=None):
     program_form = ProgramForm()
     if request.method == 'POST':
         program_form = ProgramForm(request.POST)
-        print "REQUEST IS POST"
-        print request.POST
         if program_form.is_valid():
             image = request.FILES.get('image', None)
-            #image =  program_form.cleaned_data['image']
-            print "IMAGE: ", image
             if True:
                 if not program:
                     program = Program.objects.create(user=request.user)
@@ -67,12 +63,10 @@ def program(request, program_id=None):
                     program.image    = image
                 program.save()
         else:
-            print program_form.errors
             program_form = ProgramForm(request.POST)
         return redirect('root')
     else:
         if program_id:
-            print "EDIT"
             program_form = ProgramForm(data=model_to_dict(program))
 
     return render_to_response(
