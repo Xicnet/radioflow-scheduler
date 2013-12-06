@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.timezone import utc
 from image_cropping import ImageRatioField
+from django.contrib.auth.models import User
 
 import datetime
 import os
@@ -30,7 +31,8 @@ class Program(models.Model):
     days        = models.ManyToManyField(Day)
     start       = models.TimeField(null=True)
     end         = models.TimeField(null=True)
-    created      = models.DateTimeField(default=datetime.datetime.now().replace(tzinfo=utc))
+    user        = models.ForeignKey(User)
+    created     = models.DateTimeField(default=datetime.datetime.now().replace(tzinfo=utc))
 
     def save(self, *args, **kwargs):
         return super(Program, self).save(*args, **kwargs)
