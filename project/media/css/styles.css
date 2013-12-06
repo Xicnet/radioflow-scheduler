@@ -34,7 +34,12 @@ tr, td, .program-form {
 	text-align: left;
 }
 
-input[type=text] {
+input[type=submit] {
+	width: 15%;
+}
+
+input[type=text],
+input[type=password] {
 	width: 97%;
 	outline: none;
 	border: 1px solid #000;
@@ -57,7 +62,7 @@ input.submit {
 	width: 41%;
 }
 
-table {
+table.program-form, table.program-listing {
 	border: solid #000 1px;
 	margin: 10px 10px 10px 10px;
 	padding: 10px 10px 10px 10px;
@@ -77,7 +82,7 @@ li {
 }
 
 .rowA {
-	background-color: #bcbcbc;
+	background-color: #cdcdcd;
 }
 .rowB {
 	background-color: #dfdfdf;

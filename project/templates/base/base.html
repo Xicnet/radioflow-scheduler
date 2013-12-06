@@ -17,7 +17,12 @@
 <body class="blog custom-background background-image header-image simple-menu sidebars" id="body">
 
 {% if request.user.is_authenticated %}
-<h2> {{ user.first_name }} - Programación Semanal</h2>
+<table>
+	<tr>
+		<td><img src="/media/img/{{ user.username }}.png"></td>
+		<td><h2>Programación Semanal</h2></td>
+	</tr>
+</table>
 <p>
 	<a href="/">Inicio</a>
 	| <a href="/program/">Agregar programa</a>
