@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+
+{% block headcustom %}
+<script language="javascript">
+/*
+$(document).ready(function() {
+	$(function() {
+		AjaxUploadWidget.autoDiscover();
+	});
+});
+*/
+</script>
+
+{{ form.media }}
+
+{% endblock %}
+
+
+{% block body %}
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+	{% if program.image %}
+	<img src="{{ program.image.url }}" width="320">
+	{% endif %}
+
+    <form id="suscription-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table class="suscription-form">
+    {% for field in program_form %}
+        <div class="fieldWrapper">
+            <tr><th class="suscription-label">{{ field.label_tag }} {% if field.help_text %}<br/>( {{ field.help_text }} ) {% endif %}</th><td>{{ field }}<br/> <span id="{{ field.name }}-error" class="error-message"></span></td></tr>
+        </div>
+    {% endfor %}
+    </table>
+
+    <input class="submit" type="submit" value="Agregar programa" />
+    </form>
+
+    {{ programs }}
+    {% for program in programs %}
+	{{ program.name }}<br/>...
+    {% endfor %}
+{% endblock %}

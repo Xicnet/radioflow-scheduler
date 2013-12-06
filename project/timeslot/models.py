@@ -21,7 +21,7 @@ class Program(models.Model):
 
     name        = models.CharField(max_length=256)
     description = models.TextField(max_length=1024, null=True)
-    moderator   = models.CharField(max_length=256, null=True)
+    moderator   = models.CharField(max_length=1024, null=True)
     #facebook   = models.URLField(max_length=512, null=True)
     #twitter    = models.URLField(max_length=512, null=True)
     #web        = models.URLField(max_length=512, null=True)

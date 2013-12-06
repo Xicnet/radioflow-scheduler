@@ -12,7 +12,7 @@
 	{% for k,v in day.items %}
 		{{ k }}<p>
 		{% for i in v %}
-			{{ i.start }} a {{ i.end }}  <b>{{ i.name }}</b> [ USER: {{ i.user.username }} ]<br>
+			{{ i.start }} a {{ i.end }}  <b><a href="/program/{{ i.id  }}/">{{ i.name }}</a></b> [ USER: {{ i.user.username }} ]<br>
 		{% endfor %}
 	{% endfor %}
 	<hr>
