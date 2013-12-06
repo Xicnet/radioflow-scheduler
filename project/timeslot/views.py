@@ -47,6 +47,7 @@ def program(request, program_id=None):
     if request.method == 'POST':
         program_form = ProgramForm(request.POST)
         print "REQUEST IS POST"
+        print request.POST
         if program_form.is_valid():
             image = request.FILES.get('image', None)
             #image =  program_form.cleaned_data['image']
@@ -59,12 +60,14 @@ def program(request, program_id=None):
                 program.description  = program_form.cleaned_data['description']
                 program.start        = program_form.cleaned_data['start']
                 program.end          = program_form.cleaned_data['end']
+                program.days         = program_form.cleaned_data['days']
                 if image:
                     program.image    = image
                 program.save()
         else:
             print program_form.errors
             program_form = ProgramForm(request.POST)
+        return redirect('root')
     else:
         if program_id:
             print "EDIT"

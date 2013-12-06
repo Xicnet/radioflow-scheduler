@@ -6,7 +6,9 @@
 
 {% block body %}
 
-<p><a href="/accounts/logout/">Salir</a></p>
+<p>
+	<a href="/accounts/logout/">Salir</a> | <a href="/program/">Agregar programa</a>
+</p>
 
 {% for day in programs %}
 	{% for k,v in day.items %}
