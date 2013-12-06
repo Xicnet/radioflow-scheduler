@@ -39,6 +39,7 @@ input[type=text] {
 	outline: none;
 	border: 1px solid #000;
 	padding: 3px;
+	text-align: right;
 }
 
 input[type=textarea] {
@@ -53,7 +54,7 @@ td .field-error input {
 }
 
 input.submit {
-	width: 95%;
+	width: 41%;
 }
 
 table {
@@ -93,4 +94,14 @@ td.program-name:hover {
 
 a:hover {
 	color: red;
+}
+
+.form-help-text {
+	font-size: 0.7em;
+	font-weight: bold;
+}
+
+.program-image {
+	text-align: center;
+	background: #dfdfdf;
 }

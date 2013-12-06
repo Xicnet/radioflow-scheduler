@@ -20,21 +20,28 @@ $(document).ready(function() {
   {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 
-	{% if program.image %}
-	<img src="{{ program.image.url }}" width="320">
-	{% endif %}
 
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
     <table class="program-form">
+	{% if program.image %}
+	<tr>
+		<td colspan="2" class="program-image">
+			<img src="{{ program.image.url }}" width="320">
+		</td>
+	</tr>
+	{% endif %}
     {% for field in program_form %}
 	<tr>
-		<td class="program-field-label">{{ field.label_tag }} {% if field.help_text %}<br/>( {{ field.help_text }} ) {% endif %}</td>
-		<td class="program-field-name {% if field.name == 'days' %} days{% endif %}">{{ field }}<br/> <span id="{{ field.name }}-error" class="error-message"></span></td>
+		<td class="program-field-label">{{ field.label_tag }}</td>
+		<td class="program-field-name {% if field.name == 'days' %} days{% endif %}">{{ field }}
+			{% if field.help_text %}<br/><span class="form-help-text">{{ field.help_text }}</span>{% endif %}
+			<br/><span id="{{ field.name }}-error" class="error-message"></span>
+		</td>
 	</tr>
     {% endfor %}
     </table>
 
-    <input class="submit" type="submit" value="Agregar programa" />
+    <input class="submit" type="submit" value="Guardar programa" />
     </form>
 
     {{ programs }}

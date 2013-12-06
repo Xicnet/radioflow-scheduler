@@ -32,8 +32,8 @@ class ProgramForm(forms.Form):
     #email     = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     #days      = forms.SelectMultiple(choices=('1980', '1981', '1982'))
     days      = forms.ModelMultipleChoiceField(label="Dias", queryset=Day.objects.all(), widget=forms.CheckboxSelectMultiple)
-    image     = forms.ImageField(label="Imagen", required=False)
-    start     = forms.TimeField(label="Comienzo", required=False)
+    image     = forms.ImageField(label="Imagen", required=False, help_text="JPG/PNG a 320x125 o 640x250")
+    start     = forms.TimeField(label="Comienzo", required=False, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
     end       = forms.TimeField(label="Fin", required=False)
 
 
