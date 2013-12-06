@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     url(r'^suscription_save/$','timeslot.views.suscription_save'),
     url(r'^verify_email/(?P<code>[a-z0-9_\-]+)', 'timeslot.views.verify_email', name='verify_email'),
 
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/logout/$', 'timeslot.views.logout_view'),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

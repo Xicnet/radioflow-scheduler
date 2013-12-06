@@ -16,7 +16,7 @@ class Day(models.Model):
 
 class Program(models.Model):
     def __unicode__(self):
-        return self.nombre
+        return self.name
 
     name        = models.CharField(max_length=256)
     description = models.TextField(max_length=1024, null=True)

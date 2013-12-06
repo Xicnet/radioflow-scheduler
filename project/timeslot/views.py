@@ -10,13 +10,16 @@ from django.utils.timezone import utc
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
-from timeslot.models import Program
+from timeslot.models import Program, Day
 from timeslot.forms import SuscriptionForm
 
 from constants import *
 
 
+@login_required
 def index(request):
     suscription_form = SuscriptionForm()
     if request.method == 'POST':
@@ -44,7 +47,10 @@ def index(request):
     else:
         suscription_form = SuscriptionForm(request.POST)
 
-    programs = Program.objects.all().order_by('start')
+    programs = []
+    days = Day.objects.all()
+    for day in days:
+        programs.append( { day: Program.objects.filter(days__in=[day]).order_by('start') } )
 
     return render_to_response(
             'timeslots/index.html',
@@ -59,7 +65,7 @@ def index(request):
 def now_playing(request):
     out_json = ''
     weekday = datetime.datetime.now().weekday() +1
-    programs = Program.objects.filter(dias__in=[weekday])
+    programs = Program.objects.filter(days__in=[weekday])
     for program in programs:
         now = datetime.datetime.now().time()
         if program.comienzo < now < program.fin:
@@ -175,3 +181,7 @@ def xhr_details(request):
         message = "Hello"
     return HttpResponse(message)
 
+
+def logout_view(request):
+    print logout(request)
+    return redirect('root')

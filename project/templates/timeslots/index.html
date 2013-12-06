@@ -6,12 +6,16 @@
 
 {% block body %}
 
+<p><a href="/accounts/logout/">Salir</a></p>
 
-{% for program in programs %}
-
-	{{ program.name }} - {{ program.start }} - {{ program.end }}<br>
-
+{% for day in programs %}
+	{% for k,v in day.items %}
+		{{ k }}<p>
+		{% for i in v %}
+			{{ i.start }} a {{ i.end }}  <b>{{ i.name }}</b><br>
+		{% endfor %}
+	{% endfor %}
+	<hr>
 {% endfor %}
-
 
 {% endblock %}
