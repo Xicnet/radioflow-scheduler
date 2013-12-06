@@ -25,7 +25,7 @@ def index(request):
     programs = []
     days = Day.objects.all()
     for day in days:
-        programs.append( { day: Program.objects.filter(days__in=[day]).order_by('start') } )
+        programs.append( { day: Program.objects.filter(days__in=[day], user=request.user).order_by('start') } )
 
     return render_to_response(
             'timeslots/index.html',
