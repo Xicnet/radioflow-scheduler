@@ -78,7 +78,7 @@ def program(request, program_id=None):
             context_instance=RequestContext(request)
         )
 
-def now_playing(request, station):
+def now_playing(request, station="nacionalrock"):
     out_json = ''
     weekday = datetime.datetime.now().weekday() +1
     programs = Program.objects.filter(days__in=[weekday], user__username=station)

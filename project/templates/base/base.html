@@ -13,22 +13,14 @@
 
 {% endblock %} {# head #}
 
-<!--
-<style type="text/css" id="custom-background-css"> 
-	body.custom-background { background-image: url('http://babelfest.tk/wp/wp-content/uploads/2012/12/rayitas-diagonales1.jpg'); background-repeat: repeat; background-position: top left; background-attachment: scroll; }
-	/* Link color */
-	a {
-		color: #b0b0b0;
-	}
-</style> 
--->
 </head>
 <body class="blog custom-background background-image header-image simple-menu sidebars" id="body">
 
-<h2> {{ user.first_name }} </h2>
+<h2> {{ user.first_name }} - Programación Semanal</h2>
 <p>
-	| <a href="/">Inicio</a>
+	<a href="/">Inicio</a>
 	| <a href="/program/">Agregar programa</a>
+	| <a href="/{{ request.user.username }}/now_playing.json" target="_blank">Now Playing</a>
 	| <a href="/accounts/logout/">Salir</a>
 </p>
 {% block body %}{% endblock %}
