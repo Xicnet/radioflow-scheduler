@@ -96,3 +96,12 @@ def now_playing(request, station="nacionalrock"):
 def logout_view(request):
     print logout(request)
     return redirect('root')
+
+@login_required
+def program_delete(request, program_id=None):
+    if program_id:
+        program = Program.objects.get(id=program_id)
+        program.delete()
+        return redirect("root")
+    else:
+        return redirect("root")
