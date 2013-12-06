@@ -24,12 +24,13 @@ $(document).ready(function() {
 	<img src="{{ program.image.url }}" width="320">
 	{% endif %}
 
-    <form id="suscription-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-    <table class="suscription-form">
+    <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table class="program-form">
     {% for field in program_form %}
-        <div class="fieldWrapper">
-            <tr><th class="suscription-label">{{ field.label_tag }} {% if field.help_text %}<br/>( {{ field.help_text }} ) {% endif %}</th><td>{{ field }}<br/> <span id="{{ field.name }}-error" class="error-message"></span></td></tr>
-        </div>
+	<tr>
+		<td class="program-field-label">{{ field.label_tag }} {% if field.help_text %}<br/>( {{ field.help_text }} ) {% endif %}</td>
+		<td class="program-field-name {% if field.name == 'days' %} days{% endif %}">{{ field }}<br/> <span id="{{ field.name }}-error" class="error-message"></span></td>
+	</tr>
     {% endfor %}
     </table>
 

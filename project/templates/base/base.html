@@ -16,6 +16,7 @@
 </head>
 <body class="blog custom-background background-image header-image simple-menu sidebars" id="body">
 
+{% if request.user.is_authenticated %}
 <h2> {{ user.first_name }} - Programación Semanal</h2>
 <p>
 	<a href="/">Inicio</a>
@@ -23,6 +24,8 @@
 	| <a href="/{{ request.user.username }}/now_playing.json" target="_blank">Now Playing</a>
 	| <a href="/accounts/logout/">Salir</a>
 </p>
+{% endif %}
+
 {% block body %}{% endblock %}
 </body>
 </html>

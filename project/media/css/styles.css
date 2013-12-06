@@ -2,13 +2,12 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-.suscription-form .suscription-label {
+.program-form .program-label {
 	color:#000;
 }
 
-table.suscription-form {
+table.program-form {
 	color:#000;
-	border: none;
 }
 
 tr.table-header {
@@ -17,27 +16,40 @@ tr.table-header {
 	padding: 2px 2px 2px 2px;
 }
 
-tr, td, .suscription-form {
+tr, td, .program-form {
 	padding: 5px 5px 5px 5px;
 }
 
-input {
-	width: 200px;
+.program-field-label {
+	text-align: right;
+	background: #cdcdcd;
+}
+
+.program-field-name {
+	text-align: right;
+	background: #efefef;
+}
+
+.program-field-name.days {
+	text-align: left;
+}
+
+input[type=text] {
+	width: 97%;
+	outline: none;
+	border: 1px solid #000;
+	padding: 3px;
+}
+
+input[type=textarea] {
+	width: 100%;
+	outline: none;
+	border: 1px solid #000;
+	padding: 3px;
 }
 
 td .field-error input {
 	border-color: #FF0000;
-}
-
-td .field-error textarea {
-	border-color: #FF0000;
-}
-.suscription-input {
-	width: 95%;
-}
-
-.suscription-textarea {
-	width: 95%;
 }
 
 input.submit {
