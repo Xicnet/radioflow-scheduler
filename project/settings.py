@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'ajax_upload',
     'django_extensions',
     'image_cropping',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
