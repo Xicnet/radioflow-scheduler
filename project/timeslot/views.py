@@ -22,17 +22,17 @@ from constants import *
 
 @login_required
 def index(request):
-    programs = []
+    weekly_programs = []
     days = Day.objects.all()
     for day in days:
         programs_for = Program.objects.filter(days__in=[day], user=request.user).order_by('start')
         if programs_for:
-            programs.append( { day: programs_for } )
+            weekly_programs.append( { day: programs_for } )
 
     return render_to_response(
             'timeslots/index.html',
             {
-             'programs': programs,
+             'weekly_programs': weekly_programs,
             },
             context_instance=RequestContext(request)
         )

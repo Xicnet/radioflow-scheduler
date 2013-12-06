@@ -1,22 +1,19 @@
 {% extends 'base/base.html' %}
-
 {% block headcustom %}
-
 {% endblock %}
 
 {% block body %}
 
-
-{% for day in programs %}
-	{% for k,v in day.items %}
+{% for day in weekly_programs %}
+	{% for day,programs in day.items %}
 		<h3>{{ k }}</h3>
 		<table>
 		<tr>
 			<td>Comienzo</td><td>Fin</td><td>Programa</td><td>Conduce</td>
 		</tr>
-		{% for i in v %}
+		{% for program in programs %}
 			<tr>
-			<td>{{ i.start }}</td><td>{{ i.end }}</td><td><b><a href="/program/{{ i.id  }}/">{{ i.name }}</a></b><td>{{ i.moderator }}</td></td>
+			<td>{{ program.start }}</td><td>{{ program.end }}</td><td><b><a href="/program/{{ program.id  }}/">{{ program.name }}</a></b><td>{{ program.moderator }}</td></td>
 			</tr>
 		{% endfor %}
 		</table>
