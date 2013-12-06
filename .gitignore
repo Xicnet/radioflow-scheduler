@@ -16,5 +16,5 @@ buildout/
 *.log
 share/
 static/
-media/
+project/media/uploaded_images/
 local/

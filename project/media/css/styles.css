@@ -1,0 +1,84 @@
+﻿body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.suscription-form .suscription-label {
+	color:#000;
+}
+
+table.suscription-form {
+	color:#000;
+	border: none;
+}
+
+tr.table-header {
+	color:#fff;
+	background-color:#000;
+	padding: 2px 2px 2px 2px;
+}
+
+tr, td, .suscription-form {
+	padding: 5px 5px 5px 5px;
+}
+
+input {
+	width: 200px;
+}
+
+td .field-error input {
+	border-color: #FF0000;
+}
+
+td .field-error textarea {
+	border-color: #FF0000;
+}
+.suscription-input {
+	width: 95%;
+}
+
+.suscription-textarea {
+	width: 95%;
+}
+
+input.submit {
+	width: 95%;
+}
+
+table {
+	border: solid #000 1px;
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+}
+
+.red-bold {
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.error-message {
+	color: #FF0000;
+}
+
+li {
+	list-style: none;
+}
+
+.rowA {
+	background-color: #bcbcbc;
+}
+.rowB {
+	background-color: #dfdfdf;
+}
+
+a:visited, a:link {
+	text-decoration: none;
+	color: blue;
+}
+td.program-name:hover {
+	text-decoration: none;
+	background-color: #fff;
+}
+
+a:hover {
+	color: red;
+}
