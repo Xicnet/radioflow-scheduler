@@ -88,6 +88,7 @@ def now_playing(request, station="nacionalrock"):
             out_json += '{\n'
             out_json += '    "name": %s,\n' % json.dumps(program.name)
             out_json += '    "moderator": %s,\n' % json.dumps(program.moderator)
+            out_json += '    "presenter": %s,\n' % json.dumps(program.moderator)
             out_json += '    "image": %s\n' % json.dumps(program.image.url)
             out_json += '}\n'
 
