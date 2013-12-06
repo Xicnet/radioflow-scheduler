@@ -6,18 +6,21 @@
 
 {% block body %}
 
-<p>
-	<a href="/accounts/logout/">Salir</a> | <a href="/program/">Agregar programa</a>
-</p>
 
 {% for day in programs %}
 	{% for k,v in day.items %}
-		{{ k }}<p>
+		<h3>{{ k }}</h3>
+		<table>
+		<tr>
+			<td>Comienzo</td><td>Fin</td><td>Programa</td><td>Conduce</td>
+		</tr>
 		{% for i in v %}
-			{{ i.start }} a {{ i.end }}  <b><a href="/program/{{ i.id  }}/">{{ i.name }}</a></b> [ USER: {{ i.user.username }} ]<br>
+			<tr>
+			<td>{{ i.start }}</td><td>{{ i.end }}</td><td><b><a href="/program/{{ i.id  }}/">{{ i.name }}</a></b><td>{{ i.moderator }}</td></td>
+			</tr>
 		{% endfor %}
+		</table>
 	{% endfor %}
-	<hr>
 {% endfor %}
 
 {% endblock %}

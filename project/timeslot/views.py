@@ -25,7 +25,9 @@ def index(request):
     programs = []
     days = Day.objects.all()
     for day in days:
-        programs.append( { day: Program.objects.filter(days__in=[day], user=request.user).order_by('start') } )
+        programs_for = Program.objects.filter(days__in=[day], user=request.user).order_by('start')
+        if programs_for:
+            programs.append( { day: programs_for } )
 
     return render_to_response(
             'timeslots/index.html',
@@ -82,16 +84,16 @@ def program(request, program_id=None):
             context_instance=RequestContext(request)
         )
 
-def now_playing(request):
+def now_playing(request, station):
     out_json = ''
     weekday = datetime.datetime.now().weekday() +1
-    programs = Program.objects.filter(days__in=[weekday])
+    programs = Program.objects.filter(days__in=[weekday], user__username=station)
     for program in programs:
         now = datetime.datetime.now().time()
-        if program.comienzo < now < program.fin:
+        if program.start < now < program.end:
             out_json += '{\n'
             out_json += '    "name": %s,\n' % json.dumps(program.name)
-            out_json += '    "moderator": %s,\n' % json.dumps(program.conductor)
+            out_json += '    "moderator": %s,\n' % json.dumps(program.moderator)
             out_json += '    "image": %s\n' % json.dumps(program.image.url)
             out_json += '}\n'
 

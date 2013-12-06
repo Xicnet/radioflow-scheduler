@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     #url(r'^$', 'app.views.home', name='home'),
     # url(r'^babel/', include('babel.foo.urls')),
     url(r'^$', 'timeslot.views.index', name='root'),
-    url(r'^now_playing.json$', 'timeslot.views.now_playing', name='now_playing'),
+    url(r'^(?P<station>(.*))/now_playing.json$', 'timeslot.views.now_playing', name='now_playing'),
     url(r'^program/(?P<program_id>\d+)/$','timeslot.views.program'),
     url(r'^program/$','timeslot.views.program'),
 

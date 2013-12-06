@@ -25,15 +25,12 @@ class ProgramForm(forms.Form):
 
     name      = forms.CharField(max_length=256, min_length=1, required=True, error_messages={'max_length': 'Please enter less characters'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     description = TextAreaField(max_length=1024, min_length=1, required=False, error_messages={'max_length': 'Please enter less than 1024 characters'}, widget=forms.Textarea(attrs={'class':'suscription-textarea'}), help_text="1024 characters")
-    moderator = forms.CharField(max_length=1024, min_length=1, required=True, error_messages={'max_length': 'Please enter less characters'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    moderator = forms.CharField(max_length=1024, min_length=1, required=False, error_messages={'max_length': 'Please enter less characters'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     #facebook  = forms.URLField(max_length=512, min_length=1, required=False, error_messages={'max_length': 'Please enter less characters'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     #twitter   = forms.URLField(max_length=512, min_length=1, required=False, error_messages={'max_length': 'Please enter less characters'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     #web       = forms.URLField(max_length=512, min_length=1, required=False, error_messages={'max_length': 'Please enter less characters'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     #email     = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     #days      = forms.SelectMultiple(choices=('1980', '1981', '1982'))
-    FAV = (('blue', 'Blue'),
-                            ('green', 'Green'),
-                            ('black', 'Black'))
     days      = forms.ModelMultipleChoiceField(queryset=Day.objects.all(), widget=forms.CheckboxSelectMultiple)
     image     = forms.ImageField(required=False)
     start     = forms.TimeField(required=False)

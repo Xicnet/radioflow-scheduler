@@ -24,6 +24,13 @@
 -->
 </head>
 <body class="blog custom-background background-image header-image simple-menu sidebars" id="body">
+
+<h2> {{ user.first_name }} </h2>
+<p>
+	| <a href="/">Inicio</a>
+	| <a href="/program/">Agregar programa</a>
+	| <a href="/accounts/logout/">Salir</a>
+</p>
 {% block body %}{% endblock %}
 </body>
 </html>
