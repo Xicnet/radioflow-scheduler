@@ -110,3 +110,12 @@ a:hover {
 	text-align: center;
 	background: #dfdfdf;
 }
+
+.form-row,
+fieldset {
+	width:20%;
+}
+
+.errorlist {
+	color: red;
+}

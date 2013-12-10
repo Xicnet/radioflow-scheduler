@@ -18,8 +18,11 @@ urlpatterns = patterns('',
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'timeslot.views.logout_view'),
+    url(r'^accounts/password_change/$', 'django.contrib.auth.views.password_change'),
 
-    url(r'^(?P<station>(.*))/config/$', 'timeslot.views.config_show', name='config_show'),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+
+    url(r'^config/$', 'timeslot.views.config_show', name='config_show'),
     url(r'^(?P<station>(.*))/config.json$', 'timeslot.views.config_json', name='getconfig'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
