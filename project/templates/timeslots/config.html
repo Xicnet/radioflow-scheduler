@@ -20,7 +20,9 @@ function confirm_delete(f, msg) {
     {% endfor %}
 		<tr>
 			<td colspan="2" class="program-image">
-				<img src="{{ config.image.url }}" width="320">
+				{% if config.image %}
+					<img src="{{ config.image.url }}" width="320">
+				{% endif %}
 			</td>
 		</tr>
 		<tr>
