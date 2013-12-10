@@ -10,6 +10,8 @@ function confirm_delete(f, msg) {
 
 {% block body %}
 
+<h1>Configuración</h1>
+
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 		<table class="program-listing">
     {% for field in config_form %}
@@ -21,7 +23,12 @@ function confirm_delete(f, msg) {
 				<img src="{{ config.image.url }}" width="320">
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2" class="program-image">
+    				<input class="submit" type="submit" value="Guardar configuración" />
+			</td>
+		</tr>
 		</table>
-    <input class="submit" type="submit" value="Guardar programa" />
+    </form>
 
 {% endblock %}

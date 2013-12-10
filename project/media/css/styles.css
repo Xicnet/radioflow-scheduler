@@ -34,10 +34,6 @@ tr, td, .program-form {
 	text-align: left;
 }
 
-input[type=submit] {
-	width: 15%;
-}
-
 input[type=text],
 input[type=password] {
 	width: 97%;
@@ -58,11 +54,8 @@ td .field-error input {
 	border-color: #FF0000;
 }
 
-input.submit {
-	width: 41%;
-}
-
-table.program-form, table.program-listing {
+table.program-form, table.program-listing,
+table.password-change-form {
 	border: solid #000 1px;
 	margin: 10px 10px 10px 10px;
 	padding: 10px 10px 10px 10px;

@@ -17,6 +17,10 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block body %}
+
+
+<h1>Agregar Programa</h1>
+
   {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 
@@ -39,9 +43,13 @@ $(document).ready(function() {
 		</td>
 	</tr>
     {% endfor %}
+	<tr>
+		<td colspan="2" class="program-image">
+ 			<input class="submit" type="submit" value="Guardar programa" />
+		</td>
+	</tr>
     </table>
 
-    <input class="submit" type="submit" value="Guardar programa" />
     </form>
 
     {{ programs }}
