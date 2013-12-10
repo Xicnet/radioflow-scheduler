@@ -14,8 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 
-from timeslot.models import Program, Day
-from timeslot.forms import ProgramForm
+from timeslot.models import Program, Day, Config
+from timeslot.forms import ProgramForm, ConfigForm
 
 from constants import *
 
@@ -106,3 +106,56 @@ def program_delete(request, program_id=None):
         return redirect("root")
     else:
         return redirect("root")
+
+@login_required
+def __config_show(request, station="nacionalrock"):
+    config = Config.objects.filter(user=request.user)
+
+    return render_to_response(
+            'timeslots/config.html',
+            {
+             'config': config,
+            },
+            context_instance=RequestContext(request)
+        )
+
+def config_json(request, station="nacionalrock"):
+    out_json = ''
+    config = Config.objects.filter(user__username=station)
+    for c in config:
+        out_json += '{\n'
+        out_json += '    "streamurl": %s,\n' % json.dumps(c.streamurl)
+        out_json += '    "image": %s\n' % json.dumps(c.image_url)
+        out_json += '}\n'
+
+    return HttpResponse(out_json, mimetype="application/json")
+
+@login_required
+def config_show(request, station="nacionalrock"):
+    config = Config.objects.get_or_create(user=request.user)[0]
+
+    config_form = ConfigForm()
+    if request.method == 'POST':
+        config_form = ConfigForm(request.POST)
+        if config_form.is_valid():
+            image = request.FILES.get('image', None)
+            config.streamurl = config_form.cleaned_data['streamurl']
+            if image:
+                config.image    = image
+            config.save()
+        else:
+            config_form = ConfigForm(request.POST)
+        return redirect('root')
+    else:
+        print config.image
+        config_form = ConfigForm(data=model_to_dict(config))
+
+    return render_to_response(
+            'timeslots/config.html',
+            {
+             'config': config,
+             'config_form': config_form,
+            },
+            context_instance=RequestContext(request)
+        )
+

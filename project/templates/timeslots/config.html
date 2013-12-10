@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% block headcustom %}
+<script>
+function confirm_delete(f, msg) {
+  if (confirm(msg)) return true;
+  else return false;
+}
+</script>
+{% endblock %}
+
+{% block body %}
+
+    <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+		<table class="program-listing">
+    {% for field in config_form %}
+			<tr class="{% cycle 'rowA' 'rowB' %}"><td>{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+
+    {% endfor %}
+		<tr>
+			<td colspan="2" class="program-image">
+				<img src="{{ config.image.url }}" width="320">
+			</td>
+		</tr>
+		</table>
+    <input class="submit" type="submit" value="Guardar programa" />
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from timeslot.models import Program, Day
+from timeslot.models import Program, Day, Config
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin
 
@@ -7,3 +7,4 @@ class ProgramAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 admin.site.register(Program, ProgramAdmin)
 admin.site.register(Day)
+admin.site.register(Config)
