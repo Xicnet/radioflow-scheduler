@@ -89,7 +89,10 @@ def now_playing(request, station="nacionalrock"):
             out_json += '    "name": %s,\n' % json.dumps(program.name)
             out_json += '    "moderator": %s,\n' % json.dumps(program.moderator)
             out_json += '    "presenter": %s,\n' % json.dumps(program.moderator)
-            out_json += '    "image": %s\n' % json.dumps(program.image.url)
+            if program.has_image:
+                out_json += '    "image": %s\n' % json.dumps(program.image.url)
+            else:
+                out_json += '    "image": %s\n' % json.dumps("")
             out_json += '}\n'
 
     return HttpResponse(out_json, mimetype="application/json")

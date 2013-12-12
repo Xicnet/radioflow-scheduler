@@ -39,6 +39,12 @@ class Program(models.Model):
         return super(Program, self).save(*args, **kwargs)
 
     @property
+    def has_image(self):
+        if self.image.name is '':
+            return False
+        return True
+
+    @property
     def image_path(self):
         return self.image.url.replace('/media/', '')
 
