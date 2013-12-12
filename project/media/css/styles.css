@@ -23,6 +23,7 @@ tr, td, .program-form {
 .program-field-label {
 	text-align: right;
 	background: #cdcdcd;
+	font-weight: bold;
 }
 
 .program-field-name {

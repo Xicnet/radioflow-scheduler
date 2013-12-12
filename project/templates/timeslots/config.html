@@ -10,12 +10,12 @@ function confirm_delete(f, msg) {
 
 {% block body %}
 
-<h1>Configuración</h1>
+<h3>Configuración</h3>
 
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 		<table class="program-listing">
     {% for field in config_form %}
-			<tr class="{% cycle 'rowA' 'rowB' %}"><td>{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+			<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
 
     {% endfor %}
 		<tr>
