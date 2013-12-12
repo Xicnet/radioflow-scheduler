@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
     <table class="program-form">
-	{% if program.image %}
+	{% if program.image|length >= 1 %}
 	<tr>
 		<td colspan="2" class="program-image">
 			<img src="{{ program.image.url }}" width="320">
