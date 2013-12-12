@@ -40,7 +40,7 @@ class Program(models.Model):
 
     @property
     def has_image(self):
-        if self.image.name is '':
+        if self.image.name == '':
             return False
         return True
 
