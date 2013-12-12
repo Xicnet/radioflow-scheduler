@@ -59,10 +59,12 @@ def program(request, program_id=None):
                 program.start        = program_form.cleaned_data['start']
                 program.end          = program_form.cleaned_data['end']
                 program.days         = program_form.cleaned_data['days']
+                print "DAYS: ", program_form.cleaned_data['days']
                 if image:
                     program.image    = image
                 program.save()
         else:
+            print program_form.errors
             program_form = ProgramForm(request.POST)
         return redirect('root')
     else:
