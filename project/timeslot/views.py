@@ -50,23 +50,20 @@ def program(request, program_id=None):
         program_form = ProgramForm(request.POST)
         if program_form.is_valid():
             image = request.FILES.get('image', None)
-            if True:
-                if not program:
-                    program = Program.objects.create(user=request.user)
-                program.name         = program_form.cleaned_data['name']
-                program.moderator    = program_form.cleaned_data['moderator']
-                program.description  = program_form.cleaned_data['description']
-                program.start        = program_form.cleaned_data['start']
-                program.end          = program_form.cleaned_data['end']
-                program.days         = program_form.cleaned_data['days']
-                print "DAYS: ", program_form.cleaned_data['days']
-                if image:
-                    program.image    = image
-                program.save()
+            if not program:
+                program = Program.objects.create(user=request.user)
+            program.name         = program_form.cleaned_data['name']
+            program.moderator    = program_form.cleaned_data['moderator']
+            program.description  = program_form.cleaned_data['description']
+            program.start        = program_form.cleaned_data['start']
+            program.end          = program_form.cleaned_data['end']
+            program.days         = program_form.cleaned_data['days']
+            if image:
+                program.image    = image
+            program.save()
+            return redirect('root')
         else:
-            print program_form.errors
             program_form = ProgramForm(request.POST)
-        return redirect('root')
     else:
         if program_id:
             program_form = ProgramForm(data=model_to_dict(program))
@@ -100,7 +97,6 @@ def now_playing(request, station="nacionalrock"):
     return HttpResponse(out_json, mimetype="application/json")
 
 def logout_view(request):
-    print logout(request)
     return redirect('root')
 
 @login_required
@@ -152,7 +148,6 @@ def config_show(request, station="nacionalrock"):
             config_form = ConfigForm(request.POST)
         return redirect('root')
     else:
-        print config.image
         config_form = ConfigForm(data=model_to_dict(config))
 
     return render_to_response(

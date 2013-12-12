@@ -25,8 +25,8 @@ class ProgramForm(forms.Form):
     image     = forms.ImageField(label="Imagen", required=False, help_text="JPG/PNG a 320x125 o 640x250")
     description = TextAreaField(label="Detalle", max_length=1024, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (1024 max)'}, widget=forms.Textarea(attrs={'class':'suscription-textarea'}), help_text="1024 caracteres (opcional)")
     days      = forms.ModelMultipleChoiceField(label="Dias", queryset=Day.objects.all(), widget=forms.CheckboxSelectMultiple)
-    start     = forms.TimeField(label="Comienzo", required=False, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
-    end       = forms.TimeField(label="Fin", required=False, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
+    start     = forms.TimeField(label="Comienzo", required=True, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
+    end       = forms.TimeField(label="Fin", required=True, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
 
 
 class ConfigForm(forms.Form):

@@ -36,10 +36,11 @@ $(document).ready(function() {
 			<div style="float:left"><img src="{{ program.image.url }}" width="320"></div>
 	{% endif %}
 			{% if field.help_text %}<br/><span class="form-help-text">{{ field.help_text }}</span>{% endif %}
-			<br/><span id="{{ field.name }}-error" class="error-message"></span>
+			<br/><span class="error-message">{{ field.errors }}</span>
 		</td>
 	</tr>
 	{% if field.name == 'image' %}
+			<tr><td colspan="2">&nbsp;</td></tr>
 			<tr><td colspan="2" class="row-title"><b>Campos internos (no se muestran en la aplicación móvil)</b></td></tr>
 	{% endif %}
     {% endfor %}
