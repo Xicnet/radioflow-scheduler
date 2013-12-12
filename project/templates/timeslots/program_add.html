@@ -27,21 +27,21 @@ $(document).ready(function() {
 
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
     <table class="program-form">
-	{% if program.image %}
-	<tr>
-		<td colspan="2" class="program-image">
-			<img src="{{ program.image.url }}" width="320">
-		</td>
-	</tr>
-	{% endif %}
+    <tr><td colspan="2" class="row-title"><b>Campos públicos (visibles en la aplicación móvil)</b></td></tr>
     {% for field in program_form %}
 	<tr>
 		<td class="program-field-label">{{ field.label_tag }}</td>
 		<td class="program-field-name {% if field.name == 'days' %} days{% endif %}">{{ field }}
+	{% if field.name == 'image' and program.image %}
+			<div style="float:left"><img src="{{ program.image.url }}" width="320"></div>
+	{% endif %}
 			{% if field.help_text %}<br/><span class="form-help-text">{{ field.help_text }}</span>{% endif %}
 			<br/><span id="{{ field.name }}-error" class="error-message"></span>
 		</td>
 	</tr>
+	{% if field.name == 'image' %}
+			<tr><td colspan="2" class="row-title"><b>Campos internos (no se muestran en la aplicación móvil)</b></td></tr>
+	{% endif %}
     {% endfor %}
 	<tr>
 		<td colspan="2" class="program-image">
