@@ -97,6 +97,7 @@ def now_playing(request, station="nacionalrock"):
     return HttpResponse(out_json, mimetype="application/json")
 
 def logout_view(request):
+    logout(request)
     return redirect('root')
 
 @login_required
