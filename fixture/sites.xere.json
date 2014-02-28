@@ -1,1 +1,1 @@
-[{"pk": 1, "model": "sites.site", "fields": {"domain": "192.168.2.128:8000", "name": "rnadmin.xicnet.com"}}]
+[{"pk": 1, "model": "sites.site", "fields": {"domain": "xere:8000", "name": "xere"}}]
