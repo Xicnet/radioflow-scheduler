@@ -45,6 +45,11 @@ class Program(models.Model):
         return True
 
     @property
+    def image_url(self):
+        domain = Site.objects.get_current().domain
+        return "http://%s%s"% (domain, self.image.url)
+
+    @property
     def image_path(self):
         return self.image.url.replace('/media/', '')
 
