@@ -16,7 +16,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         #'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'rna',                      # Or path to database file if using sqlite3.
+        'NAME': 'rna2',                      # Or path to database file if using sqlite3.
         'USER': 'rna',                      # Not used with sqlite3.
         'PASSWORD': 'AbVtehnQZDSpU',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
