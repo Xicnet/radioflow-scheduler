@@ -8,7 +8,6 @@ eggs/
 bin/
 lib/
 tmp/
-*.sql
 include/
 develop-eggs/
 buildout/
