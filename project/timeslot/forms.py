@@ -38,7 +38,7 @@ class ConfigForm(forms.Form):
         image = self.cleaned_data['image']
         return image
 
-    streamurl = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=True, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    streamurl = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     image     = forms.ImageField(label="Imagen", required=False, help_text="")
 
 

@@ -57,7 +57,7 @@ class Config(models.Model):
     def __unicode__(self):
         return "%s config" % self.user
 
-    streamurl = models.CharField(max_length=512)
+    streamurl = models.CharField(max_length=512, blank=True, null=True)
     image     = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
     cropping  = ImageRatioField('image', '320x480')
     user      = models.ForeignKey(User)
