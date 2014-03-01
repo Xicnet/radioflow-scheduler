@@ -1,0 +1,1904 @@
+[
+    {
+        "pk": 1, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "Lunes"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "Martes"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "Mi\u00e9rcoles"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "Jueves"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "Viernes"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "S\u00e1bado"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "timeslot.day", 
+        "fields": {
+            "name": "Domingo"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "18:00:00", 
+            "name": "Sucio Pop", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/SUCIO-POP.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Mat\u00edas Casta\u00f1eda y Tom\u00e1s Balmaceda", 
+            "start": "16:00:00", 
+            "user": 1, 
+            "cropping": "119,0,202,124", 
+            "description": "Sucio Pop"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "16:00:00", 
+            "name": "La hora pulenta", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/LA-HORA.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Nicol\u00e1s Lantos y Juan Manuel Strassburger", 
+            "start": "14:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "la hora pulenta"
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "12:00:00", 
+            "name": "Hacklab a full", 
+            "created": "2013-12-06T00:29:38.825Z", 
+            "image": "uploaded_images/hacklab01_6.jpg", 
+            "days": [], 
+            "moderator": "Rama", 
+            "start": "08:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "A hackearla"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "10:00:00", 
+            "name": "Casi Despierto", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/casi-despierto.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Pablo Marcovsky", 
+            "start": "07:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Casi Despierto"
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "12:00:00", 
+            "name": "La gran aldea", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "11:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": "M\u00fasica por paises"
+        }
+    }, 
+    {
+        "pk": 108, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "T\u00e9 para dos", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                5
+            ], 
+            "moderator": "Donna Caroll y Oscar L\u00f3pez Ruiz", 
+            "start": "18:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 99, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "Asi de simple", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "uploaded_images/Asi_De_Simple_-_Ricardo_Salton_01.JPG", 
+            "days": [
+                3
+            ], 
+            "moderator": "Ricardo Salton", 
+            "start": "18:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": "Todos los estilos"
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "13:00:00", 
+            "name": "Clasicos a la carta", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "12:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": "Giovanni Paisiello\nConcierto para mandolina, cuerdas y clave en Mi bemol mayor\nHugo Orlandi, mandolina\nI Solisti Veneti / Claudio Scimone\n\nJacques Ibert\nCuatro canciones de Don Quijote\nCarlos \u00c1lvarez, bar\u00edtono\nOrquesta de la Comunidad de Madrid / Jos\u00e9 Ram\u00f3n Encinar\n\nJohann Sebastian Bach\n\u201cAria\u201d de la Suite para orquesta en Re mayor, BWV 1068\nOrquesta de C\u00e1mara Franz Liszt de Budapest / Janos Rolla\n\nLudwig van Beethoven\nSonata para piano N\u00ba26 en Mi bemol mayor, op.81a, \u201cLos adioses\u201d\nAlexander Panizza, piano\n"
+        }
+    }, 
+    {
+        "pk": 109, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "Ciclos", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "20:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 110, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:00:00", 
+            "name": "M\u00fasica nocturna", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "21:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 98, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "15:00:00", 
+            "name": "La musica del fauno", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "13:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": "Prueba"
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "16:00:00", 
+            "name": "M\u00fasica documental", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "15:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "18:00:00", 
+            "name": "Tarde de cl\u00e1sicos", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Clara de la Rosa", 
+            "start": "16:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 105, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "La odisea del regreso", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                1, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "18:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 106, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "Tarde transfigurada", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "", 
+            "days": [
+                2
+            ], 
+            "moderator": "Luis Gorelik", 
+            "start": "18:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "02:00:00", 
+            "name": "Diario del futuro", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/DIARIO.jpg", 
+            "days": [
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Nicol\u00e1s Lantos y Florencia Alcaraz", 
+            "start": "00:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Diario del futuro"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "02:00:00", 
+            "name": "La espuma de las noches", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/espuma.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Andy Chango", 
+            "start": "00:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 117, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "18:00:00", 
+            "name": "Pasi\u00f3n Nacional", 
+            "created": "2013-12-12T21:06:46.216Z", 
+            "image": "", 
+            "days": [
+                5
+            ], 
+            "moderator": "Roberto Perfumo, Gustavo Vergara y equipo de deportes", 
+            "start": "17:00:00", 
+            "user": 5, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 112, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "00:00:00", 
+            "name": "Industria Nacional", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "uploaded_images/IN2_4.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "ss", 
+            "start": "23:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": "dd"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:00", 
+            "name": "El rock naci\u00f3 mal", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/NACIOMAL.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Andr\u00e9s Ruiz", 
+            "start": "22:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "el crock naci\u00f3 mal"
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "11:00:00", 
+            "name": "Y la ma\u00f1ana va", 
+            "created": "2013-12-08T03:15:23.151Z", 
+            "image": "uploaded_images/logo_app_3.JPG", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "07:00:00", 
+            "user": 3, 
+            "cropping": "", 
+            "description": "M\u00fasica para acompa\u00f1arte cuando comienza el d\u00eda."
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "19:00:00", 
+            "name": "Aver", 
+            "created": "2013-12-06T00:37:29Z", 
+            "image": "uploaded_images/splash.png", 
+            "days": [
+                5
+            ], 
+            "moderator": "con este", 
+            "start": "17:00:00", 
+            "user": 2, 
+            "cropping": "0,0,2200,3300", 
+            "description": "que pasa"
+        }
+    }, 
+    {
+        "pk": 120, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "10:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Portugu\u00e9s", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/juli_galvan.png", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "JULIETA GALVAN", 
+            "start": "09:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 128, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Latinoam\u00e9rica II", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mir_turk.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "MIRIAN T\u00daRKULA", 
+            "start": "19:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 119, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "09:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Japon\u00e9s", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/kei_ue.png", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "KEIKO UEDA", 
+            "start": "08:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 124, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "15:57:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Ingl\u00e9s", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mir_fer_3_2.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "MIRIAM T\u00daRKULA", 
+            "start": "15:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 122, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "12:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Espa\u00f1ol", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/che_aya.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "CHELO AYALA", 
+            "start": "11:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 130, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:57:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Portugu\u00e9s II", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mir_can.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "MIRTA C\u00c1NEPA", 
+            "start": "21:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 126, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "17:57:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Franc\u00e9s", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mag_arn.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "MAGDALENA ARNOUX", 
+            "start": "17:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 127, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "19:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Alem\u00e1n", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/ray_car_1.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "RAY\u00c9N BRAUN Y CARLOS DIAZ ROCCA", 
+            "start": "18:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 125, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "16:57:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Italiano", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/cari_che.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "CARITINA C\u00d3SULICH Y CHELO AYALA", 
+            "start": "16:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 129, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Espa\u00f1ol II", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "DAR\u00cdO BURSZTYN", 
+            "start": "20:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 123, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "14:57:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Alem\u00e1n (Rep)", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/ray_car.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "RAY\u00c9N BRAUN Y CARLOS DIAZ ROCCA", 
+            "start": "14:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 121, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "11:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Latinoam\u00e9rica", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/ang_flo.png", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "ANGEL FLOREANO", 
+            "start": "10:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "18:00:00", 
+            "name": "Spam!", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/spam_1.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Srta Bimbo y Alejandro Lingenti", 
+            "start": "15:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Spam"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "Burundanga", 
+            "created": "2013-11-18T23:12:05Z", 
+            "image": "uploaded_images/BURUNDANGA.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Gillespie y Malena Pichot", 
+            "start": "18:00:00", 
+            "user": 1, 
+            "cropping": "48,0,130,124", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:00:00", 
+            "name": "Nunca lo sabr\u00e1n", 
+            "created": "2013-11-18T23:12:05Z", 
+            "image": "uploaded_images/nunca.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Maitena Aboitiz y Diego Mancusi", 
+            "start": "21:00:00", 
+            "user": 1, 
+            "cropping": "0,0,320,480", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "00:00:00", 
+            "name": "Polifon\u00eda Nocturna", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/polifonia.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Carlos Polimeni", 
+            "start": "23:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Polifon\u00eda Nocturna"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "15:00:00", 
+            "name": "Mute", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/muteint.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Casta\u00f1eda, Zabo, Jesicall y Kart\u00fan", 
+            "start": "13:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Mute"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "12:00:00", 
+            "name": "Territorio Comanche", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/territoriocomancheint.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Daniel Tognetti, Sergio Ranieri y Eduardo Fabregat", 
+            "start": "09:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "07:00:00", 
+            "name": "Programaci\u00f3n Musical", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/generico_1.jpg", 
+            "days": [
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Carla Ruiz", 
+            "start": "02:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "14:00:00", 
+            "name": "Figuraci\u00f3n", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/figuracion.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Alfredo Rosso y Noemi Hackel", 
+            "start": "12:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Alfredo Rosso"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "22:00:00", 
+            "name": "No Tan Distintos", 
+            "created": "2013-11-18T23:12:05Z", 
+            "image": "uploaded_images/NTD.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Chicho Pellegrini y equipo", 
+            "start": "18:00:00", 
+            "user": 1, 
+            "cropping": "320,0,320,0", 
+            "description": "Cultura Latinoamericana. Rock. Viajes. M\u00fasica"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "10:00:00", 
+            "name": "Emociones Rock", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/emociones.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Carlos Melo", 
+            "start": "08:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "emociones Rock"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "07:00:00", 
+            "name": "Argentina Electr\u00f3nica", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/electronica.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Nacional Rock 93.7", 
+            "start": "00:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Argentina electr\u00f3nica"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "12:00:00", 
+            "name": "El fin de la met\u00e1fora", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/elfindelametafora.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Facundo Ale, Guido Stochik e Ivan Schargrodski", 
+            "start": "10:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "El fin de la met\u00e1fora"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "16:00:00", 
+            "name": "Rock de la casa", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/ROCKDECASA.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Nacional Rock 93.7", 
+            "start": "13:00:00", 
+            "user": 1, 
+            "cropping": "119,0,202,124", 
+            "description": "rock de la casa"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "18:00:00", 
+            "name": "Teloneros del f\u00fatbol", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/SIEMPRE.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Adri\u00e1n y Alejandro Korol", 
+            "start": "16:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 132, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "00:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Ingl\u00e9s", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mir_fer_3_1.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "FERNANDO FARIAS", 
+            "start": "23:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 131, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Japon\u00e9s II", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mar_car.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "MARCELO CARBALLAL", 
+            "start": "22:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "13:00:00", 
+            "name": "Segurola y Habana", 
+            "created": "2013-11-19T12:51:57Z", 
+            "image": "uploaded_images/segurola.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "Julia Mengolini e Ivan Schargrodski", 
+            "start": "10:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": "Segurola y Habana"
+        }
+    }, 
+    {
+        "pk": 146, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "13:00:00", 
+            "name": "Conversa", 
+            "created": "2014-02-16T04:54:18.185Z", 
+            "image": "uploaded_images/conversaint.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Agust\u00edn Casta\u00f1eda y Francisco Yofre", 
+            "start": "12:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 135, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "12:30:00", 
+            "name": "Panorama de Noticias-Link AM870", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "12:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 147, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:30:00", 
+            "name": "F\u00fatbol pasi\u00f3n nacional", 
+            "created": "2014-02-16T04:54:18.185Z", 
+            "image": "uploaded_images/futbol.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Transmisi\u00f3n de los cl\u00e1sicos del domingo", 
+            "start": "18:00:00", 
+            "user": 1, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 138, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "16:00:00", 
+            "name": "Bolet\u00ecn de Noticias RAE", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "15:57:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 139, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "17:00:00", 
+            "name": "Bolet\u00ecn de Noticias RAE", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "16:57:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 140, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "18:00:00", 
+            "name": "Bolet\u00ecn de Noticias RAE", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "17:57:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 141, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "22:00:00", 
+            "name": "Bolet\u00ecn de Noticias RAE", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "21:57:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 142, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "15:00:00", 
+            "name": "Bolet\u00ecn de Noticias RAE", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "14:57:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 133, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "01:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Franc\u00e9s II", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "DIEGO FILLOY", 
+            "start": "00:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 145, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "14:00:00", 
+            "name": "Sigla Gong", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "13:45:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 143, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "07:00:00", 
+            "name": "Sigla-Gong-Himno Nacional", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "", 
+            "start": "06:45:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 134, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "02:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Chino (Rep)", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/lina_ji.png", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "LINAJI DE OVIEDO", 
+            "start": "01:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 118, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "08:00:00", 
+            "name": "Siempre Argentina-Conexi\u00f3n Chino", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/lina_ji_1.png", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "LINAJI DE OVIEDO", 
+            "start": "07:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 136, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:30:00", 
+            "name": "Link AM870", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/rad_nac_3.jpg", 
+            "days": [
+                6
+            ], 
+            "moderator": "Duplex con AM870", 
+            "start": "09:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 137, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "00:00:00", 
+            "name": "Link AM870", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/rad_nac_4.jpg", 
+            "days": [
+                7
+            ], 
+            "moderator": "Duplex con AM870", 
+            "start": "09:00:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 144, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "13:45:00", 
+            "name": "Gente de a pie-Link AM870", 
+            "created": "2013-12-22T05:07:08.065Z", 
+            "image": "uploaded_images/mar_waif.jpg", 
+            "days": [
+                1, 
+                3, 
+                2, 
+                5, 
+                4
+            ], 
+            "moderator": "MARIO WAINFELD", 
+            "start": "12:30:00", 
+            "user": 4, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 148, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "22:00:00", 
+            "name": "La Turba", 
+            "created": "2014-02-27T11:59:32.380Z", 
+            "image": "", 
+            "days": [
+                1
+            ], 
+            "moderator": "", 
+            "start": "20:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 149, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:00", 
+            "name": "Contra", 
+            "created": "2014-03-01T03:59:52Z", 
+            "image": "", 
+            "days": [
+                1
+            ], 
+            "moderator": "", 
+            "start": "22:00:00", 
+            "user": 6, 
+            "cropping": "498,0,1421,1386", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 151, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "Reflex", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                2
+            ], 
+            "moderator": "", 
+            "start": "19:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 152, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "22:30:00", 
+            "name": "Jock Horror/J.H Musica", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                2
+            ], 
+            "moderator": "", 
+            "start": "21:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 153, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:59", 
+            "name": "Argentina Skate Rock", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                2
+            ], 
+            "moderator": "", 
+            "start": "23:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 154, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "La Dimension Bipolar", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                3
+            ], 
+            "moderator": "", 
+            "start": "19:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 155, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:00:00", 
+            "name": "Cuando Quieras y Donde Quieras", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                3
+            ], 
+            "moderator": "", 
+            "start": "21:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 156, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:59", 
+            "name": "El Acople", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                3
+            ], 
+            "moderator": "", 
+            "start": "23:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 157, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "Aire Acondicionado", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                4
+            ], 
+            "moderator": "", 
+            "start": "18:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 158, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "22:00:00", 
+            "name": "Club Social y Musical de la Vieja Cuela", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                4
+            ], 
+            "moderator": "", 
+            "start": "20:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 159, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:59", 
+            "name": "Jueves Radioactivos", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                4
+            ], 
+            "moderator": "", 
+            "start": "22:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 160, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "20:00:00", 
+            "name": "Vuelen Topos Vuelen", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                5
+            ], 
+            "moderator": "", 
+            "start": "18:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 161, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "22:00:00", 
+            "name": "Pizza Birra & Chewbacca", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                5
+            ], 
+            "moderator": "", 
+            "start": "20:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 162, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:59", 
+            "name": "Vale Molinete", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                5
+            ], 
+            "moderator": "", 
+            "start": "22:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 163, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "01:00:00", 
+            "name": "Argentina Skate Rock", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                3
+            ], 
+            "moderator": "", 
+            "start": "00:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 164, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "01:00:00", 
+            "name": "El Acople", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                4
+            ], 
+            "moderator": "", 
+            "start": "00:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 165, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "01:00:00", 
+            "name": "Jueves Radioactivos", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                5
+            ], 
+            "moderator": "", 
+            "start": "00:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 166, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "01:00:00", 
+            "name": "Vale Molinete", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                6
+            ], 
+            "moderator": "", 
+            "start": "00:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 167, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "19:00:00", 
+            "name": "Sin Verguenzas", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                6
+            ], 
+            "moderator": "", 
+            "start": "18:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 168, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "Idiotas con Talento", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                6
+            ], 
+            "moderator": "", 
+            "start": "19:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 169, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:59:59", 
+            "name": "Radio Pirata Transmite", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                6
+            ], 
+            "moderator": "", 
+            "start": "21:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 170, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "21:00:00", 
+            "name": "Raras Vibraciones", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                7
+            ], 
+            "moderator": "", 
+            "start": "18:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 171, 
+        "model": "timeslot.program", 
+        "fields": {
+            "end": "23:00:00", 
+            "name": "Pudriendola", 
+            "created": "2014-03-01T09:09:12.479Z", 
+            "image": "", 
+            "days": [
+                7
+            ], 
+            "moderator": "", 
+            "start": "21:00:00", 
+            "user": 6, 
+            "cropping": "", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "timeslot.config", 
+        "fields": {
+            "streamurl": "http://5.9.56.134:8146/;stream.nsv", 
+            "cropping": "", 
+            "image": "uploaded_images/rae.jpg", 
+            "user": 4
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "timeslot.config", 
+        "fields": {
+            "streamurl": "http://5.9.56.134:8158/;stream.nsv", 
+            "cropping": "", 
+            "image": "uploaded_images/nacionalfolklorica.jpg", 
+            "user": 2
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "timeslot.config", 
+        "fields": {
+            "streamurl": "http://5.9.56.134:8154/;stream.nsv", 
+            "cropping": "", 
+            "image": "uploaded_images/nacionalclasica.jpg", 
+            "user": 3
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "timeslot.config", 
+        "fields": {
+            "streamurl": "http://5.9.56.134:8010/;stream.nsv", 
+            "cropping": "", 
+            "image": "uploaded_images/radionacionalam870.jpg", 
+            "user": 5
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "timeslot.config", 
+        "fields": {
+            "streamurl": "", 
+            "cropping": "", 
+            "image": "uploaded_images/lightning-strike-thunder-bolt.jpg", 
+            "user": 6
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "timeslot.config", 
+        "fields": {
+            "streamurl": "http://streamlky.alsolnet.com:8270/sc_rad39", 
+            "cropping": "", 
+            "image": "uploaded_images/hacklab01.jpg", 
+            "user": 1
+        }
+    }
+]
