@@ -142,10 +142,13 @@ def config_show(request, station="nacionalrock"):
     if request.method == 'POST':
         config_form = ConfigForm(request.POST)
         if config_form.is_valid():
-            image = request.FILES.get('image', None)
+            image     = request.FILES.get('image', None)
+            image_del = request.POST.get('image_del', None)
             config.streamurl = config_form.cleaned_data['streamurl']
             if image:
                 config.image    = image
+            if image_del:
+                config.image    = None
             config.save()
         else:
             config_form = ConfigForm(request.POST)
