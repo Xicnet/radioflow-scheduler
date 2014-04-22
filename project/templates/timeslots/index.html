@@ -20,6 +20,7 @@ function confirm_delete(f, msg) {
 			<td>Programa</td>
 			<td>Conduce</td>
 			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 		</tr>
 		{% for program in programs %}
 			<tr class="{% cycle 'rowA' 'rowB' %}">
@@ -27,7 +28,8 @@ function confirm_delete(f, msg) {
 				<td>{{ program.end }}</td>
 				<td class="program-name"><a href="/program/{{ program.id  }}/">{{ program.name }}</a></td>
 				<td>{{ program.moderator }}</td>
-				<td><a href="/program/{{ program.id }}/delete" onclick="return confirm_delete(this, 'Confirma eliminar: {{ program.name }}?')"> X</td>
+				<td><a href="/program/{{ program.id }}/delete" onclick="return confirm_delete(this, 'Confirma eliminar: {{ program.name }}?')"> X </a></td>
+				<td><a href="/program/{{ program.id }}"> E </a></td>
 			</tr>
 		{% endfor %}
 		</table>

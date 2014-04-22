@@ -20,7 +20,7 @@ class Program(models.Model):
     def __unicode__(self):
         return self.name
 
-    name        = models.CharField(max_length=256)
+    name        = models.CharField(max_length=256, blank=True, null=True)
     description = models.TextField(max_length=1024, blank=True, null=True)
     moderator   = models.CharField(max_length=1024, blank=True, null=True)
     #facebook   = models.URLField(max_length=512, null=True)
