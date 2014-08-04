@@ -38,8 +38,13 @@ class ConfigForm(forms.Form):
         image = self.cleaned_data['image']
         return image
 
+    def clean_logo(self):
+        logo = self.cleaned_data['logo']
+        return logo
+
     streamurl = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     image     = forms.ImageField(label="Imagen", required=False, help_text="")
+    logo      = forms.ImageField(label="Logo", required=False, help_text="")
     image_del = forms.BooleanField(label="Eliminar Imagen", required=False, help_text="")
 
 

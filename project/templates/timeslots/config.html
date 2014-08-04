@@ -27,6 +27,13 @@ function confirm_delete(f, msg) {
 		</tr>
 		<tr>
 			<td colspan="2" class="program-image">
+				{% if config.logo %}
+					<img src="{{ config.logo.url }}" width="320">
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="program-image">
     				<input class="submit" type="submit" value="Guardar configuración" />
 			</td>
 		</tr>
