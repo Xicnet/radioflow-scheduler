@@ -95,8 +95,7 @@ class Config(models.Model):
     image_tag.allow_tags = True
 
     def get_fb_url(self):
-        url = "http://facebook.com/nacionalrock"
-        response = urlopen("http://graph.facebook.com/" + url)
+        response = urlopen("http://graph.facebook.com/" + self.facebook)
         data = json.loads(response.read())
         return "fb://profile/%s" % data['id']
 
