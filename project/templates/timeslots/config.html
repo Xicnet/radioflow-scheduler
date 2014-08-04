@@ -18,20 +18,22 @@ function confirm_delete(f, msg) {
 			<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
 
     {% endfor %}
+		{% if config.image %}
 		<tr>
 			<td colspan="2" class="program-image">
-				{% if config.image %}
-					<img src="{{ config.image.url }}" width="320">
-				{% endif %}
+				<b>Fondo</b><br/>
+				<img src="{{ config.image.url }}" width="320">
 			</td>
 		</tr>
+		{% endif %}
+		{% if config.logo %}
 		<tr>
 			<td colspan="2" class="program-image">
-				{% if config.logo %}
-					<img src="{{ config.logo.url }}" width="320">
-				{% endif %}
+				<b>Logo</b><br/>
+				<img src="{{ config.logo.url }}" width="320">
 			</td>
 		</tr>
+		{% endif %}
 		<tr>
 			<td colspan="2" class="program-image">
     				<input class="submit" type="submit" value="Guardar configuración" />

@@ -43,8 +43,8 @@ class ConfigForm(forms.Form):
         return logo
 
     streamurl = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    image     = forms.ImageField(label="Imagen", required=False, help_text="")
+    background = forms.ImageField(label="Fondo", required=False, help_text="")
     logo      = forms.ImageField(label="Logo", required=False, help_text="")
-    image_del = forms.BooleanField(label="Eliminar Imagen", required=False, help_text="")
+    image_del = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
 
 

@@ -148,12 +148,13 @@ def config_show(request, station="nacionalrock"):
             config.streamurl = config_form.cleaned_data['streamurl']
             if image:
                 config.image    = image
-            if image:
+            if logo:
                 config.logo     = logo
             if image_del:
                 config.image    = None
             print request.FILES
             config.save()
+            return redirect('config_show')
         else:
             config_form = ConfigForm(request.POST)
         return redirect('root')
