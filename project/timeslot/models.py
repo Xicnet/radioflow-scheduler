@@ -7,6 +7,8 @@ from django.contrib.sites.models import Site
 
 import datetime
 import os
+from urllib import urlopen
+import json
 
 from constants import *
 
@@ -63,6 +65,10 @@ class Config(models.Model):
         return "%s config" % self.user
 
     streamurl     = models.CharField(max_length=512, blank=True, null=True)
+    facebook      = models.URLField(max_length=512, blank=True, null=True)
+    twitter       = models.URLField(max_length=512, blank=True, null=True)
+    web           = models.URLField(max_length=512, blank=True, null=True)
+    email         = models.EmailField(max_length=256, null=True)
     image         = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
     cropping      = ImageRatioField('image', '320x480')
     logo          = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
@@ -87,3 +93,13 @@ class Config(models.Model):
         return u'<img src="%s" />' % self.image.url
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
+
+    def get_fb_url(self):
+        url = "http://facebook.com/nacionalrock"
+        response = urlopen("http://graph.facebook.com/" + url)
+        data = json.loads(response.read())
+        return "fb://profile/%s" % data['id']
+
+    def get_tw_url(self):
+        return self.twitter.replace("http://", "twitter://").replace("https://", "twitter://")
+

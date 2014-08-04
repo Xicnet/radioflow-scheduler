@@ -146,6 +146,10 @@ def config_show(request, station="nacionalrock"):
             image     = request.FILES.get('image', None)
             image_del = request.POST.get('image_del', None)
             config.streamurl = config_form.cleaned_data['streamurl']
+            config.facebook  = config_form.cleaned_data['facebook']
+            config.twitter   = config_form.cleaned_data['twitter']
+            config.web       = config_form.cleaned_data['web']
+            config.email     = config_form.cleaned_data['email']
             if image:
                 config.image    = image
             if logo:

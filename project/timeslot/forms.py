@@ -42,9 +42,29 @@ class ConfigForm(forms.Form):
         logo = self.cleaned_data['logo']
         return logo
 
-    streamurl = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    def clean_facebook(self):
+        facebook = self.cleaned_data['facebook']
+        return facebook
+
+    def clean_twitter(self):
+        twitter = self.cleaned_data['twitter']
+        return twitter
+
+    def clean_web(self):
+        web = self.cleaned_data['web']
+        return web
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        return email
+
+    streamurl  = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    facebook   = forms.CharField(label="Facebook", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    twitter    = forms.CharField(label="Twitter", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    web        = forms.CharField(label="Web", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    email      = forms.CharField(label="E-mail", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     background = forms.ImageField(label="Fondo", required=False, help_text="")
-    logo      = forms.ImageField(label="Logo", required=False, help_text="")
-    image_del = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
+    logo       = forms.ImageField(label="Logo", required=False, help_text="")
+    image_del  = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
 
 
