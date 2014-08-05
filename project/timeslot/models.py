@@ -4,6 +4,7 @@ from django.utils.timezone import utc
 from image_cropping import ImageRatioField
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.db.models.signals import post_save
 
 import datetime
 import os
@@ -73,7 +74,7 @@ class Config(models.Model):
     cropping      = ImageRatioField('image', '320x480')
     logo          = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
     logo_cropping = ImageRatioField('logo', '320x480')
-    user          = models.ForeignKey(User)
+    user          = models.OneToOneField(User)
 
     @property
     def image_url(self):
@@ -81,7 +82,7 @@ class Config(models.Model):
         return "http://%s%s"% (domain, self.image.url)
 
     @property
-    def logo_url(self):
+    def get_logo_url(self):
         domain = Site.objects.get_current().domain
         return "http://%s%s"% (domain, self.logo.url)
 
@@ -102,3 +103,9 @@ class Config(models.Model):
     def get_tw_url(self):
         return self.twitter.replace("http://", "twitter://").replace("https://", "twitter://")
 
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+       profile, created = UserProfile.objects.get_or_create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)

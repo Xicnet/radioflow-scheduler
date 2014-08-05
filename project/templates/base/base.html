@@ -18,7 +18,9 @@
 {% if request.user.is_authenticated %}
 <table>
 	<tr>
-		<td><img src="/media/img/{{ user.username }}.png"></td>
+		{% if request.user.config.get_logo_url %}
+		<td><img src="{{ request.user.config.get_logo_url }}"></td>
+		{% endif %}
 		<td><h2>Programación Semanal</h2></td>
 	</tr>
 </table>
