@@ -96,11 +96,15 @@ class Config(models.Model):
     image_tag.allow_tags = True
 
     def get_fb_url(self):
+        if not self.facebook or self.facebook == "":
+            return ""
         response = urlopen("http://graph.facebook.com/" + self.facebook)
         data = json.loads(response.read())
         return "fb://profile/%s" % data['id']
 
     def get_tw_url(self):
+        if not self.twitter or self.twitter == "":
+            return ""
         return self.twitter.replace("http://", "twitter://").replace("https://", "twitter://")
 
 
