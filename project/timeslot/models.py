@@ -82,6 +82,18 @@ class Config(models.Model):
         return "http://%s%s"% (domain, self.image.url)
 
     @property
+    def get_web(self):
+        if not self.web or self.web == "":
+            return ""
+        return self.web
+
+    @property
+    def get_email(self):
+        if not self.email or self.email == "":
+            return ""
+        return self.email
+
+    @property
     def get_logo_url(self):
         if not self.logo or self.logo == "":
             return ""
@@ -97,6 +109,7 @@ class Config(models.Model):
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
 
+    @property
     def get_fb_url(self):
         if not self.facebook or self.facebook == "":
             return ""
@@ -104,6 +117,7 @@ class Config(models.Model):
         data = json.loads(response.read())
         return "fb://profile/%s" % data['id']
 
+    @property
     def get_tw_url(self):
         if not self.twitter or self.twitter == "":
             return ""
