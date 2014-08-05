@@ -129,6 +129,7 @@ def config_json(request, station="nacionalrock"):
     for c in config:
         out_json += '{\n'
         out_json += '    "streamurl": %s,\n' % json.dumps(c.streamurl)
+        out_json += '    "logourl": %s,\n' % json.dumps(c.get_logo_url)
         out_json += '    "facebook": %s,\n' % json.dumps(c.get_fb_url())
         out_json += '    "twitter": %s,\n' % json.dumps(c.get_tw_url())
         out_json += '    "web": %s,\n' % json.dumps(c.web)

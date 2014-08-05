@@ -69,7 +69,7 @@ class Config(models.Model):
     facebook      = models.URLField(max_length=512, blank=True, null=True)
     twitter       = models.URLField(max_length=512, blank=True, null=True)
     web           = models.URLField(max_length=512, blank=True, null=True)
-    email         = models.EmailField(max_length=256, null=True)
+    email         = models.EmailField(max_length=256, null=True, blank=True)
     image         = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
     cropping      = ImageRatioField('image', '320x480')
     logo          = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
