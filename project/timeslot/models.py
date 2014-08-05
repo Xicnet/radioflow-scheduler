@@ -83,6 +83,8 @@ class Config(models.Model):
 
     @property
     def get_logo_url(self):
+        if not self.logo or self.logo == "":
+            return ""
         domain = Site.objects.get_current().domain
         return "http://%s%s"% (domain, self.logo.url)
 
