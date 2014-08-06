@@ -10,6 +10,10 @@ class ProgramForm(forms.Form):
         data = self.cleaned_data['name']
         return data
 
+    def clean_show_labels(self):
+        data = self.cleaned_data['show_labels']
+        return data
+
     def clean_image(self):
         image = self.cleaned_data['image']
         return image
@@ -20,13 +24,14 @@ class ProgramForm(forms.Form):
 
     days = Day.objects.all()
 
-    name      = forms.CharField(label="Nombre", max_length=256, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    moderator = forms.CharField(label="Conduce", max_length=1024, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (1024 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="(Opcional)")
-    image     = forms.ImageField(label="Imagen", required=False, help_text="JPG/PNG a 320x125 o 640x250")
+    name        = forms.CharField(label="Nombre", max_length=256, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (256 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
+    moderator   = forms.CharField(label="Conduce", max_length=1024, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (1024 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="(Opcional)")
+    show_labels = forms.BooleanField(label="Mostrar etiquetas", required=False, initial=True)
+    image       = forms.ImageField(label="Imagen", required=False, help_text="JPG/PNG a 320x125 o 640x250")
     description = TextAreaField(label="Detalle", max_length=1024, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (1024 max)'}, widget=forms.Textarea(attrs={'class':'suscription-textarea'}), help_text="1024 caracteres (Opcional)")
-    days      = forms.ModelMultipleChoiceField(label="Dias", queryset=Day.objects.all(), widget=forms.CheckboxSelectMultiple)
-    start     = forms.TimeField(label="Comienzo", required=True, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
-    end       = forms.TimeField(label="Fin", required=True, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
+    days        = forms.ModelMultipleChoiceField(label="Dias", queryset=Day.objects.all(), widget=forms.CheckboxSelectMultiple)
+    start       = forms.TimeField(label="Comienzo", required=True, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
+    end         = forms.TimeField(label="Fin", required=True, help_text="Formato HH:MM. Ej: 12:30 o 00:30")
 
 
 class ConfigForm(forms.Form):

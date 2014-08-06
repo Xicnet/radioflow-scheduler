@@ -55,6 +55,7 @@ def program(request, program_id=None):
             program.name         = program_form.cleaned_data['name']
             program.moderator    = program_form.cleaned_data['moderator']
             program.description  = program_form.cleaned_data['description']
+            program.show_labels  = program_form.cleaned_data['show_labels']
             program.start        = program_form.cleaned_data['start']
             program.end          = program_form.cleaned_data['end']
             program.days         = program_form.cleaned_data['days']
@@ -88,6 +89,7 @@ def now_playing(request, station="nacionalrock"):
             out_json += '    "name": %s,\n' % json.dumps(program.name)
             out_json += '    "moderator": %s,\n' % json.dumps(program.moderator)
             out_json += '    "presenter": %s,\n' % json.dumps(program.moderator)
+            out_json += '    "show_labels": %s,\n' % json.dumps(program.show_labels)
             if program.has_image:
                 out_json += '    "image": %s,\n' % json.dumps(program.image.url)
                 out_json += '    "image_url": %s\n' % json.dumps(program.image_url)
