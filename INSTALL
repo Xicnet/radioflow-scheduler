@@ -1,12 +1,21 @@
+### Create virtualenv and install django with all its dependencies
+
 virtualenv --no-site-packages --no-setuptools .
 . bin/activate
 pip install distribute
 python bootstrap.py
 bin/buildout -v -N
-#cd tools ; ./loaddata
-#bin/django collectstatic
 
-# su - postgres
-# createuser -P rna
-# createdb rna -O rna
+### If you want to use postresql instead of sqlite:
 
+su - postgres
+createuser -P rna
+createdb rna -O rna
+
+### Then you must configure django to use that database in your project/local_settings.py:
+
+cp project/local_settings.py.sample project/local_settings.py
+
+### Ceate database, tables and load initial data
+
+tools/initdb.sh
