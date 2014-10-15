@@ -75,8 +75,10 @@ class Config(models.Model):
 
     @property
     def image_url(self):
-        domain = Site.objects.get_current().domain
-        return "http://%s%s"% (domain, self.image.url)
+        if self.image:
+            domain = Site.objects.get_current().domain
+            return "http://%s%s"% (domain, self.image.url)
+        return ""
 
     @property
     def get_web(self):
