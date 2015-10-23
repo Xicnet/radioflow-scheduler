@@ -1,22 +1,14 @@
-import socket
-
 from django.core.management.base import BaseCommand, CommandError
 from django.db import models
 from django.contrib.sites.models import Site
+from django.conf import settings
 
 class Command(BaseCommand):
     help = "Deletes thumbnails that no longer have an original file."
 
     def handle(self, **options):
-        hostname = socket.gethostname()
+        print 'Setting site domain to:', settings.SITE_DOMAIN
 
-        if hostname == 'banx':
-            domain = 'localhost:8000'
-        else:
-            domain = 'babel.xicnet.com'
-
-        print 'Setting site domain to:', domain
-
-        site = Site.objects.get()
-        site.domain = domain
+        site = Site.objects.get(id=1)
+        site.domain = settings.SITE_DOMAIN
         site.save()

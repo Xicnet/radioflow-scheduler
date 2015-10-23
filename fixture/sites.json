@@ -1,1 +1,1 @@
-[{"pk": 1, "model": "sites.site", "fields": {"domain": "rnadmin.xicnet.com", "name": "rnadmin.xicnet.com"}}]
+[{"pk": 1, "model": "sites.site", "fields": {"domain": "localhost:8000", "name": "localhost:8000"}}]
