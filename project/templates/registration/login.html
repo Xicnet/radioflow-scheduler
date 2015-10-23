@@ -3,8 +3,11 @@
 
 {% block body %}
 
-<img src="/media/img/logo-rna.png">
+<center>
 
+
+<h2>RadioFlow Scheduler</h2>
+<div>
 {% if form.errors %}
 <p>El nombre de usuario y/o la contraseña no son válidos.</p>
 {% endif %}
@@ -26,4 +29,6 @@
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
+</div>
+</center>
 {% endblock %}
