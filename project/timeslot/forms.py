@@ -69,7 +69,7 @@ class ConfigForm(forms.Form):
     web        = forms.CharField(label="Web", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     email      = forms.CharField(label="E-mail", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     image      = forms.ImageField(label="Fondo", required=False, help_text="")
-    logo       = forms.ImageField(label="Logo", required=False, help_text="")
+    logo       = forms.ImageField(label="Logo (280x90)", required=False, help_text="")
     image_del  = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
 
 
