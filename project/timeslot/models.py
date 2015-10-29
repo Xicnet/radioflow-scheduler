@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 
-from utils import get_fb_profile_url
+from utils import get_fb_profile_url, parse_tw_url
 
 import datetime
 import os
@@ -66,7 +66,7 @@ class Config(models.Model):
 
     streamurl     = models.CharField(max_length=512, blank=True, null=True)
     facebook      = models.URLField(max_length=512, blank=True, null=True)
-    twitter       = models.URLField(max_length=512, blank=True, null=True)
+    twitter       = models.CharField(max_length=512, blank=True, null=True)
     web           = models.URLField(max_length=512, blank=True, null=True)
     email         = models.EmailField(max_length=256, null=True, blank=True)
     image         = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
@@ -120,7 +120,8 @@ class Config(models.Model):
     def get_tw_url(self):
         if not self.twitter or self.twitter == "":
             return ""
-        return self.twitter.replace("http://", "twitter://").replace("https://", "twitter://")
+        #return parse_tw_url(self.twitter)
+        return self.twitter
 
 
 def create_user_config(sender, instance, created, **kwargs):

@@ -9,3 +9,6 @@ def get_fb_profile_url(url):
     graph = facebook.GraphAPI(access_token=settings.FB_ACCESS_TOKEN)
     return "fb://profile/%s" % graph.get_object(name)['id']
 
+def parse_tw_url(url):
+    return urlparse(url).path.strip("/")
+
