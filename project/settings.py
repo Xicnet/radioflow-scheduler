@@ -193,6 +193,11 @@ SOUTH_MIGRATION_MODULES = {
 #FORCE_SCRIPT_NAME = '/registration'
 
 THUMBNAIL_DEBUG = True
+
+# used to query Facebook Graph API and translating human-URL into its Profile ID
+FB_ACCESS_TOKEN = None
+
+
 try:
     from local_settings import *
 except ImportError, e:

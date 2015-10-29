@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 
+from utils import get_fb_profile_url
+
 import datetime
 import os
 from urllib import urlopen
@@ -112,9 +114,7 @@ class Config(models.Model):
     def get_fb_url(self):
         if not self.facebook or self.facebook == "":
             return ""
-        response = urlopen("http://graph.facebook.com/" + self.facebook)
-        data = json.loads(response.read())
-        return "fb://profile/%s" % data['id']
+        return get_fb_profile_url(self.facebook)
 
     @property
     def get_tw_url(self):
