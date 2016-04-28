@@ -140,7 +140,8 @@ INSTALLED_APPS = (
     'ajax_upload',
     'django_extensions',
     'image_cropping',
-    'south',
+    'rest_api',
+    #'south',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -196,6 +197,14 @@ THUMBNAIL_DEBUG = True
 
 # used to query Facebook Graph API and translating human-URL into its Profile ID
 FB_ACCESS_TOKEN = None
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 
 try:

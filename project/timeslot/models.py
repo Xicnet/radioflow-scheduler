@@ -8,12 +8,22 @@ from django.db.models.signals import post_save
 
 from utils import get_fb_profile_url, parse_tw_url
 
-import datetime
+from datetime import datetime
+from django.utils import timezone
 import os
 from urllib import urlopen
 import json
 
 from constants import *
+
+# this solves
+# ValueError: Cannot serialize datetime values with timezones. Either use a
+# callable value for default or remove the timezone.
+# while migrating to Django 1.7
+INF_TIME = datetime.max.replace(tzinfo=timezone.utc)
+def get_inf_time():
+        return INF_TIME
+
 
 class Day(models.Model):
     def __unicode__(self):
@@ -35,7 +45,7 @@ class Program(models.Model):
     start       = models.TimeField(null=True)
     end         = models.TimeField(null=True)
     user        = models.ForeignKey(User)
-    created     = models.DateTimeField(default=datetime.datetime.now().replace(tzinfo=utc))
+    created     = models.DateTimeField(default=get_inf_time)
 
     def save(self, *args, **kwargs):
         return super(Program, self).save(*args, **kwargs)

@@ -5,7 +5,6 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.utils import simplejson
 from django.utils.timezone import utc
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
