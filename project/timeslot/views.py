@@ -13,6 +13,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.forms.models import model_to_dict
 
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from timeslot.serializers import ProgramSerializer
+
 from timeslot.models import Program, Day, Config
 from timeslot.forms import ProgramForm, ConfigForm
 
@@ -180,3 +184,81 @@ def config_show(request, station="nacionalrock"):
             context_instance=RequestContext(request)
         )
 
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
+
+@csrf_exempt
+def program_list(request):
+    """
+    List all code programs, or create a new program.
+    """
+    if request.method == 'GET':
+        programs = Program.objects.all()
+        serializer = ProgramSerializer(programs, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ProgramSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        return JSONResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def program_detail(request, pk):
+    """
+    Retrieve, update or delete a code program.
+    """
+    try:
+        program = Program.objects.get(pk=pk)
+    except Program.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = ProgramSerializer(program)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ProgramSerializer(program, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        program.delete()
+        return HttpResponse(status=204)
+
+@csrf_exempt
+def station_programs(request, station):
+    """
+    Retrieve, update or delete a code program.
+    """
+    try:
+        program = Program.objects.filter(user__username=station)
+    except Program.DoesNotExist:
+        return HttpResponse(status=401)
+
+    if request.method == 'GET':
+        serializer = ProgramSerializer(program, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ProgramSerializer(program, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        program.delete()
+        return HttpResponse(status=204)

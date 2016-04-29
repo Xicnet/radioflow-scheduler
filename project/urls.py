@@ -25,7 +25,6 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     url(r'^ajax-upload', include('ajax_upload.urls')),
-    #url(r'^api-auth/', include('rest_api.urls', namespace='rest_api'))
 
 )
 

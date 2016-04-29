@@ -140,7 +140,7 @@ INSTALLED_APPS = (
     'ajax_upload',
     'django_extensions',
     'image_cropping',
-    'rest_api',
+    'rest_framework',
     #'south',
 )
 
