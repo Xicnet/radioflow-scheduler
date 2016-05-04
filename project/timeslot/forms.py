@@ -35,6 +35,10 @@ class ProgramForm(forms.Form):
 
 
 class ConfigForm(forms.Form):
+    def clean_station(self):
+        data = self.cleaned_data['station']
+        return data
+
     def clean_streamurl(self):
         data = self.cleaned_data['streamurl']
         return data
@@ -63,6 +67,7 @@ class ConfigForm(forms.Form):
         email = self.cleaned_data['email']
         return email
 
+    station    = forms.CharField(label="Emisora", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     streamurl  = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     facebook   = forms.CharField(label="Facebook", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     twitter    = forms.CharField(label="Twitter", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))

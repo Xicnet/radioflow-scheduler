@@ -24,7 +24,10 @@
 			<img src="{% thumbnail request.user.config.logo 160x120 %}">
 		</td>
 		{% endif %}
-		<td><h2>Programación Semanal</h2></td>
+		<td>
+			<h2>{{ request.user.config.station }}</h2>
+			<h4>Programación Semanal</h4>
+		</td>
 	</tr>
 </table>
 <p>

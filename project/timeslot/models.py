@@ -74,6 +74,7 @@ class Config(models.Model):
     def __unicode__(self):
         return "%s config" % self.user
 
+    station       = models.CharField(max_length=512, null=True)
     streamurl     = models.CharField(max_length=512, blank=True, null=True)
     facebook      = models.URLField(max_length=512, blank=True, null=True)
     twitter       = models.CharField(max_length=512, blank=True, null=True)
@@ -84,6 +85,9 @@ class Config(models.Model):
     logo          = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
     logo_cropping = ImageRatioField('logo', '320x480')
     user          = models.OneToOneField(User)
+
+    def __unicode__(self):
+        return u'%s' % self.station
 
     @property
     def image_url(self):

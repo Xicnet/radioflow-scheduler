@@ -155,6 +155,7 @@ def config_show(request, station="nacionalrock"):
             logo      = request.FILES.get('logo', None)
             image     = request.FILES.get('image', None)
             image_del = request.POST.get('image_del', None)
+            config.station   = config_form.cleaned_data['station']
             config.streamurl = config_form.cleaned_data['streamurl']
             config.facebook  = config_form.cleaned_data['facebook']
             config.twitter   = config_form.cleaned_data['twitter']
