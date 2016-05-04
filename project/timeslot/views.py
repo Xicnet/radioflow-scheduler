@@ -15,7 +15,7 @@ from django.forms.models import model_to_dict
 
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from timeslot.serializers import ProgramSerializer
+from timeslot.serializers import ProgramSerializer, DaySerializer
 
 from timeslot.models import Program, Day, Config
 from timeslot.forms import ProgramForm, ConfigForm
@@ -217,7 +217,7 @@ def program_detail(request, pk):
     Retrieve, update or delete a code program.
     """
     try:
-        program = Program.objects.get(pk=pk)
+        program = Program.objects.get(pk=pk).__dict__
     except Program.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -243,12 +243,26 @@ def station_programs(request, station):
     Retrieve, update or delete a code program.
     """
     try:
-        program = Program.objects.filter(user__username=station)
+        """
+        program = Program.objects.filter(user__username=station).values()
+        days = Day.objects.all()
+        a = {}
+        for day in days:
+            a[day.name] = Program.objects.filter(user__username=station).values()
+        print a
+        program = a
+        """
+
+        program = []
+        days = Day.objects.all()
+        for day in days:
+            program.append({'day': day, 'programs': day.program_set.all()})
+
     except Program.DoesNotExist:
         return HttpResponse(status=401)
 
     if request.method == 'GET':
-        serializer = ProgramSerializer(program, many=True)
+        serializer = DaySerializer(program, many=True)
         return JSONResponse(serializer.data)
 
     elif request.method == 'PUT':
