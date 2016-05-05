@@ -32,6 +32,9 @@ class Day(models.Model):
     name = models.CharField(max_length=10)
 
 class Program(models.Model):
+    class Meta:
+        ordering = ['start']
+
     def __unicode__(self):
         return self.name
 
