@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/program/$', timeslot.views.program_list),
     url(r'^api/program/(?P<pk>[0-9]+)/$', timeslot.views.program_detail),
-    url(r'^api/station/(?P<station>[a-z0-9]+)/programs/$', timeslot.views.station_programs),
+    url(r'^api/programs/(?P<station>[a-z0-9]+)/$', timeslot.views.station_programs),
 )
 
 #if settings.DEBUG:
