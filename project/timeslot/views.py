@@ -101,7 +101,7 @@ def now_playing(request, station="nacionalrock"):
                 out_json += '    "image_url": %s\n' % json.dumps("")
             out_json += '}\n'
 
-    return HttpResponse(out_json, mimetype="application/json")
+    return HttpResponse(out_json, content_type="application/json")
 
 def logout_view(request):
     logout(request)
@@ -142,7 +142,7 @@ def config_json(request, station="nacionalrock"):
         out_json += '    "image": %s\n' % json.dumps(c.image_url)
         out_json += '}\n'
 
-    return HttpResponse(out_json, mimetype="application/json")
+    return HttpResponse(out_json, content_type="application/json")
 
 @login_required
 def config_show(request, station="nacionalrock"):
