@@ -257,7 +257,8 @@ def station_programs(request, station):
         program = []
         days = Day.objects.all()
         for day in days:
-            program.append({'day': day, 'programs': day.program_set.filter(user__username="radiodesalon")})
+            program.append({'day': day, 'programs':
+                day.program_set.filter(user__username=station)})
 
 
     except Program.DoesNotExist:
