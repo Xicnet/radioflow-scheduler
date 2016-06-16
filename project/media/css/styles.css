@@ -56,10 +56,16 @@ td .field-error input {
 }
 
 table.program-form, table.program-listing,
+table.config-form,
 table.password-change-form {
 	border: solid #000 1px;
 	margin: 10px 10px 10px 10px;
 	padding: 10px 10px 10px 10px;
+}
+
+.config-form-field,
+.config-form-field textarea {
+	width: 512px;
 }
 
 .red-bold {

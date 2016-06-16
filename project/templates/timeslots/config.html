@@ -18,9 +18,9 @@ function confirm_delete(f, msg) {
 	<tr>
 		<td>
 
-			<table class="program-listing">
+			<table class="config-form">
 				{% for field in config_form %}
-				<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+				<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td class="config-form-field">{{ field }}</td></tr>
 				{% endfor %}
 				<tr>
 					<td colspan="2" class="program-image">
