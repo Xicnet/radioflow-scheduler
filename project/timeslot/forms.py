@@ -90,7 +90,7 @@ class ConfigForm(forms.Form):
     logo       = forms.ImageField(label="Logo (2048x2048)", required=False, help_text="")
     feature_graphic = forms.ImageField(label="Feature Graphic (1024x500)", required=False, help_text="")
     app_name   = forms.CharField(label=u"Nombre de la app (max. 30 caracteres)", max_length=30, min_length=1, required=False)
-    short_description = forms.CharField(label=u"Descripcion corta (max. 80 caracteres)", max_length=80, min_length=1, required=False, widget=forms.Textarea())
+    short_description = forms.CharField(label=u"Descripcion corta (max. 80 caracteres)", max_length=80, min_length=1, required=False)
     description       = forms.CharField(label=u"Descripcion larga (max. 4000 caracteres)", max_length=4000, min_length=1, required=False, widget=forms.Textarea())
     keywords          = forms.CharField(label="Keywords", max_length=512, min_length=1, required=False)
 
