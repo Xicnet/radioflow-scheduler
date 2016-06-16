@@ -77,17 +77,21 @@ class Config(models.Model):
     def __unicode__(self):
         return "%s config" % self.user
 
-    station       = models.CharField(max_length=512, null=True)
-    streamurl     = models.CharField(max_length=512, blank=True, null=True)
-    facebook      = models.URLField(max_length=512, blank=True, null=True)
-    twitter       = models.CharField(max_length=512, blank=True, null=True)
-    web           = models.URLField(max_length=512, blank=True, null=True)
-    email         = models.EmailField(max_length=256, null=True, blank=True)
-    image         = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
-    cropping      = ImageRatioField('image', '320x480')
-    logo          = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
-    logo_cropping = ImageRatioField('logo', '320x480')
-    user          = models.OneToOneField(User)
+    station           = models.CharField(max_length=512, null=True)
+    streamurl         = models.CharField(max_length=512, blank=True, null=True)
+    facebook          = models.URLField(max_length=512, blank=True, null=True)
+    twitter           = models.CharField(max_length=512, blank=True, null=True)
+    web               = models.URLField(max_length=512, blank=True, null=True)
+    email             = models.EmailField(max_length=256, null=True, blank=True)
+    image             = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
+    cropping          = ImageRatioField('image', '320x480')
+    logo              = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
+    logo_cropping     = ImageRatioField('logo', '320x480')
+    short_description = models.CharField(max_length=80, blank=True, null=True)
+    description       = models.CharField(max_length=4000, blank=True, null=True)
+    keywords          = models.CharField(max_length=256, blank=True, null=True)
+    feature_graphic   = models.ImageField(verbose_name="Feature Graphic (1024x500)", blank=True, null=True, upload_to='uploaded_images/')
+    user              = models.OneToOneField(User)
 
     def __unicode__(self):
         return u'%s' % self.station
