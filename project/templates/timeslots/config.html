@@ -14,41 +14,54 @@ function confirm_delete(f, msg) {
 <h3>Configuración</h3>
 
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-		<table class="program-listing">
-    {% for field in config_form %}
-			<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+	<table id="config-container">
+	<tr>
+		<td>
 
-    {% endfor %}
-		{% if config.image %}
-		<tr>
-			<td colspan="2" class="program-image">
-				<b>Fondo</b><br/>
-				<img src="{{ config.image.url }}" width="160">
-			</td>
-		</tr>
-		{% endif %}
-		{% if config.logo %}
-		<tr>
-			<td colspan="2" class="program-image">
-				<b>Logo</b><br/>
-				<img src="{% thumbnail config.logo 160x160 %}">
-			</td>
-		</tr>
-		{% endif %}
-		{% if config.feature_graphic %}
-		<tr>
-			<td colspan="2" class="program-image">
-				<b>Feature Graphic</b><br/>
-				<img src="{% thumbnail config.feature_graphic 256x125 %}">
-			</td>
-		</tr>
-		{% endif %}
-		<tr>
-			<td colspan="2" class="program-image">
-    				<input class="submit" type="submit" value="Guardar configuración" />
-			</td>
-		</tr>
-		</table>
-    </form>
+			<table class="program-listing">
+				{% for field in config_form %}
+				<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+				{% endfor %}
+				<tr>
+					<td colspan="2" class="program-image">
+						<input class="submit" type="submit" value="Guardar configuración" />
+					</td>
+				</tr>
+			</table>
+
+		</td>
+		<td valign="top">
+
+			<table class="program-listing">
+			{% if config.image %}
+			<tr>
+				<td colspan="2" class="program-image">
+					<b>Fondo</b><br/>
+					<img src="{{ config.image.url }}" width="160">
+				</td>
+			</tr>
+			{% endif %}
+			{% if config.logo %}
+			<tr>
+				<td colspan="2" class="program-image">
+					<b>Logo</b><br/>
+					<img src="{% thumbnail config.logo 160x160 %}">
+				</td>
+			</tr>
+			{% endif %}
+			{% if config.feature_graphic %}
+			<tr>
+				<td colspan="2" class="program-image">
+					<b>Feature Graphic</b><br/>
+					<img src="{% thumbnail config.feature_graphic 256x125 %}">
+				</td>
+			</tr>
+			{% endif %}
+			</table>
+
+		</td>
+	</tr>
+	</table>
+	</form>
 
 {% endblock %}
