@@ -10,6 +10,8 @@ from utils import get_fb_profile_url, parse_tw_url
 
 from datetime import datetime
 from django.utils import timezone
+from django.utils.text import slugify
+
 import os
 from urllib import urlopen
 import json
@@ -23,6 +25,9 @@ from constants import *
 INF_TIME = datetime.max.replace(tzinfo=timezone.utc)
 def get_inf_time():
         return INF_TIME
+
+def uploaded_image_path(instance, filename):
+    return '/'.join(['uploaded_images', instance.station_slug, filename])
 
 
 class Day(models.Model):
@@ -83,9 +88,9 @@ class Config(models.Model):
     twitter           = models.CharField(max_length=512, blank=True, null=True)
     web               = models.URLField(max_length=512, blank=True, null=True)
     email             = models.EmailField(max_length=256, null=True, blank=True)
-    image             = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
+    image             = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
     cropping          = ImageRatioField('image', '320x480')
-    logo              = models.ImageField(blank=True, null=True, upload_to='uploaded_images/')
+    logo              = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
     logo_cropping     = ImageRatioField('logo', '320x480')
     short_description = models.CharField(max_length=80, blank=True, null=True)
     description       = models.CharField(max_length=4000, blank=True, null=True)
@@ -95,6 +100,10 @@ class Config(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.station
+
+    @property
+    def station_slug(self):
+        return slugify(self.station).replace('-', '')
 
     @property
     def image_url(self):
