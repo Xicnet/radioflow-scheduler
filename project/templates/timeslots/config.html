@@ -13,6 +13,8 @@ function confirm_delete(f, msg) {
 
 <h3>Configuración</h3>
 
+<h5>IMPORTANTE: los campos marcados con * son obligatorios para el correcto funcionamiento de la app.</h5>
+
     <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 	<table id="config-container">
 	<tr>
@@ -20,7 +22,10 @@ function confirm_delete(f, msg) {
 
 			<table class="config-form">
 				{% for field in config_form %}
-				<tr class="{% cycle 'rowA' 'rowB' %}"><td class="program-field-label">{{ field.label_tag }}</td><td class="config-form-field">{{ field }}</td></tr>
+				<tr class="{% cycle 'rowA' 'rowB' %}">
+					<td class="program-field-label">{{ field.label_tag }}</td>
+					<td class="config-form-field">{{ field }}<p class="help">{{ field.help_text }}</p></td>
+				</tr>
 				{% endfor %}
 				<tr>
 					<td colspan="2" class="program-image">

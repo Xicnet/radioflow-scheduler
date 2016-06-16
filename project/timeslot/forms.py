@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from django import forms
 from timeslot.fields import TextAreaField, SelectField
 from django.forms import widgets
@@ -79,19 +81,19 @@ class ConfigForm(forms.Form):
         keywords = self.cleaned_data['keywords']
         return keywords
 
-    station    = forms.CharField(label="Emisora", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    streamurl  = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    facebook   = forms.CharField(label="Facebook", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    twitter    = forms.CharField(label="Twitter", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    web        = forms.CharField(label="Web", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    email      = forms.CharField(label="E-mail", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
-    image      = forms.ImageField(label="Fondo", required=False, help_text="")
+    station    = forms.CharField(label="Nombre de la radio", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text=u"Se utiliza en el gestor de programación (Radioflow Scheduler).")
+    streamurl  = forms.CharField(label="URL Stream*", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="URL del stream para conectar desde la app.")
+    facebook   = forms.CharField(label="Facebook*", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="Se utiliza en la pantalla principal de la app.")
+    twitter    = forms.CharField(label="Twitter*", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="Se utiliza en la pantalla principal de la app.")
+    web        = forms.CharField(label="Web*", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="Se utiliza en la pantalla principal de la app.")
+    email      = forms.CharField(label="E-mail*", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}), help_text="Se utiliza en la pantalla principal de la app.")
+    image      = forms.ImageField(label="Fondo", required=False, help_text="Se utiliza en la pantalla principal de la app.")
     image_del  = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
-    logo       = forms.ImageField(label="Logo (2048x2048)", required=False, help_text="")
-    feature_graphic = forms.ImageField(label="Feature Graphic (1024x500)", required=False, help_text="")
-    app_name   = forms.CharField(label=u"Nombre de la app (max. 30 caracteres)", max_length=30, min_length=1, required=False)
-    short_description = forms.CharField(label=u"Descripcion corta (max. 80 caracteres)", max_length=80, min_length=1, required=False)
-    description       = forms.CharField(label=u"Descripcion larga (max. 4000 caracteres)", max_length=4000, min_length=1, required=False, widget=forms.Textarea())
-    keywords          = forms.CharField(label="Keywords", max_length=512, min_length=1, required=False)
+    logo       = forms.ImageField(label="Logo* (2048x2048)", required=False, help_text="Se utiliza en las tiendas de apps y en la pantalla principal de la app.")
+    feature_graphic = forms.ImageField(label="Feature Graphic* (1024x500)", required=False, help_text="Se utiliza en la Play Store en caso de que ellos decidan promocionar tu app.")
+    app_name   = forms.CharField(label=u"Nombre de la app* (max. 30 caracteres)", max_length=30, min_length=1, required=False, help_text="Se utiliza en las tiendas de apps.")
+    short_description = forms.CharField(label=u"Descripcion corta* (max. 80 caracteres)", max_length=80, min_length=1, required=False, help_text="Se utiliza en la Play Store.")
+    description       = forms.CharField(label=u"Descripcion larga* (max. 4000 caracteres)", max_length=4000, min_length=1, required=False, widget=forms.Textarea(), help_text="Se utiliza en las tiendas de apps.")
+    keywords          = forms.CharField(label="Keywords*", max_length=512, min_length=1, required=False, help_text="Se utiliza en la App Store.")
 
 

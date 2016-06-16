@@ -35,6 +35,12 @@ tr, td, .program-form {
 	text-align: left;
 }
 
+p.help {
+	font-size: 0.8em;
+	margin: 0;
+	color: #297518;
+}
+
 input[type=text],
 input[type=password] {
 	width: 97%;
