@@ -152,21 +152,26 @@ def config_show(request, station="nacionalrock"):
     if request.method == 'POST':
         config_form = ConfigForm(request.POST)
         if config_form.is_valid():
-            logo      = request.FILES.get('logo', None)
-            image     = request.FILES.get('image', None)
-            image_del = request.POST.get('image_del', None)
+            logo             = request.FILES.get('logo', None)
+            image            = request.FILES.get('image', None)
+            image_del        = request.POST.get('image_del', None)
+            feature_graphic  = request.FILES.get('feature_graphic', None)
+
             config.station   = config_form.cleaned_data['station']
             config.streamurl = config_form.cleaned_data['streamurl']
             config.facebook  = config_form.cleaned_data['facebook']
             config.twitter   = config_form.cleaned_data['twitter']
             config.web       = config_form.cleaned_data['web']
             config.email     = config_form.cleaned_data['email']
+
             if image:
-                config.image    = image
+                config.image = image
             if logo:
-                config.logo     = logo
+                config.logo  = logo
             if image_del:
-                config.image    = None
+                config.image = None
+            if feature_graphic:
+                config.feature_graphic = feature_graphic
 
             config.app_name          = config_form.cleaned_data['app_name']
             config.short_description = config_form.cleaned_data['short_description']

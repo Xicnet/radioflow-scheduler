@@ -88,6 +88,7 @@ class ConfigForm(forms.Form):
     image      = forms.ImageField(label="Fondo", required=False, help_text="")
     logo       = forms.ImageField(label="Logo (2048x2048)", required=False, help_text="")
     image_del  = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
+    feature_graphic = forms.ImageField(label="Feature Graphic (1024x500)", required=False, help_text="")
     app_name   = forms.CharField(label=u"Nombre de la app (max. 30 caracteres)", max_length=30, min_length=1, required=False)
     short_description = forms.CharField(label=u"Descripcion corta (max. 80 caracteres)", max_length=80, min_length=1, required=False, widget=forms.Textarea())
     description       = forms.CharField(label=u"Descripcion larga (max. 4000 caracteres)", max_length=4000, min_length=1, required=False, widget=forms.Textarea())

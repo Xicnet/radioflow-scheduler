@@ -96,7 +96,7 @@ class Config(models.Model):
     short_description = models.CharField(max_length=80, blank=True, null=True)
     description       = models.CharField(max_length=4000, blank=True, null=True)
     keywords          = models.CharField(max_length=256, blank=True, null=True)
-    feature_graphic   = models.ImageField(verbose_name="Feature Graphic (1024x500)", blank=True, null=True, upload_to='uploaded_images/')
+    feature_graphic   = models.ImageField(verbose_name="Feature Graphic (1024x500)", blank=True, null=True, upload_to=uploaded_image_path)
     user              = models.OneToOneField(User)
 
     def __unicode__(self):

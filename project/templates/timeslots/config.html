@@ -35,6 +35,14 @@ function confirm_delete(f, msg) {
 			</td>
 		</tr>
 		{% endif %}
+		{% if config.feature_graphic %}
+		<tr>
+			<td colspan="2" class="program-image">
+				<b>Feature Graphic</b><br/>
+				<img src="{% thumbnail config.feature_graphic 256x125 %}">
+			</td>
+		</tr>
+		{% endif %}
 		<tr>
 			<td colspan="2" class="program-image">
     				<input class="submit" type="submit" value="Guardar configuración" />
