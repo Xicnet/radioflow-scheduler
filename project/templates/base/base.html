@@ -21,7 +21,7 @@
 	<tr>
 		{% if request.user.config.get_logo_url %}
 		<td>
-			<img src="{% thumbnail request.user.config.logo 160x120 %}">
+			<img src="{% thumbnail request.user.config.logo 160x160 %}">
 		</td>
 		{% endif %}
 		<td>
