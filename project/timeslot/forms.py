@@ -90,6 +90,6 @@ class ConfigForm(forms.Form):
     image_del  = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
     short_description = forms.CharField(label=u"Descripcion corta (max. 80 caracteres)", max_length=80, min_length=1, required=False, widget=forms.Textarea())
     description       = forms.CharField(label=u"Descripcion larga (max. 4000 caracteres)", max_length=4000, min_length=1, required=False, widget=forms.Textarea())
-    keywords      = forms.CharField(label="Keywords", max_length=512, min_length=1, required=False)
+    keywords          = forms.CharField(label="Keywords", max_length=512, min_length=1, required=False)
 
 
