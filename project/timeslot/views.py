@@ -167,9 +167,11 @@ def config_show(request, station="nacionalrock"):
                 config.logo     = logo
             if image_del:
                 config.image    = None
-            config.short_description     = config_form.cleaned_data['short_description']
-            config.description     = config_form.cleaned_data['description']
-            config.keywords     = config_form.cleaned_data['keywords']
+
+            config.app_name          = config_form.cleaned_data['app_name']
+            config.short_description = config_form.cleaned_data['short_description']
+            config.description       = config_form.cleaned_data['description']
+            config.keywords          = config_form.cleaned_data['keywords']
             print request.FILES
             config.save()
             return redirect('config_show')
