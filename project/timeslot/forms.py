@@ -67,6 +67,18 @@ class ConfigForm(forms.Form):
         email = self.cleaned_data['email']
         return email
 
+    def clean_short_description(self):
+        short_description = self.cleaned_data['short_description']
+        return short_description
+
+    def clean_description(self):
+        description = self.cleaned_data['description']
+        return description
+
+    def clean_keywords(self):
+        keywords = self.cleaned_data['keywords']
+        return keywords
+
     station    = forms.CharField(label="Emisora", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     streamurl  = forms.CharField(label="URL Stream", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
     facebook   = forms.CharField(label="Facebook", max_length=512, min_length=1, required=False, error_messages={'max_length': 'Por favor, ingrese menos caracteres (512 max)'}, widget=forms.TextInput(attrs={'class':'suscription-input'}))
@@ -78,5 +90,6 @@ class ConfigForm(forms.Form):
     image_del  = forms.BooleanField(label="Eliminar fondo", required=False, help_text="")
     short_description = forms.CharField(label=u"Descripcion corta (max. 80 caracteres)", max_length=80, min_length=1, required=False, widget=forms.Textarea())
     description       = forms.CharField(label=u"Descripcion larga (max. 4000 caracteres)", max_length=4000, min_length=1, required=False, widget=forms.Textarea())
+    keywords      = forms.CharField(label="Keywords", max_length=512, min_length=1, required=False)
 
 

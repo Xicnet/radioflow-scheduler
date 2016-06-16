@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load thumbnail %}
 {% block headcustom %}
 <script>
 function confirm_delete(f, msg) {
@@ -30,7 +31,7 @@ function confirm_delete(f, msg) {
 		<tr>
 			<td colspan="2" class="program-image">
 				<b>Logo</b><br/>
-				<img src="{{ config.logo.url }}" width="320">
+				<img src="{% thumbnail config.logo 160x160 %}">
 			</td>
 		</tr>
 		{% endif %}
