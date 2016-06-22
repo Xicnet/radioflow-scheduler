@@ -91,6 +91,7 @@ class Config(models.Model):
     image             = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
     cropping          = ImageRatioField('image', '320x480')
     logo              = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
+    logo_alpha        = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
     logo_cropping     = ImageRatioField('logo', '320x480')
     app_name          = models.CharField(max_length=30, blank=True, null=True)
     short_description = models.CharField(max_length=80, blank=True, null=True)

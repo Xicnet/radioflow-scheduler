@@ -153,6 +153,7 @@ def config_show(request, station="nacionalrock"):
         config_form = ConfigForm(request.POST)
         if config_form.is_valid():
             logo             = request.FILES.get('logo', None)
+            logo_alpha       = request.FILES.get('logo_alpha', None)
             image            = request.FILES.get('image', None)
             image_del        = request.POST.get('image_del', None)
             feature_graphic  = request.FILES.get('feature_graphic', None)
@@ -168,6 +169,8 @@ def config_show(request, station="nacionalrock"):
                 config.image = image
             if logo:
                 config.logo  = logo
+            if logo_alpha:
+                config.logo_alpha  = logo_alpha
             if image_del:
                 config.image = None
             if feature_graphic:

@@ -54,6 +54,14 @@ function confirm_delete(f, msg) {
 				</td>
 			</tr>
 			{% endif %}
+			{% if config.logo_alpha %}
+			<tr>
+				<td colspan="2" class="program-image">
+					<b>Logo</b><br/>
+					<img src="{% thumbnail config.logo_alpha 160x160 %}">
+				</td>
+			</tr>
+			{% endif %}
 			{% if config.feature_graphic %}
 			<tr>
 				<td colspan="2" class="program-image">
