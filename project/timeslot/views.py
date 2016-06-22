@@ -153,7 +153,11 @@ def config_show(request, station="nacionalrock"):
         config_form = ConfigForm(request.POST)
         if config_form.is_valid():
             logo             = request.FILES.get('logo', None)
+            logo_del         = request.POST.get('logo_del', None)
             logo_alpha       = request.FILES.get('logo_alpha', None)
+            logo_alpha_del   = request.POST.get('logo_alpha_del', None)
+            logo_home        = request.FILES.get('logo_home', None)
+            logo_home_del    = request.POST.get('logo_home_del', None)
             image            = request.FILES.get('image', None)
             image_del        = request.POST.get('image_del', None)
             feature_graphic  = request.FILES.get('feature_graphic', None)
@@ -167,12 +171,21 @@ def config_show(request, station="nacionalrock"):
 
             if image:
                 config.image = image
-            if logo:
-                config.logo  = logo
-            if logo_alpha:
-                config.logo_alpha  = logo_alpha
             if image_del:
                 config.image = None
+            if logo:
+                config.logo  = logo
+            if logo_del:
+                config.logo = None
+            if logo_alpha:
+                config.logo_alpha  = logo_alpha
+            if logo_alpha_del:
+                config.logo_alpha = None
+            if logo_home:
+                config.logo_home  = logo_home
+            if logo_home_del:
+                config.logo_home = None
+                print "HERE"*77
             if feature_graphic:
                 config.feature_graphic = feature_graphic
 
@@ -181,6 +194,7 @@ def config_show(request, station="nacionalrock"):
             config.description       = config_form.cleaned_data['description']
             config.keywords          = config_form.cleaned_data['keywords']
             print request.FILES
+            print "POST: ", request.POST
             config.save()
             return redirect('config_show')
         else:

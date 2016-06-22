@@ -19,9 +19,9 @@
 {% if request.user.is_authenticated %}
 <table>
 	<tr>
-		{% if request.user.config.get_logo_url %}
+		{% if request.user.config.logo_home %}
 		<td>
-			<img src="{% thumbnail request.user.config.logo 160x160 %}">
+			<img src="{% thumbnail request.user.config.logo_home 160x160 %}">
 		</td>
 		{% endif %}
 		<td>

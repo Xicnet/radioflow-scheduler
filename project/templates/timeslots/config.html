@@ -49,7 +49,7 @@ function confirm_delete(f, msg) {
 			{% if config.logo %}
 			<tr>
 				<td colspan="2" class="program-image">
-					<b>Logo</b><br/>
+					<b>Logo sin Alpha</b><br/>
 					<img src="{% thumbnail config.logo 160x160 %}">
 				</td>
 			</tr>
@@ -57,8 +57,16 @@ function confirm_delete(f, msg) {
 			{% if config.logo_alpha %}
 			<tr>
 				<td colspan="2" class="program-image">
-					<b>Logo</b><br/>
+					<b>Logo con Alpha</b><br/>
 					<img src="{% thumbnail config.logo_alpha 160x160 %}">
+				</td>
+			</tr>
+			{% endif %}
+			{% if config.logo_home %}
+			<tr>
+				<td colspan="2" class="program-image">
+					<b>Logo Home</b><br/>
+					<img src="{% thumbnail config.logo_home 160x160 %}">
 				</td>
 			</tr>
 			{% endif %}

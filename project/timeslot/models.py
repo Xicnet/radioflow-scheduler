@@ -92,6 +92,7 @@ class Config(models.Model):
     cropping          = ImageRatioField('image', '320x480')
     logo              = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
     logo_alpha        = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
+    logo_home         = models.ImageField(blank=True, null=True, upload_to=uploaded_image_path)
     logo_cropping     = ImageRatioField('logo', '320x480')
     app_name          = models.CharField(max_length=30, blank=True, null=True)
     short_description = models.CharField(max_length=80, blank=True, null=True)
@@ -128,10 +129,14 @@ class Config(models.Model):
 
     @property
     def get_logo_url(self):
-        if not self.logo or self.logo == "":
+        if self.logo_home and self.logo_home != "":
+            logo_url = self.logo_home.url
+        elif self.logo or self.logo != "":
+            logo_url = self.logo.url
+        else:
             return ""
         domain = Site.objects.get_current().domain
-        return "http://%s%s"% (domain, self.logo.url)
+        return "http://%s%s"% (domain, logo_url)
 
     @property
     def image_path(self):
