@@ -8,7 +8,7 @@ class ProgramAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display    = ('name', 'moderator', 'start', 'end')
 
 class ConfigAdmin(admin.ModelAdmin):
-    list_display    = ('station', 'user')
+    list_display    = ('station', 'user', 'streamurl', 'facebook', 'twitter', 'web', 'email')
 
 admin.site.register(Program, ProgramAdmin)
 admin.site.register(Day)
