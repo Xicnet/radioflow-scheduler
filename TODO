@@ -1,3 +1,6 @@
+* hacer que las etiquetas del infopanel sean opcionales y su texto configurable
+
+* hacer que cuando el fb o twitter link no son validos, no explote la config, sino no abre la app
 
 * Logo app main screen : 280x90
 
