@@ -3,6 +3,7 @@ import json
 
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timezone import utc
@@ -25,6 +26,8 @@ from constants import *
 
 @login_required
 def index(request):
+    if request.user.username == "admin":
+        return HttpResponseRedirect(reverse('admin:index'))
     weekly_programs = []
     days = Day.objects.all()
     for day in days:
