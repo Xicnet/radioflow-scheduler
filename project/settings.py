@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'image_cropping',
     'rest_framework',
     #'south',
+    'icecast_stats',
 )
 
 # A sample logging configuration. The only tangible logging
