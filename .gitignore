@@ -19,3 +19,4 @@ static/
 project/media/uploaded_images/
 local/
 timeslot.sql
+pip-selfcheck.json
