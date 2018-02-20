@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^program/', include('timeslot.urls')),
+    url(r'^stats/', include('icecast_stats.urls')),
 
     url(r'^(?P<station>(.*))/now_playing.json$', 'timeslot.views.now_playing', name='now_playing'),
     url(r'^now_playing.json$', 'timeslot.views.now_playing', name='now_playing'),
