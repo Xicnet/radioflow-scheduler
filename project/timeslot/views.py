@@ -26,7 +26,7 @@ from constants import *
 
 @login_required
 def index(request):
-    if request.user.username == "admin":
+    if request.user.is_superuser == True:
         return HttpResponseRedirect(reverse('admin:index'))
     weekly_programs = []
     days = Day.objects.all()
