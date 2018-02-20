@@ -1,0 +1,16 @@
+{% for log in logs %}
+  {{ log.datetime_start }} |
+  {{ log.datetime_end }} |
+  {{ log.ip }} |
+  {{ log.country_code }} |
+  {{ log.mount }} |
+  {{ log.status_code }} |
+  {{ log.duration }} |
+  {{ log.sent_bytes }} |
+  {{ log.agent }} |
+  {{ log.referer }} |
+  {{ log.server }} |
+
+  </br>
+{% endfor %}
+

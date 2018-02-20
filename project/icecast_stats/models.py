@@ -9,7 +9,7 @@ class IcecastLog(models.Model):
     status_code    = models.IntegerField(blank=True, null=True)
     duration       = models.IntegerField(blank=True, null=True)
     sent_bytes     = models.IntegerField(blank=True, null=True)
-    agent          = models.CharField(max_length=200, blank=True, null=True)
+    agent          = models.CharField(max_length=400, blank=True, null=True)
     referer        = models.CharField(max_length=400, blank=True, null=True)
     server         = models.CharField(max_length=50, blank=True, null=True)
     auth_user      = models.CharField(max_length=20, blank=True, null=True)
