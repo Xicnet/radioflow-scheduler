@@ -1,4 +1,6 @@
 import os.path
+import datetime
+import pytz
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -10,6 +12,8 @@ from django.template import RequestContext
 from rest_framework import generics
 from rest_framework import serializers
 
+from timeslot.models import Program, Day, Config
+
 from icecast_stats.models import IcecastLog
 
 @login_required
@@ -20,6 +24,18 @@ def index(request):
             'icecast_stats/index.html',
             {
              'logs': logs,
+             'weekly_programs': Program.get_weekly(request),
+            },
+            context_instance=RequestContext(request)
+        )
+
+@login_required
+def programacion(request):
+
+    return render_to_response(
+            'icecast_stats/programacion.html',
+            {
+             'weekly_programs': Program.get_weekly(request),
             },
             context_instance=RequestContext(request)
         )
@@ -32,7 +48,7 @@ class IcecastLogSerializer(serializers.ModelSerializer):
 
 
 class IcecastLogViewSet( generics.ListAPIView):
-    @method_decorator(login_required)
+    #@method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(IcecastLogViewSet, self).dispatch(*args, **kwargs)
 
@@ -44,14 +60,15 @@ class IcecastLogViewSet( generics.ListAPIView):
         the user as determined by the mount portion of the URL.
         """
         mount  = self.request.query_params.get('mount', None)
-        start  = self.request.query_params.get('start', None)
-        end    = self.request.query_params.get('end', None)
+        start  = "%s 00:00:00" % self.request.query_params.get('start', None)
+        end  = "%s 00:00:00" % self.request.query_params.get('end', None)
+        #end    = datetime.date("%s 00:00:00" % self.request.query_params.get('end', None), tzinfo=pytz.UTC)
         limit  = self.request.query_params.get('limit', None)
 
         if self.request.user.is_superuser:
             logs = IcecastLog.objects.all()
         else:
-            mount = os.path.basename(User.objects.get(username=self.request.user.username).config.streamurl)
+            #mount = os.path.basename(User.objects.get(username=self.request.user.username).config.streamurl)
             logs = IcecastLog.objects.filter(mount=mount)
 
         if mount:

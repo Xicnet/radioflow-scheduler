@@ -104,6 +104,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -141,6 +142,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'image_cropping',
     'rest_framework',
+    'corsheaders',
     #'south',
     'icecast_stats',
 )
@@ -207,6 +209,7 @@ REST_FRAMEWORK = {
     ]
 }
 
+CORS_ORIGIN_ALLOW_ALL=True
 
 try:
     from local_settings import *

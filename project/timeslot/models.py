@@ -78,6 +78,17 @@ class Program(models.Model):
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
 
+    @staticmethod
+    def get_weekly(request):
+        weekly_programs = []
+        days = Day.objects.all()
+        for day in days:
+            programs_for = Program.objects.filter(days__in=[day], user=request.user).order_by('start')
+            if programs_for:
+                weekly_programs.append( { day: programs_for } )
+
+        return weekly_programs
+
 class Config(models.Model):
     def __unicode__(self):
         return "%s config" % self.user

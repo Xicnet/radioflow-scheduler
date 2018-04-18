@@ -1,6 +1,7 @@
 *.swo
 *.swp
 *.pyc
+*.pyo
 *~
 .installed.cfg
 local_settings.py

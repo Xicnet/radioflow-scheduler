@@ -10,6 +10,7 @@ from icecast_stats.models import IcecastLog
 
 urlpatterns = patterns('',
     url(r'^$','icecast_stats.views.index'),
+    url(r'^programacion/','icecast_stats.views.programacion'),
     url(r'^api/logs/$', IcecastLogViewSet.as_view()),
     #url(r'^api/', include(router.urls)),
 )

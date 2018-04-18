@@ -17,4 +17,3 @@ class IcecastLog(models.Model):
 
     def __unicode__(self):
         return self.mount
-
