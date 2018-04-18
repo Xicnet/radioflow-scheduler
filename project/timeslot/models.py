@@ -12,7 +12,7 @@ from datetime import datetime
 from django.utils import timezone
 from django.utils.text import slugify
 
-import os
+import os, os.path
 from urllib import urlopen
 import json
 
@@ -171,6 +171,9 @@ class Config(models.Model):
         #return parse_tw_url(self.twitter)
         return self.twitter
 
+    @property
+    def get_mount(self):
+        return os.path.basename(self.streamurl)
 
 def create_user_config(sender, instance, created, **kwargs):
     if created:
