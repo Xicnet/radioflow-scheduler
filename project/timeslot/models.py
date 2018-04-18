@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import utc
@@ -88,6 +90,12 @@ class Program(models.Model):
                 weekly_programs.append( { day: programs_for } )
 
         return weekly_programs
+
+    #@property
+    def time_listened(self, disconnect_time):
+        return timedelta(hours=disconnect_time.hour, minutes=disconnect_time.minute) - timedelta(hours=self.start.hour, minutes=self.start.minute)
+
+
 
 class Config(models.Model):
     def __unicode__(self):

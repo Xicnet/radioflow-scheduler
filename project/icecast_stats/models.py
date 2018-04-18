@@ -1,4 +1,10 @@
+from datetime import timedelta
+
 from django.db import models
+from django.db.models import Q
+from django.contrib.auth.models import User
+
+from timeslot.models import Program
 
 class IcecastLog(models.Model):
     datetime_start = models.DateTimeField(blank=True, null=True)
@@ -17,3 +23,19 @@ class IcecastLog(models.Model):
 
     def __unicode__(self):
         return self.mount
+
+    @property
+    def programs(self):
+        return User.objects.get(config__streamurl__icontains=self.mount).program_set.all()
+
+    def listened(self):
+        weekday = self.datetime_start.weekday() + 1
+        listened = self.programs.filter(days=weekday).filter(
+          Q(start__lte=self.datetime_start.time(), end__gte=self.datetime_start.time()) |
+          Q(start__lt=self.datetime_end.time(), end__gte=self.datetime_end.time())
+        )
+        programs = []
+        for l in listened:
+            programs.append([l.name, l.time_listened(self.datetime_end.time()).seconds/60])
+
+        return programs
