@@ -76,6 +76,14 @@ desired effect
 -->
 <body class="hold-transition skin-blue sidebar-mini">
 
+	<script type="text/javascript">
+	    var bodyEl = document.querySelectorAll('body')[0];
+	    var bodyClassName = bodyEl.className;
+	    if ( window.outerWidth<1400 && bodyClassName.indexOf('sidebar-collapse')<0 ) {
+	        bodyEl.className = bodyClassName + ' sidebar-collapse';
+	    }
+	</script>
+
     <div class="wrapper">
 
         <!-- Main Header -->

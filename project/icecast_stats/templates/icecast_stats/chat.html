@@ -42,10 +42,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-    	var jsonApiSrc = 'http://icelog-dev.xicnet.com/stats/api/logs/?format=json';
-    	var bgClasses = ['bg-green','bg-light-blue','bg-blue','bg-aqua','bg-yellow','bg-red','bg-teal','bg-olive','bg-lime','bg-orange','bg-fuchsia','bg-purple','bg-maroon','bg-navy','bg-black','bg-red-active','bg-yellow-active','bg-aqua-active','bg-blue-active','bg-light-blue-active','bg-green-active','bg-navy-active','bg-teal-active','bg-olive-active','bg-lime-active','bg-orange-active','bg-fuchsia-active','bg-purple-active','bg-maroon-active','bg-black-active'];
-    </script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -60,6 +56,14 @@ desired effect
 |       | skin-green   |
 -->
 <body class="hold-transition skin-blue sidebar-mini">
+
+    <script type="text/javascript">
+        var bodyEl = document.querySelectorAll('body')[0];
+        var bodyClassName = bodyEl.className;
+        if ( window.outerWidth<1400 && bodyClassName.indexOf('sidebar-collapse')<0 ) {
+            bodyEl.className = bodyClassName + ' sidebar-collapse';
+        }
+    </script>
 
     <div class="wrapper">
 

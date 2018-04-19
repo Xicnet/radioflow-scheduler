@@ -78,6 +78,14 @@ desired effect
 -->
 <body class="hold-transition skin-blue sidebar-mini">
 
+    <script type="text/javascript">
+        var bodyEl = document.querySelectorAll('body')[0];
+        var bodyClassName = bodyEl.className;
+        if ( window.outerWidth<1400 && bodyClassName.indexOf('sidebar-collapse')<0 ) {
+            bodyEl.className = bodyClassName + ' sidebar-collapse';
+        }
+    </script>
+
     <div class="wrapper">
 
         <!-- Main Header -->
@@ -251,7 +259,7 @@ desired effect
                             <div class="inner">
                                 <h3><span>0</span></h3>
 
-                                <p>Accesos en Total</p>
+                                <p>Conexiones en Total</p>
                             </div>
                             <div class="icon">
                                 <i class="ion-ios-people"></i>
@@ -364,7 +372,7 @@ desired effect
 
                                 <div class="pull-left">
                                     <i class="ion ion-android-wifi"></i>
-                                    <h3 class="box-title">Accesos</h3>
+                                    <h3 class="box-title">Conexiones</h3>
                                 </div>
 
                             </div>
@@ -521,7 +529,17 @@ desired effect
                             </div>
 
                             <div class="box-body">
-                                <div class="chart tab-pane" id="devices-chart" style="position: relative; height: 300px;"></div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="chart tab-pane" id="devices-chart" style="position: relative; height: 240px;"></div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="chart tab-pane" id="browsers-chart" style="position: relative; height: 240px;"></div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="chart tab-pane" id="os-chart" style="position: relative; height: 240px;"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -933,27 +951,11 @@ desired effect
     <script src="/static/dist/js/radioflow.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <!-- <script src="/static/dist/js/demo.js"></script> -->
-    
+
     <!-- Radio Flow -->
     <script src="/static/dist/js/useragents.js"></script>
     <script src="/static/dist/js/pages/dashboard.js"></script>
     <script src="/static/dist/js/pages/index.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script type="text/javascript">
-        $(function(){ 
-            $(window).on('resize',function(){ 
-                var sidebarCollapsed = $('body').hasClass('sidebar-collapse');
-                setTimeout( function(){ 
-                    if ($('body').hasClass('chat-active') && $('body').hasClass('chat-workspace')) {
-                        $('body').addClass('sidebar-collapse')
-                        $('.content-wrapper').height($(window).height()-($('.main-footer').height()+$('.main-header').height()));
-                    }else{
-                        if (sidebarCollapsed) $('body').removeClass('sidebar-collapse');
-                        $('.content-wrapper').css('height','auto');
-                    }
-                }, 100 );
-            });
-        });
-    </script>
+
 </body>
 </html>
