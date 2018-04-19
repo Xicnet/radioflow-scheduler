@@ -16,7 +16,6 @@ buildout/
 .htpasswd
 *.log
 share/
-static/
 project/media/uploaded_images/
 local/
 timeslot.sql

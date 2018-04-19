@@ -1,0 +1,334 @@
+/*chat*/
+#chat-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10000;
+    transition: all 0.25s ease-in 0s;
+    -webkit-transition: all 0.25s ease-in 0s;
+    -moz-transition: all 0.25s ease-in 0s;
+    -o-transition: all 0.25s ease-in 0s;
+    -ms-transition: all 0.25s ease-in 0s;
+}
+#chat-iframe-wrapper {
+    position: absolute;
+    top: 48px;
+    left: -2px;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    background: #ecf0f5;
+    border-left: 1px solid #ffffff;
+}
+#chat-header {
+    position: absolute;
+    top: 0;
+    height: 50px;
+    z-index: 100000;
+    width: 100%;
+    background: #3c8dbc;
+    color: #fff;
+    font-size: 2em;
+    padding: 5px 15px;
+}
+#chat-header h4 {
+	height: 50px;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	width: 240px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	padding: 0 15px;
+	font-weight: 300;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	background: #367fa9;
+}
+#chat-header h4 span.ion-chatbubbles {
+	text-shadow: 0 1px 0 #000;
+    margin: 0 10px 0 -20px;
+    display: inline-block;
+    transform: scaleX(-1) scaleY(0.9);
+}
+#chat-header .chat-btns {
+    position: absolute;
+    right: 15px;
+    top: 2px;
+}
+#chat-header .chat-btns a {
+	text-shadow: 0 1px 0 #000;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.6em;
+}
+#chat-header .chat-btns a > i {
+	display: inline-block;
+	margin: 0 5px;
+}
+body.chat-active {
+	overflow: hidden;
+}
+body:not(.chat-active) #chat-wrapper {
+	right: 100%;
+	left: -100%;
+}
+body.chat-active.chat-workspace {
+	overflow-y: hidden;
+}
+body.chat-active.chat-workspace > .wrapper {
+	width: 50%;
+}
+body.chat-active.chat-workspace #chat-wrapper {
+	left: 50%;
+	right: 0;
+	overflow: hidden;
+}
+body.chat-active.chat-workspace #chat-wrapper h4 {
+	width: 95px;
+}
+body.chat-active.chat-workspace #chat-header h4 span.ion-chatbubbles {
+	font-size: 1.5em;
+	margin: 0;
+	transform: scaleX(-1) scaleY(0.8);
+}
+body.chat-active.chat-workspace #chat-wrapper .logo {
+	display: none;
+}
+body.chat-active.chat-workspace .content section[class*="col-"] {
+    width: 100%;
+}
+body.chat-active.chat-workspace .content-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+body.chat-active:not(.chat-workspace) #chat-header .chat-btns a > i.ion-android-expand,
+body.chat-active.chat-workspace #chat-header .chat-btns a > i.ion-android-contract{
+	display: none;
+}
+body.chat-active.chat-workspace .small-box p {
+    font-size: 13px;
+    margin: 0;
+}
+body.chat-active.chat-workspace .small-box .icon {
+    font-size: 3em !important;
+    top: -5px;
+    right: 6px;
+}
+/*end chat*/
+/* table-scroller*/
+.table-wrapper {
+	padding-top: 38px;
+	position: relative;
+}
+.table-wrapper > ul.thead {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #efefef;
+}
+.table-wrapper > ul.thead > li {
+	list-style: none;
+	float: left;
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+}
+.table-scroller {
+	max-height: 190px;
+	overflow-y: auto;
+}
+#programacion-table-wrapper .table-scroller{
+    max-height: 300px;
+}
+/* end table */
+
+#sent-bytes .box-footer .text-center > div[style]:before {
+    content: '%';
+    position: absolute;
+    top: 50%;
+    margin-top: -22px;
+    left: 50%;
+    margin-left: 7px;
+    display: inline-block;
+    font-size: 0.8em;
+    color: #39cccc;
+}
+
+/*#main-range {*/
+input#main-range {
+    margin-left: 0.7em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 0;
+    background: #fcfeff;
+    font-size: 0.7em;
+    text-align: center;
+}
+/*end #main-range {*/
+
+/*fileinput-button */
+.fileinput-button {
+	position: relative;
+	padding-left: 2.5em;
+}
+.fileinput-button i.ion-image {
+	font-size: 1.5em;
+	position: absolute;
+	left: 8px;
+	top: 2px;
+}
+.fileinput-button input[type="file"] {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+}
+/*end fileinput-button */
+
+/*bootstrap extend*/
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+.dropdown-submenu .dropdown-menu-right {
+    right: 100% !important;
+    left: auto;	
+    top: -5px;
+}
+.dropdown-submenu a.dropdown-submenu-toggle .caret {
+    float: right;
+    position: relative;
+    top: 8px;
+}
+.dropdown-menu.pull-right a.dropdown-submenu-toggle .caret {
+    float: left;
+    left: -8px;
+    transform: rotate(90deg);
+}
+.tagsinput-no-input  input,
+.tagsinput-no-input .bootstrap-tagsinput input{
+	display: none;
+}
+.bootstrap-tagsinput {
+	min-width: 40px;
+	min-height: 28px;
+    padding: 2px 2px 4px 4px;
+    max-width: 380px;
+    max-height: 30px;
+    overflow: auto;
+}
+.dropdown-menu > li > a[href="-filter"]{
+	border-bottom: 1px solid #fff;
+}
+.dropdown-menu > li > a[href="-filter"].added:hover,
+.dropdown-menu > li > a[href="-filter"].added:focus,
+.dropdown-menu > li > a[href="-filter"].added {
+    background: rgb(60, 141, 188);
+    color: #fff !important;
+}
+.dropdown-menu[data-filter="device"] > li > a[href="-filter"].added:hover, 
+.dropdown-menu[data-filter="device"] > li > a[href="-filter"].added:focus, 
+.dropdown-menu[data-filter="device"] > li > a[href="-filter"].added {
+    background: #00a65a;
+}
+/*end bootstrap extend*/
+
+/*AdminLTE extend*/
+.box.box-solid>.box-header .btn:hover{
+    background: rgba(0,0,0,0.4);
+}
+/*end AdminLTE extend*/
+
+table[data-page]{
+	display: none;
+}
+
+label.btn input[type=checkbox], label.btn input[type=radio] {
+    position: relative;
+    top: 1px;
+}
+
+label.btn .field-label {
+    display: inline-block;
+    position: relative;
+    top: -1px;
+}
+
+@media(min-width:769px){
+	section.content .small-box-wraper{
+		width: 20%;
+ 	}
+}
+
+/* errores */
+h3.alert.error{
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 3px;
+    text-align: center;
+    padding: 30px 15px;
+    margin-top: 0;
+}
+h3.alert.error i.alert-icon {
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    color: #f39c12;
+}
+.small-box>.inner h3.alert.error {
+    font-size: 1.2em;
+    border: 0;
+    height: 80px;
+    max-width: calc(100% - 100px);
+    white-space: normal;
+    padding: 5px;
+}
+.small-box>.inner h3.alert.error i.alert-icon {
+    padding: 3px;
+    margin-bottom: 0;
+}
+.small-box>.inner h3.alert.error i.alert-icon,
+.dashboard-widget[class*=" bg-"] h3.alert.error i.alert-icon {
+    color: #fff;
+}
+.dashboard-widget.loading:before{
+    content: "\f110";
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: auto;
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -.5em;
+    margin-left: -.5em;
+    font-size: 50px;
+}
+.dashboard-widget.loading .box-body *{
+    opacity: 0;
+}
+.dashboard-widget.loading .box-footer,
+.dashboard-widget.empty .box-footer,
+h3.alert.error ~ * {
+    display: none;
+}
