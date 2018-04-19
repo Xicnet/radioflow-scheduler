@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.db.models import Sum, Avg
 
 from timeslot.models import Program
 
@@ -39,3 +40,26 @@ class IcecastLog(models.Model):
             programs.append([l.name, l.time_listened(self.datetime_end.time()).seconds/60])
 
         return programs
+
+class ProgramStat(models.Model):
+    log_entry      = models.ForeignKey(IcecastLog)
+    program_name   = models.CharField(max_length=256)
+    duration       = models.IntegerField()
+
+    def __unicode__(self):
+        return u"%s: %s" % (self.program_name, self.duration)
+
+
+    @staticmethod
+    def duration_total(start, end, program_name=None):
+        duration = ProgramStat.objects.filter(log_entry__datetime_start__gte=start, log_entry__datetime_end__lte=end)
+        if program_name:
+            duration = duration.filter(program_name=program_name)
+        return duration.aggregate(total=Sum('duration'))['total']
+
+    @staticmethod
+    def duration_average(start, end, program_name=None):
+        duration = ProgramStat.objects.filter(log_entry__datetime_start__gte=start, log_entry__datetime_end__lte=end)
+        if program_name:
+            duration = duration.filter(program_name=program_name)
+        return duration.aggregate(average=Avg('duration'))['average']

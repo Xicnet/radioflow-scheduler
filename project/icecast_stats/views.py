@@ -14,7 +14,7 @@ from rest_framework import serializers
 
 from timeslot.models import Program, Day, Config
 
-from icecast_stats.models import IcecastLog
+from icecast_stats.models import IcecastLog, ProgramStat
 
 @login_required
 def index(request):
@@ -77,5 +77,39 @@ class IcecastLogViewSet( generics.ListAPIView):
             logs = logs.filter(datetime_start__gte=start, datetime_end__lte=end)
 
         return logs[:limit]
+
+class ProgramStatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramStat
+
+
+class ProgramStatViewSet( generics.ListAPIView):
+    #@method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ProgramStatViewSet, self).dispatch(*args, **kwargs)
+
+    serializer_class = ProgramStatSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the mount portion of the URL.
+        """
+        mount  = self.request.query_params.get('mount', None)
+        start  = "%s 00:00:00" % self.request.query_params.get('start', None)
+        end    = "%s 00:00:00" % self.request.query_params.get('end', None)
+        limit  = self.request.query_params.get('limit', None)
+
+        if self.request.user.is_superuser:
+            program_stat = ProgramStat.objects.all()
+        else:
+            program_stat = ProgramStat.objects.filter(log_entry__mount=mount)
+
+        if mount:
+            program_stat = program_stat.filter(log_entry__mount=mount)
+        if start and end:
+            program_stat = program_stat.filter(log_entry__datetime_start__gte=start, log_entry__datetime_end__lte=end)
+
+        return program_stat[:limit]
 
 

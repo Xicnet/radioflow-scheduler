@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from timeslot.models import Config, Day, Program
-from icecast_stats.models import IcecastLog
+from icecast_stats.models import IcecastLog, ProgramStat
 
 def duration(log_end, program_end):
     return timedelta(hours=log_end.hour, minutes=log_end.minute) - timedelta(hours=program_end.hour, minutes=program_end.minute)
@@ -39,6 +39,9 @@ class Command(BaseCommand):
             # TODO agregar duracion y agregar fecha a la tabla relacionada
             #print log.datetime_start, log.datetime_end, log.ip, log.country_code, [(x.name, x.start, x.end, x.days.filter(id=weekday)) for x in listened], "Today is: ", weekday
             #print log.datetime_start, log.datetime_end, log.ip, log.country_code, log.duration(), [(x.name, x.start, x.end) for x in listened], "Today is: ", weekday
+            for l in log.listened():
+                ProgramStat.objects.create(log_entry=log, program_name=l[0], duration=l[1])
+
             print log.datetime_start, log.datetime_end, log.ip, log.country_code, log.listened()
 """
         n = 0
