@@ -21,7 +21,7 @@ def index(request):
     logs = IcecastLog.objects.all()[:50]
 
     return render_to_response(
-            'icecast_stats/index.html',
+            'icecast_stats/dashboard.html',
             {
              'logs': logs,
              'weekly_programs': Program.get_weekly(request),

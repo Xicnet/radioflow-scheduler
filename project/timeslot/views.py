@@ -28,21 +28,14 @@ from constants import *
 def index(request):
     if request.user.is_superuser == True:
         return HttpResponseRedirect(reverse('admin:index'))
-    weekly_programs = []
-    days = Day.objects.all()
-    for day in days:
-        programs_for = Program.objects.filter(days__in=[day], user=request.user).order_by('start')
-        if programs_for:
-            weekly_programs.append( { day: programs_for } )
 
     return render_to_response(
-            'timeslots/index.html',
+            'timeslots/program.html',
             {
-             'weekly_programs': weekly_programs,
+             'weekly_programs': Program.get_weekly(request),
             },
             context_instance=RequestContext(request)
-        )
-
+    )
 @login_required
 def program(request, program_id=None):
     if program_id:
