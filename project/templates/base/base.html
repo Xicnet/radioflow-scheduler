@@ -215,7 +215,7 @@ desired effect
                     <li class="active"><a href="/stats"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                     <li><a href="{% url 'program' %}"><i class="fa fa-list"></i> <span>Programación</span></a></li>
                     <li><a href="javascript:void(0)" class="toggleClass" data-class="chat-active" data-target="body"><i class="ion ion-chatbubbles"></i> <span>Chat</span></a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i> <span>Configuración</span></a></li>
+                    <li><a href="{% url 'config_show' %}"><i class="fa fa-cog"></i> <span>Configuración</span></a></li>
             <!--
                      <li class="treeview">
                         <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
@@ -397,8 +397,9 @@ desired effect
     <!-- <script src="/static/dist/js/demo.js"></script> -->
 
     <!-- Radio Flow -->
-    <script src="/static/dist/js/useragents.js"></script>
     <script src="/static/dist/js/pages/dashboard.js"></script>
+    <script src="/static/dist/js/useragents.js"></script>
     <script src="/static/dist/js/pages/index.js"></script>
+    <script src="/static/dist/js/pages/programacion.js"></script>
 </body>
 </html>

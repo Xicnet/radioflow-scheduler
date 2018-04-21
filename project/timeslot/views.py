@@ -26,8 +26,8 @@ from constants import *
 
 @login_required
 def index(request):
-    if request.user.is_superuser == True:
-        return HttpResponseRedirect(reverse('admin:index'))
+    #if request.user.is_superuser == True:
+    #    return HttpResponseRedirect(reverse('admin:index'))
 
     return render_to_response(
             'timeslots/program.html',
