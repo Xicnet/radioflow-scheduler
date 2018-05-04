@@ -9,9 +9,13 @@ var now = today.getTime();
 var weekDaysToNumber = { "lunes": 1, "martes": 2, "miercoles": 3, "miércoles": 3, "jueves": 4, "viernes": 5, "sábado": 6, "sabado": 6, "domingo": 0 };
 var dayNumberToWeekDay = { 1: "lunes", 2: "martes", 3: "miercoles", 3: "miércoles", 4: "jueves", 5: "viernes", 6: "sábado", 6: "sabado", 0: "domingo" };
 
-var jsonApiSrc = 'http://icelog-dev.xicnet.com/stats/api/logs/';
+var logsApiPath = jsonApiPath + 'logs/';
+var programsApiPath = jsonApiPath + 'program_stat/';
+
 var bgClasses = ['bg-green','bg-light-blue','bg-blue','bg-aqua','bg-yellow','bg-red','bg-teal','bg-olive','bg-lime','bg-orange','bg-fuchsia','bg-purple','bg-maroon','bg-navy','bg-black','bg-red-active','bg-yellow-active','bg-aqua-active','bg-blue-active','bg-light-blue-active','bg-green-active','bg-navy-active','bg-teal-active','bg-olive-active','bg-lime-active','bg-orange-active','bg-fuchsia-active','bg-purple-active','bg-maroon-active','bg-black-active'];
+var hierarchyClasses = ['bg-green','bg-light-blue','bg-blue','bg-aqua','bg-yellow','bg-teal','bg-olive','bg-lime','bg-orange','bg-fuchsia','bg-purple','bg-maroon','bg-navy','bg-yellow-active','bg-aqua-active','bg-blue-active','bg-light-blue-active','bg-green-active','bg-navy-active','bg-teal-active','bg-olive-active','bg-lime-active','bg-orange-active','bg-fuchsia-active','bg-purple-active','bg-maroon-active'];
 var randomColors = ['rgb(0, 166, 90)', 'rgb(60, 141, 188)', 'rgb(0, 115, 183)', 'rgb(0, 192, 239)', 'rgb(221, 75, 57)', 'rgb(57, 204, 204)', 'rgb(61, 153, 112)', 'rgb(1, 255, 112)', 'rgb(255, 133, 27)', 'rgb(240, 18, 190)', 'rgb(243, 156, 18)'];
+var randomColors2 = ['#274240','#056499','#074547','#682636','#127987','#680665','#081408','#681971','#352294','#251046','#690803'];
 
 
 /**
@@ -54,44 +58,47 @@ function DashBoard(widgets, requireLogs) {
         desktop: 'Computadora'  
     },
     this.logs={},
-    this.Widget = function(id){
+    this.programlogs={},
+    this.Widget = function(widget){
 
-        var widget = self.widgets[id];
-        for (var key in widget) {
-            this[key] = widget[key];
-        }
+        widget.pos          = widget.pos          || 0,
+        widget.active       = widget.active       || true,
+        widget.initialized  = widget.initialized  || false,
+        widget.logs         = widget.logs         || [],
+        widget.programlogs  = widget.programlogs  || [];
 
-        this.showLoading=function(msg,callback){
-            this.$el.addClass('loading')
+        widget.showLoading=function(msg,callback){
+            widget.$el.addClass('loading')
             callback = callback || function(){};
             callback()
-            return this;
+            return widget;
         },
-        this.hideLoading=function(msg,callback){
-            this.$el.removeClass('loading')
+        widget.hideLoading=function(msg,callback){
+            widget.$el.removeClass('loading')
             callback = callback || function(){};
             callback()
-            return this;
+            return widget;
         },
-        this.beforeRender=function(){
-            this.showLoading();
-            this.reset();
+        widget.beforeRender=function(){
+            widget.title && widget.$boxTitle.text(widget.title);
+            widget.showLoading();
+            widget.reset();
         },
-        this.afterRender=function(){
-            this.hideLoading();
+        widget.afterRender=function(){
+            widget.hideLoading();
         },
-        this.reset=function(){
-            this.$el.removeClass('error empty')
-            this.$body.find('h3.alert.error').remove();
+        widget.reset=function(){
+            widget.$el.removeClass('error empty')
+            widget.$body.find('h3.alert.error').remove();
         },
-        this.showMsg=function(type){
+        widget.showMsg=function(type){
 
             switch (type ) {
                 case 'empty':
 
-                    this.$el.addClass('empty')
-                    this.$body.find('h3.alert.error.empty').remove()
-                    this.$body.prepend('<h3 class="alert error empty"><i class="alert-icon ion-alert-circled"/>No hay datos para el período</h3>')
+                    widget.$el.addClass('empty')
+                    widget.$body.find('h3.alert.error.empty').remove()
+                    widget.$body.prepend('<h3 class="alert error empty"><i class="alert-icon ion-alert-circled"/>No hay datos para el período</h3>')
                     
                     break;
                 
@@ -99,8 +106,101 @@ function DashBoard(widgets, requireLogs) {
                     //code
                     break;
             }
-        };
+        },
+        widget.joinLogs=function(logs,programlogs) {
 
+            widget.joinedLogs = [];
+
+            if (logs && logs.length){ 
+
+                widget.logs = JSON.parse(JSON.stringify(logs));
+
+                var thisDateRangePicker = widget.$el.find('.daterange'),
+                    start,
+                    end;
+
+                if (thisDateRangePicker.length){
+                    var dateRangeData = thisDateRangePicker.data('daterangepicker');
+                    start = dateRangeData.startDate._d.toISOString().split('T')[0]
+                    end = dateRangeData.endDate._d.toISOString().split('T')[0]
+                    widget.start = start;
+                    widget.end = end;
+                }
+
+                widget.showLoading()
+                dashBoard.requestProgramsLogs(start,end,widget.joinLogs)
+                return;
+            };
+
+            if (programlogs && programlogs.length) {
+
+                widget.programlogs = programlogs
+
+                // duration:     161
+                // id:           64
+                // log_entry:    3561
+                // program_name: "Prueba"
+
+                // console.log('logs',widget.logs);
+                // console.log('programlogs',programlogs);
+
+                var joinedLogs = [];
+
+                $.each(widget.logs, function(i,item){ 
+
+                    var startTime = new Date(item.datetime_start);
+                    var endTime = (item.datetime_end && new Date(item.datetime_end)) || startTime;
+
+                    item.startISO = startTime.toISOString().split('T')[0];
+                    item.startDay = startTime.getDay();
+                    item.startHour = startTime.getHours();
+                    
+                    item.endISO = endTime.toISOString().split('T')[0];
+                    item.endDay = endTime.getDay();
+                    item.endHour = endTime.getHours();
+
+                    var programs = programlogs.filter(function(program){
+                        return item.id == program.log_entry;
+                    });
+
+                    item.programs = programs.map(function(program,index) {
+                        return program;
+                    });
+
+                })
+
+                $.each(programlogs, function(i,program){ 
+
+                    if (program.log_entry) {
+
+                        var program_name = program.program_name;
+
+                        var item = widget.logs.find(function(log){
+                            return log.id == program.log_entry;
+                        });
+
+                        if (item && item.datetime_start) {
+                            
+                            program.log = item;
+                            joinedLogs.push(program);
+                            
+                        }
+
+                    }
+
+                })
+
+                widget.joinedLogs = joinedLogs;
+                widget.render(null, programlogs)
+
+            };
+            
+
+        }
+
+    },
+    this.getWidget=function(id){
+        return self.widgets.find(widget=>widget.id==id);
     },
     this.getDeviceFromAgent=function(agent){
 
@@ -201,13 +301,23 @@ function DashBoard(widgets, requireLogs) {
         }, 10 );
 
     },
-    this.requestLogs=function(startToISO, endToISO, callback) {
+    this.requestProgramsLogs=function(startToISO, endToISO, callback) {
+        this.requestLogs(startToISO, endToISO, callback, 'programs');
+    },
+    this.requestLogs=function(startToISO, endToISO, callback, api) {
 
+        var programs = api === 'programs';
+        var targetKey = programs ? 'programlogs' : 'logs';
         callback = callback || function(){};
 
-        if ( startToISO && endToISO && parseFloat(endToISO.replaceAll('-','')) < parseFloat(todayToISO.replaceAll('-','')) && self.logs[startToISO+'_'+endToISO]) {
-            callback(self.logs[startToISO+'_'+endToISO]);
-            return;
+        if  ( 
+                startToISO
+                && endToISO 
+                && parseFloat(endToISO.replaceAll('-','')) < parseFloat(todayToISO.replaceAll('-','')) 
+                && self[targetKey][startToISO+'_'+endToISO]
+            ) {
+                callback(self.logs[startToISO+'_'+endToISO]);
+                return;
         }
 
         if (!startToISO) {
@@ -223,18 +333,29 @@ function DashBoard(widgets, requireLogs) {
 
         }
 
-        var apiQueryStr = ( jsonApiSrc + '?start='+startToISO + '&end='+endToISO + '&mount=radioapp.mp3&format=json' );
-        console.log('apiQueryStr: '+apiQueryStr);
+        var queryStr = '?start='+startToISO + '&end='+endToISO + '&mount='+mount+'&format=json';
+        var targetApiPath = programs ? programsApiPath+queryStr : logsApiPath+queryStr;
+
+        // console.log('targetApiPath: '+targetApiPath);
 
         $.ajax({
-            url: apiQueryStr,
+            url: targetApiPath,
             type: 'GET',
             // data: { format: 'json', mount: 'radioapp.mp3', start: startToISO, end: endToISO },
-            success: function(data) {
-                console.log(data);
-                self.logs[startToISO+'_'+endToISO] = data;
-                callback(data);
-             
+            success: function(logs) {
+                // console.log(logs);
+
+                var programlogs = [];
+
+                if (programs) {
+                    programlogs = logs
+                    self.programlogs[startToISO+'_'+endToISO] = logs;
+                    logs = []
+                }
+                else
+                    self.logs[startToISO+'_'+endToISO] = logs
+
+                callback(logs, programlogs);
             },
             error: function(error){
                  console.log(error.statusText);
@@ -242,6 +363,13 @@ function DashBoard(widgets, requireLogs) {
       
         });
       
+    },
+    this.refresh=function(){
+        setTimeout( function(){ 
+            var e = new Event('resize');
+            e.fake = true;
+            window.dispatchEvent(e);
+        }, 300 );
     },
     this.init=function(requireLogs){
 
@@ -253,11 +381,15 @@ function DashBoard(widgets, requireLogs) {
 
         // Make the dashboard widgets sortable Using jquery UI
         $('.connectedSortable').sortable({
-          placeholder         : 'sort-highlight',
-          connectWith         : '.connectedSortable',
-          handle              : '.box-header, .nav-tabs',
-          forcePlaceholderSize: true,
-          zIndex              : 999999
+            forcePlaceholderSize: true,
+            placeholder: 'sort-highlight',
+            connectWith: '.connectedSortable',
+            handle: '.box-header, .nav-tabs',
+            zIndex: 999999,
+            stop: function(e,ui){
+                console.log(e,ui);
+                self.refresh()
+            },
         });
 
         $('.connectedSortable .box-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
@@ -271,13 +403,9 @@ function DashBoard(widgets, requireLogs) {
         endToISO = endDate.toISOString().split('T')[0];
         startToISO = startDate.toISOString().split('T')[0];
 
-        for (var id in this.widgets) {
-            if ( this.widgets[id].$el.length) {
-                this.widgets[id] = new self.Widget(id);
-            }else{
-                delete this.widgets[id];
-            }
-        }
+        this.widgets.map(function(widget){    
+            return new self.Widget(widget);
+        });
 
         if (requireLogs) {
             this.requestLogs(startToISO, endToISO, this.render);
@@ -288,9 +416,9 @@ function DashBoard(widgets, requireLogs) {
     },
     this.beforeRender=function(callback){
         callback = callback || function(){};
-        for (var id in self.widgets) {
-            self.widgets[id].showLoading()
-        }
+        self.widgets.forEach(function(widget){
+            widget.showLoading()
+        });
         callback();
     },
     this.afterRender=function(){
@@ -300,13 +428,11 @@ function DashBoard(widgets, requireLogs) {
 
         self.beforeRender();
 
-        var i=0;
-        for (var id in self.widgets) {
-            setTimeout( function(id){
-                self.widgets[id].render(logs)
-            }, i*100, id );
-            i++;
-        }
+        self.widgets.forEach(function(widget, i){
+            setTimeout( function(widget){
+                widget.render(logs)
+            }, i*100, widget );
+        })
 
     }
 

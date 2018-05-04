@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^$','timeslot.views.index', name='program'),
     url(r'^(?P<station>(.*))/now_playing.json$', 'timeslot.views.now_playing', name='now_playing'),
     url(r'^now_playing.json$', 'timeslot.views.now_playing', name='now_playing'),
-    url(r'^(?P<program_id>\d+)/$','timeslot.views.program'),
+    url(r'^(?P<program_id>\d+)/$','timeslot.views.index', name='program'),
     url(r'^(?P<program_id>\d+)/delete/$','timeslot.views.program_delete'),
     url(r'^api/', include(router.urls)),
 

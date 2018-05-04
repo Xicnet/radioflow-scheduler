@@ -57,33 +57,32 @@ $(function () {
                     dashBoard.requestLogs( startToISO, endToISO, dashBoard.render)                
                 });
 
-                for (var id in dashBoard.widgets) {
-
-                    var targetDateRange = $('#'+id+' .daterange:not(#main-range)');
+                dashBoard.widgets.forEach(function(widget, index, array){    
+                    
+                    var targetDateRange = widget.$el.find('.daterange:not(#main-range)');
 
                     if (targetDateRange.length){
                         targetDateRange.data('daterangepicker').setStartDate(start)
                         targetDateRange.data('daterangepicker').setEndDate(end)
                     }
 
-                }
+                })
                 
             }else{
 
-                var widgets = thisInstance.data().widgets;
+                var widgetList = thisInstance.data().widgets;
                 
-                if (widgets) {
+                if ( widgetList ) {
 
-                    var widgetsToarr = (widgets && widgets.split(',')) || [];
-                        
-                    widgetsToarr.forEach(function(id, index, array){
-                        if (dashBoard.widgets[id]) dashBoard.widgets[id].showLoading();
-                    });
-
-                    dashBoard.requestLogs( startToISO, endToISO, function(logs){
-                        widgetsToarr.forEach(function(id, index, array){
-                            if (dashBoard.widgets[id]) dashBoard.widgets[id].render(logs);
-                        });
+                    widgetList.split(',').forEach(function(id){
+                        var widget = dashBoard.getWidget(id)
+                        console.log('widget',widget);
+                        widget && (
+                            widget.showLoading(),
+                            dashBoard.requestLogs( startToISO, endToISO, function(logs, programlogs){    
+                                widget.render(logs, programlogs)
+                            })
+                        )
                     });
 
                 }
@@ -102,6 +101,22 @@ $(function () {
             
         });
 
+    })
+
+    $('.django-fix-label input').on("change", function(e){
+        if ($(this).prop('checked')) {
+            $(this).closest('.btn').addClass('btn-primary').removeClass('btn-default')
+        }else{
+            $(this).closest('.btn').removeClass('btn-primary').addClass('btn-default')
+        }
+    })
+
+    $('.django-fix-label input').each(function(){ 
+        if ($(this).prop('checked')) {
+            $(this).closest('.btn').addClass('btn-primary').removeClass('btn-default')
+        }else{
+            $(this).closest('.btn').removeClass('btn-primary').addClass('btn-default')
+        }
     })
 
     $('.dropdown-submenu a.dropdown-submenu-toggle').on("click", function(e){
@@ -152,6 +167,32 @@ $(function () {
             }
         }, 100 );
     });
+
+    $('.modal-confirm').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
+
+        var title = button.data().title;
+        var message = button.data().message;
+        var redirect = button.data().redirect;
+
+        modal.find('.modal-title').text(title)
+        modal.find('.modal-body').text(message)
+
+        if (redirect) {
+            modal.find('.btn-confirm').on('click',function(){    
+                document.location.href = redirect;
+            });            
+        }
+
+    });
+
+    $(document).on('change','input[type="file"]',function(){    
+        $(this).closest('form')
+            .find('.program-image-field').removeClass('program-image-field')
+                .find('.program-image').remove()
+    })
 
 });
 

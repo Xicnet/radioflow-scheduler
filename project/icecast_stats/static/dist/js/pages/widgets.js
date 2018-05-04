@@ -1,17 +1,142 @@
 
-    var widgets = {
-        "auto-compare": {
+var widgets = {
+    program : [
+        {
+            pos: 2,
+            id: "quick-add",
+            parent: "dashboard-left",
+            title: "",
+            type: "box-info",
+            $el: $('#quick-add'),
+            $body: $('#quick-add .box-body'),
+            $boxTitle: $('#quick-add .box-title'),
+            render: function(logs, programlogs){
+
+                this.beforeRender()
+
+                 if (!this.initialized) {
+
+                    // bootstrap WYSIHTML5 - text editor
+                    $('#quick-add .textarea').wysihtml5();
+
+                    $('#quick-add .datetimepicker').datetimepicker({
+                        format: 'HH:mm'
+                    });
+
+                }
+
+                this.initialized = true;
+
+                this.afterRender();
+
+            }
+
+        },
+        {
+            pos: 2,
+            id: "programacion-grilla",
+            parent: "dashboard-right",
+            title: "Programación",
+            type: "box-primary",
+            $el: $('#programacion-grilla'),
+            $body: $('#programacion-grilla .box-body'),
+            $boxTitle: $('#programacion-grilla .box-title'),
+            render: function(logs, programlogs){
+
+                this.beforeRender();
+
+                var buildTable=function(target){
+
+                    var tableDataToHtml = '';
+                    var totalCount = 0;
+
+                    console.log('weeklyPrograms',weeklyPrograms);
+
+                    if ( window.weeklyPrograms && !$.isEmptyObject(weeklyPrograms)) {
+
+                        for (var weekDay in weeklyPrograms) {
+
+                            var dayItems = weeklyPrograms[weekDay];
+                            var weekday = weekDay.toLowerCase();
+                            var day = weekDaysToNumber[weekday];
+                            
+                            tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(day)+'">';
+
+                            for (var d = 0; d < dayItems.length; d++) {
+
+                                var weekday = dayItems[d].weekday;
+                                var start = dayItems[d].start;
+                                var end = dayItems[d].end;
+                                var name = dayItems[d].name;
+                                var moderator = dayItems[d].moderator;
+
+                                var hour = parseInt(start);
+                                var fullHour = start;
+                                var fullHourEnd = end;
+
+                                tableDataToHtml += '\
+                                    <tr>\
+                                        <td class="text-center" style="width: 120px;">'+fullHour+' - '+fullHourEnd+'</td>\
+                                        <td>'+name+'</td>\
+                                        <td>'+moderator+'</td>\
+                                    </tr>\
+                                ';
+                                
+                            }
+
+                            tableDataToHtml += '</table>';
+
+                        }
+
+                    }
+
+                    // $(target).html(tableDataToHtml);
+                    $(target).find('table[data-page]').first().show();
+                 
+                    setTimeout( function(){ 
+                        $(target).closest('.table-wrapper').find('.thead > li').each(function(i){ 
+                            var width = $('#programacion-grilla-table-wrapper').find('table:visible tr:first-child td').eq(i).width();
+                            $(this).width(width);
+                        });
+                    }, 100 );
+                    
+                };
+
+                buildTable('#programacion-grilla-table-wrapper .table-scroller');
+
+                if (!this.initialized) {
+
+                    $('#programacion-grilla .pagination a[data-table]').on('click',function(){ 
+
+                        var targetTable = $(this).attr('data-table');
+                        $('#programacion-grilla table[data-page]').hide()
+                        $('#programacion-grilla table[data-page="'+targetTable+'"]').stop().fadeIn();
+
+                    });
+
+                }
+                
+                this.initialized = true;
+
+                this.afterRender();
+
+            }
+        }
+    ],
+    stats: [
+        {
             pos: 0,
             id: "auto-compare",
             parent: "dashboard-left",
             title: "Conexiones",
             type: "nav-tabs",
-            active: true,
-            initialized: false,
             $el: $('#auto-compare'),
             $body: $('#auto-compare .box-body'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#auto-compare .box-title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
@@ -63,7 +188,7 @@
 
                 }
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -236,22 +361,23 @@
 
             }
         },
-        "geo-audiencia": {
+        {
             pos: 1,
             id: "geo-audiencia",
             parent: "dashboard-left",
             title: "GEO Audiencia",
             type: "box-solid",
-            active: true,
-            initialized: false,
             $el: $('#geo-audiencia'),
             $body: $('#geo-audiencia .box-body'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#geo-audiencia .box-title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -421,8 +547,8 @@
 
                             posCounter = c==0 ? 1 : (cityCount < regionsData[citiesArr[c-1]].count ? (posCounter+1) : posCounter);
 
-                            var colorCounter = posCounter > bgClasses.length ? 0 : posCounter-1;
-                            var cityColor = bgClasses[colorCounter];
+                            var colorCounter = posCounter > hierarchyClasses.length ? hierarchyClasses.length-1 : posCounter-1;
+                            var cityColor = hierarchyClasses[colorCounter];
 
                             tableDataToHtml += '\
                                 <tr>\
@@ -532,156 +658,226 @@
 
             }
         },
-        "programacion": {
+        {
             pos: 2,
-            id: "programacion",
+            id: "ConexionesHora",
             parent: "dashboard-right",
-            title: "Programación",
+            title: "Conexiones por hora",
             type: "box-primary",
-            active: true,
-            initialized: false,
-            $el: $('#programacion'),
-            $body: $('#programacion .box-body'),
-            logs: [],
-            render: function(logs){
+            $el: $('#ConexionesHora'),
+            $body: $('#ConexionesHora .box-body'),
+            $boxTitle: $('#ConexionesHora .box-title'),
+            validate: function(logs, programlogs){
+                return  ( $.isArray(logs) && logs.length ) 
+                        || 
+                        ( $.isArray(programlogs) && programlogs.length )
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                !this.joinedLogs && (
+                    this.joinedLogs = []
+                    );
+
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
 
-                var visitorsData = {};
-
-                for (var day = 0; day < 7; day++) {
-                    visitorsData[day.toString()] = {};
-                    for (var hour = 0; hour < 24; hour++) {
-                        visitorsData[day.toString()][hour.toString()] = 0;
-                    }   
-                }
-
-                $.each(logs, function(i,item){ 
-
-                    if (item.datetime_start) {
-
-                        var startTime = new Date(item.datetime_start);
-                        var endTime = (item.datetime_end && new Date(item.datetime_end)) || startTime;
-                        var startHour = startTime.getHours();
-                        var endHour = endTime.getHours();
-                        var startDay = startTime.getDay();
-                        var endDay = endTime.getDay();
-
-                        visitorsData[startDay.toString()][startHour.toString()]++;
-                        // for (var d = startDay; d <= endDay; d++) {
-                            // for (var s = startHour; s <= endHour; s++) {
-                            //     visitorsData[startDay.toString()][s.toString()]++;
-                            // }
-                        // }
-
-                    }
-
-                });
-
-                // console.log('visitorsData');
-                // console.log(visitorsData);
-
-                var buildTable=function(target,visitorsData){
-
-                    var tableDataToHtml = '';
-                    var totalCount = 0;
-
-                    if ( window.weeklyPrograms && !$.isEmptyObject(weeklyPrograms)) {
-
-                        for (var weekDay in weeklyPrograms) {
-
-                            var dayItems = weeklyPrograms[weekDay];
-                            var weekday = weekDay.toLowerCase();
-                            var day = weekDaysToNumber[weekday];
-                            
-                            tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(day)+'">';
-
-                            for (var d = 0; d < dayItems.length; d++) {
-
-                                var weekday = dayItems[d].weekday;
-                                var start = dayItems[d].start;
-                                var end = dayItems[d].end;
-                                var name = dayItems[d].name;
-                                var moderator = dayItems[d].moderator;
-
-                                var hour = parseInt(start);
-                                var fullHour = start;
-                                var fullHourEnd = end;
-                                var hourCount = (visitorsData[day] && visitorsData[day][hour]) || 0;
-                                var badgeColor = hourCount > 0 ? 'bg-olive' : 'bg-red';
-
-                                tableDataToHtml += '\
-                                    <tr>\
-                                        <td class="text-center" style="width: 120px;">'+fullHour+' - '+fullHourEnd+'</td>\
-                                        <td>'+name+(moderator?' ('+moderator+')':'')+'</td>\
-                                        <td class="text-center" style="width: 80px;"><span class="badge '+badgeColor+'">'+hourCount+'</span></td>\
-                                    </tr>\
-                                ';
-                                
-                            }
-
-                            tableDataToHtml += '</table>';
-
-                        }
-
-                    }else{
-
-                        for (var day in visitorsData) {
-                            
-                            var c = 0;
-                            
-                            tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(day)+'">';
-
-                            for (var hour in visitorsData[day]) {
-
-                                var hourCount = visitorsData[day][hour];
-                                var badgeColor = hourCount > 0 ? 'bg-olive' : 'bg-red';
-                                var fullHour = hour.toString()+':00';
-                                var fullHourEnd = (hour+1).toString()+':00';
-
-                                tableDataToHtml += '\
-                                    <tr>\
-                                        <td class="text-center" style="width: 120px;">'+fullHour+' - '+fullHourEnd+'</td>\
-                                        <td>'+'Programa '+hour+'</td>\
-                                        <td class="text-center" style="width: 80px;"><span class="badge '+badgeColor+'">'+hourCount+'</span></td>\
-                                    </tr>\
-                                ';
-
-                            c++;
-                            }
-
-                            tableDataToHtml += '</table>';
-
-                        }
-
-                    }
-
-                    $(target).html(tableDataToHtml);
-                    $(target).find('table[data-page="1"]').show();
-                 
-                    setTimeout( function(){ 
-                        $(target).closest('.table-wrapper').find('.thead > li').each(function(i){ 
-                            var width = $('#programacion-table-wrapper').find('table:visible tr:first-child td').eq(i).width();
-                            $(this).width(width);
-                        });
-                    }, 100 );
-                    
+                if (logs && logs.length){ 
+                    this.joinLogs(logs);
+                    return;
                 };
 
-                buildTable('#programacion-table-wrapper .table-scroller',visitorsData);
+                if (programlogs && this.joinedLogs.length) {
+
+                    var visitorsData = {};
+
+                    for (var day = 0; day < 7; day++) {
+                        visitorsData[day.toString()] = {};
+                        for (var hour = 0; hour < 24; hour++) {
+                            visitorsData[day.toString()][hour.toString()] = {
+                                count: 0,
+                                programs: []
+                            };
+                        }   
+                    }
+
+                    var logs = this.logs;
+
+                    $.each(logs, function(i,item){ 
+
+                        var startDayToStr = item.startDay.toString(),
+                            startHourToStr = item.startHour.toString();
+
+                        var obj = visitorsData[startDayToStr][startHourToStr];
+
+                        obj.count++
+
+                        if (item.programs.length) {
+
+                            obj.programs = obj.programs.concat(item.programs);
+
+                        }
+
+                    })
+
+                    // console.log('visitorsData');
+                    // console.log(visitorsData);
+
+                    var tableScroller = this.$el.find('.table-scroller');
+
+                    var buildTable=function(target,visitorsData){
+
+                        var tableDataToHtml = '';
+                        var totalCount = 0;
+
+                        if ( window.weeklyPrograms && !$.isEmptyObject(weeklyPrograms)) {
+
+                            for (var weekDay in weeklyPrograms) {
+
+                                var weekday = weekDay.toLowerCase();
+                                var day = weekDaysToNumber[weekday];
+                                
+                                var maxArr = [];
+
+                                for (var hour in visitorsData[day]) {
+                                    maxArr.push({ hour, count: visitorsData[day][hour].count })
+                                }
+
+                                var posCounter = 0;
+                                var index = 0;
+
+                                maxArr.sort((a,b) => a.count == b.count ? 0 : (a.count > b.count ? -1 : 1 ) ).forEach(function(o,i){    
+
+                                    var badgeColor = '',
+                                        colorCounter = 0,
+                                        hour = o.hour,
+                                        count = o.count;
+
+                                    if ( count ) {
+                                        posCounter = index==0 ? 1 : (count < maxArr[index-1].count ? (posCounter+1) : posCounter);
+                                        colorCounter = posCounter >= hierarchyClasses.length ? hierarchyClasses.length-1 : posCounter-1;
+                                        badgeColor = hierarchyClasses[colorCounter];
+                                        index++;
+                                    }
+
+                                    visitorsData[day][hour].badgeColor = badgeColor;
+
+                                });
+
+                                tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(day)+'">';
+
+                                for (var hour in visitorsData[day]) {
+
+                                    var obj = visitorsData[day][hour];
+
+                                    var hourToStr = parseInt(hour).toString(),
+                                        fullHour = hourToStr.length < 2 ? '0'+hourToStr : hourToStr,
+                                        fullHourStart = fullHour+':00';
+                                        fullHourEnd = fullHour+':59';
+                                        badgeColor = obj.badgeColor,
+                                        count = obj.count;
+
+                                    tableDataToHtml += '<tr>';
+                                        tableDataToHtml += '<td class="text-center" style="width: 120px;">'+fullHourStart+' - '+fullHourEnd+'</td>';
+                                    
+                                    if ( !visitorsData[day][hour].programs.length ) {
+
+                                        tableDataToHtml += '<td>No hay datos de programas para este horario</td>';
+                                            
+                                    }else{
+
+                                        tableDataToHtml += '<td>';
+
+                                        var addedPrograms = [];
+                                        
+                                        obj.programs.forEach(function(program, i){    
+                                            
+                                            if( arrayHasVal(addedPrograms,program.program_name) ) return;
+
+                                            var start = program.start;
+                                            var end = program.end;
+                                            var program_name = program.program_name;
+                                            var moderator = '';
+
+                                            tableDataToHtml += '<span data-sep=" | ">'+program_name + (moderator?' ('+moderator+')':'')+'</span>';
+
+                                            addedPrograms.push(program.program_name)
+
+                                        });
+
+                                        tableDataToHtml += '</td>';
+
+                                    }
+
+                                        tableDataToHtml += '<td class="text-center" style="width: 80px;"><span class="badge '+badgeColor+'">'+count+'</span></td>';
+                                    tableDataToHtml += '</tr>';
+
+                                }
+
+                                tableDataToHtml += '</table>';
+
+                            }
+
+                        }else{
+
+                            for (var day in visitorsData) {
+                                
+                                var c = 0;
+                                
+                                tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(day)+'">';
+
+                                for (var hour in visitorsData[day]) {
+
+                                    var hourCount = visitorsData[day][hour];
+                                    var badgeColor = hourCount > 0 ? 'bg-olive' : 'bg-red';
+                                    var fullHour = hour.toString()+':00';
+                                    var fullHourEnd = (hour+1).toString()+':00';
+
+                                    tableDataToHtml += '\
+                                        <tr>\
+                                            <td class="text-center" style="width: 120px;">'+fullHour+' - '+fullHourEnd+'</td>\
+                                            <td>'+'Programa '+hour+'</td>\
+                                            <td class="text-center" style="width: 80px;"><span class="badge '+badgeColor+'">'+hourCount+'</span></td>\
+                                        </tr>\
+                                    ';
+
+                                c++;
+                                }
+
+                                tableDataToHtml += '</table>';
+
+                            }
+
+                        }
+
+                        target.html(tableDataToHtml);
+                        target.find('table[data-page="1"]').show();
+                     
+                        setTimeout( function(){ 
+                            target.closest('.table-wrapper').find('.thead > li').each(function(i){ 
+                                var width = tableScroller.find('table:visible tr:first-child td').eq(i).width();
+                                $(this).width(width);
+                            });
+                        }, 100 );
+                        
+                    };
+
+                    buildTable(tableScroller,visitorsData);
+
+                    // console.log('visitorsData',visitorsData);
+
+                };
 
                 if (!this.initialized) {
 
-                    $('#programacion .pagination a[data-table]').on('click',function(){ 
+                    this.$el.find('.pagination a[data-table]').on('click',function(){ 
 
                         var targetTable = $(this).attr('data-table');
-                        $('#programacion table[data-page]').hide()
-                        $('#programacion table[data-page="'+targetTable+'"]').stop().fadeIn();
+                        tableScroller.find('table[data-page]').hide()
+                        tableScroller.find('table[data-page="'+targetTable+'"]').stop().fadeIn();
 
                     });
 
@@ -693,162 +889,152 @@
 
             }
         },
-        "programs-stats": {
+        {
             pos: 3,
             id: "programs-stats",
             parent: "dashboard-left",
             title: "Programas",
             type: "box-primary",
-            active: true,
-            initialized: false,
             $el: $('#programs-stats'),
             $body: $('#programs-stats .box-body'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#programs-stats .box-title'),
+            validate: function(logs, programlogs){
+                return  ( $.isArray(logs) && logs.length ) 
+                        || 
+                        ( $.isArray(programlogs) && programlogs.length )
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                !this.joinedLogs && (
+                    this.joinedLogs = []
+                    );
+
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
-                
-                if ( !window.weeklyPrograms || $.isEmptyObject(weeklyPrograms)) {
-                    this.hideLoading().showMsg('empty')
-                }
 
-                var programsData = [];
-                var programsLine = [];
-                var programsBar = [];
+                if (logs && logs.length){ 
+                    this.joinLogs(logs);
+                    return;
+                };
 
-                var programsByID = {};
-                var programsByISO = {};
-                var programsCount = {};
-                
-                var programNames = [];
-                var programIDs = [];
-                var programsColors = [];
-                var programsColorsObj = {};
+                if (programlogs && this.joinedLogs.length) {
 
-                if ( window.weeklyPrograms && !$.isEmptyObject(weeklyPrograms)) {
+                    var programsByISO = {};
+                    var programsCount = [];
+                    var programsLine = [];
+                    var programsBar = [];
 
-                    for (var weekDay in weeklyPrograms) {
+                    var programsColorsObj = {};
+                    var programsColors = []
+                    var programNames = []
+                    var programIDs = []
+                    var barColors = []
 
-                        var dayItems = weeklyPrograms[weekDay];
-                        var weekday = weekDay.toLowerCase();
-                        var day = weekDaysToNumber[weekday];
-                        var posCounter = 0;
-
-                        programsData[day] = {};
-
-                        for (var d = 0; d < dayItems.length; d++) {
-
-                            var id = dayItems[d].id;
-                            var weekday = dayItems[d].weekday;
-                            var start = dayItems[d].start;
-                            var end = dayItems[d].end;
-                            var name = dayItems[d].name;
-                            var moderator = dayItems[d].moderator;
-
-                            var hour = parseInt(start);
-                            var color = programsColorsObj[id] || randomColors[posCounter];
-
-                            programNames.pushOnce(name);
-                            programIDs.pushOnce(id);
-
-                            !programsColorsObj[id] && programsColors.push(color);
-                            
-                            posCounter += programsColorsObj[id] ? 0 : 1;
-                            if (posCounter >= randomColors.length) posCounter = 0;
-
-                            programsColorsObj[id] = color;
-
-                            !programsData[day][hour] && (programsData[day][hour] = {})
-
-                            programsByID[id] = {id,weekday,start,end,name,moderator,hour,color,count: 0};
-
-                            programsData[day][hour][id] = programsByID[id];
-
-                        }
-
-                    }
-
-                }
-
-                $.each(logs, function(i,item){ 
-
-                    if (item.datetime_start) {
-
-                        var startTime = new Date(item.datetime_start);
-                        var endTime = (item.datetime_end && new Date(item.datetime_end)) || startTime;
-                        var startISO = startTime.toISOString().split('T')[0];
-                        var startHour = startTime.getHours();
-                        var endHour = endTime.getHours();
-                        var startDay = startTime.getDay();
-                        var endDay = endTime.getDay();
-
-                        !programsByISO[startISO] && (programsByISO[startISO]={})
-
-                        if(programsData[startDay] && programsData[startDay][startHour]){
-
-                            for (var id in programsData[startDay][startHour]) {
-
-                                // Line
-                                !programsByISO[startISO][id] && (programsByISO[startISO][id]=0)
-                                programsByISO[startISO][id]++;
-
-                                // Bar
-                                !programsCount[id] && (programsCount[id]=0)
-                                programsCount[id]++;
-
-                            };
-
-                        }
-                            
-                    }
-
-                });
-
-                // console.log('programsData', programsData);
-                // console.log('programsByISO', programsByISO);
-
-                // line
-                for (var startISO in programsByISO) {
-
-                    var lineItem = { day: startISO };
-
-                    if (!$.isEmptyObject(programsByISO[startISO])) {
-                        for (var id in programsByISO[startISO]) {
-                            lineItem[id] = programsByISO[startISO][id];
-                        }
-                    }
-
-                    programsLine.push(lineItem);
-
-                }
-
-                // bar
-                for (var id in programsCount) {
-
-                    var name = programsByID[id].name;;
-                    var count = programsCount[id];
-                    var barItem = { count, name };
-                    programsBar.push(barItem);
-
-                }
+                    var joinedLogs = this.joinedLogs;
                     
-                
-                programsLine.forEach(function(lineItem, index, array){    
-                    programIDs.forEach(function(id){
-                        if (!lineItem[id]) programsLine[index][id] = 0;
-                    });    
-                });
+                    var posCounter = 0;
 
-                // console.log('programsLine',programsLine);
-                // console.log('programIDs',programIDs);
-                // console.log('programNames',programNames);
-                // console.log('programsColors',programsColors);
-                // console.log('programsCount',programsCount);
+                    $.each(joinedLogs, function(i,program){ 
+
+                        var program_name = program.program_name;
+                        var startISO = program.log && program.log.startISO;
+
+                        if ( !startISO ) return;
+
+                        var name = program.program_name;
+                        var color = programsColorsObj[name] || randomColors[posCounter];
+
+                        programNames.pushOnce(program_name);
+                        programIDs.pushOnce(name);
+
+                        !programsColorsObj[name] && programsColors.push(color);
+                        
+                        posCounter += programsColorsObj[name] ? 0 : 1;
+                        if (posCounter >= randomColors.length) posCounter = 0;
+
+                        programsColorsObj[name] = color;
+
+                        !programsByISO[startISO] && (
+                                programsByISO[startISO] =  {}
+                            )
+
+                        !programsByISO[startISO][name] && (
+                            programsByISO[startISO][name] =  {
+                                    program,
+                                    count: 0
+                                }
+                            )
+
+                        programsByISO[startISO][name].count++;
+
+                        if ( program_name ) {
+
+                            !programsCount.filter(obj => obj.program.program_name == program.program_name ).length && (
+                                    barColors.push(color),
+                                    programsCount.push(
+                                    {
+                                        program,
+                                        count: 0
+                                    })
+                                );
+
+                            programsCount.map(function(obj){
+                                obj.program.program_name == program.program_name && obj.count++;
+                                return obj;
+                            })
+
+                        }
+
+                    })
+
+                    // line
+                    for (var startISO in programsByISO) {
+
+                        var xAxisObj = { day: startISO };
+
+                        Object.keys(programsByISO[startISO]).forEach(function(name){    
+                            xAxisObj[name] = programsByISO[startISO][name].count;
+                        });
+  
+                        // set programs to 0 when there's no log entry for them
+                        programIDs.forEach(function(id){
+                            if (!xAxisObj[id]) xAxisObj[id] = 0;
+                        });    
+
+                        programsLine.push(xAxisObj);
+
+                    }
+
+                    // bar
+                    programsCount.forEach(function(obj){    
+                        
+                        var name = obj.program.program_name;
+                        var count = obj.count;
+
+                        programsBar.push({ count, name });
+
+                    });
+
+
+                    // console.log('barColors',barColors);
+                    // console.log('programsBar',programsBar);
+                    // console.log('programsCount',programsCount);
+                    // console.log('/////////////////////');
+
+                    // console.log('programsByISO',programsByISO);
+                    // console.log('programsLine',programsLine);
+                    // console.log('programIDs',programIDs);
+                    // console.log('programNames',programNames);
+                    // console.log('programsColors',programsColors);
+                    // console.log('/////////////////////');
+
+                }
+
+
 
                 if (!this.initialized) {
 
@@ -858,6 +1044,7 @@
                       resize           : true,
                       data             : programsLine,
                       xkey             : 'day',
+                      xLabelFormat: function (x) { return x.toLocaleDateString(); },
                       ykeys            : programIDs,
                       labels           : programNames,
                       lineColors       : programsColors,
@@ -868,25 +1055,18 @@
                       pointSize        : 2,
                       pointStrokeColors: ['#3c8dbc'],
                       // gridLineColor    : '#efefef',
-                      // gridTextFamily   : 'Open Sans',
                       gridTextSize     : 12
                     });
 
-                    // data: [
-                    //   {device: 'iPhone', geekbench: 136},
-                    //   {device: 'iPhone 3G', geekbench: 137},
-                    //   {device: 'iPhone 3GS', geekbench: 275},
-                    //   {device: 'iPhone 4', geekbench: 380},
-                    //   {device: 'iPhone 4S', geekbench: 655},
-                    //   {device: 'iPhone 5', geekbench: 1571}
-                    // ],
                     this.bar = new Morris.Bar({
                       element: 'programs-bar-chart',
                       data: programsBar,
                       xkey: 'name',
                       ykeys: ['count'],
                       labels: ['Conexiones'],
-                      barColors: ['#a0d0e0', '#3c8dbc'],
+                      barColors: function (row, series, type) {
+                        return barColors[row.x] || "#1AB244";
+                      },
                       barRatio: 0.4,
                       xLabelAngle: 0,
                       hideHover: 'auto'
@@ -912,18 +1092,16 @@
 
             }
         },
-        "calendario": {
+        {
             pos: 1,
             id: "calendario",
             parent: "dashboard-right",
             title: "Calendario",
             type: "box-solid",
-            active: true,
-            initialized: false,
             $el: $('#calendario'),
             $body: $('#calendario .box-body'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#calendario .box-title'),
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
@@ -956,22 +1134,23 @@
 
             }
         },
-        "devices": {
+        {
             pos: 0,
             id: "devices",
             parent: "dashboard-right",
             title: "Dispositivos",
             type: "box-solid",
-            active: true,
-            initialized: false,
             $el: $('#devices'),
             $body: $('#devices .box-body'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#devices .box-title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1112,22 +1291,23 @@
 
             }
         },
-        "sent-bytes": {
+        {
             pos: 1,
             id: "sent-bytes",
             parent: "dashboard-right",
             title: "Bytes Enviados",
             type: "box-primary",
-            active: true,
-            initialized: false,
             $el: $('#sent-bytes'),
             $body: $('#sent-bytes .box-body'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#sent-bytes .box-title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1342,22 +1522,23 @@
 
             }
         },
-        "small-box-aqua": {
+        {
             pos: 0,
             id: "small-box-aqua",
             parent: "",
             title: "Conexiones en Total",
             type: "small-box",
-            active: true,
-            initialized: false,
             $el: $('#small-box-aqua'),
             $body: $('#small-box-aqua .inner'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#small-box-aqua .title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1370,22 +1551,23 @@
 
             }
         },
-        "small-box-green": {
+        {
             pos: 1,
             id: "small-box-green",
             parent: "",
             title: "Usuarios Únicos",
             type: "small-box",
-            active: true,
-            initialized: false,
             $el: $('#small-box-green'),
             $body: $('#small-box-green .inner'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#small-box-green .title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1403,22 +1585,23 @@
 
             }
         },
-        "small-box-yellow": {
+        {
             pos: 2,
             id: "small-box-yellow",
             parent: "",
             title: "Bytes Enviados",
             type: "small-box",
-            active: true,
-            initialized: false,
             $el: $('#small-box-yellow'),
             $body: $('#small-box-yellow .inner'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#small-box-yellow .title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1438,22 +1621,23 @@
 
             }
         },
-        "small-box-red": {
+        {
             pos: 3,
             id: "small-box-red",
             parent: "",
             title: "Conexiones Perdidas",
             type: "small-box",
-            active: true,
-            initialized: false,
             $el: $('#small-box-red'),
             $body: $('#small-box-red .inner'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#small-box-red .title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1474,22 +1658,23 @@
 
             }
         },
-        "small-box-blue": {
+        {
             pos: 4,
             id: "small-box-blue",
             parent: "",
             title: "Duración Promedio",
             type: "small-box",
-            active: true,
-            initialized: false,
             $el: $('#small-box-blue'),
             $body: $('#small-box-blue .inner'),
-            logs: [],
-            render: function(logs){
+            $boxTitle: $('#small-box-blue .title'),
+            validate: function(logs, programlogs){
+                return $.isArray(logs) && logs.length 
+            },
+            render: function(logs, programlogs){
 
                 this.beforeRender();
 
-                if ( !$.isArray(logs) || !logs.length ) {
+                if ( !this.validate(logs, programlogs) ) {
                     this.hideLoading().showMsg('empty')
                     return;
                 }
@@ -1515,7 +1700,8 @@
             }
         },
 
-    };
+    ]
+};
 
 $(function () {
     /**
@@ -1524,7 +1710,8 @@ $(function () {
      */
 
     $(document).ready(function(){ 
-        dashBoard = new DashBoard(widgets);
+        var screen = window.location.href.indexOf('stats') >= 0 ? 'stats' : 'program';
+        dashBoard = new DashBoard(widgets[screen]);
     }); 
 
 })

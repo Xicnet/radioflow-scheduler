@@ -1,9 +1,10 @@
+{% load thumbnail %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE | Radio App</title>
+    <title>{% block title %}Radioflow Scheduler . Gestor de programas{% endblock %}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -43,6 +44,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
+        var jsonApiPath = 'http://icelog-dev.xicnet.com/stats/api/';
+        var mount = '{{ request.user.config.mount }}'||'radioapp.mp3';
         var weeklyPrograms = {  
             {% for day in weekly_programs %}
                 {% for day,programs in day.items %}
@@ -82,11 +85,11 @@ desired effect
 {% endblock %}
 
     <script type="text/javascript">
-        var bodyEl = document.querySelectorAll('body')[0];
-        var bodyClassName = bodyEl.className;
-        if ( window.outerWidth<1400 && bodyClassName.indexOf('sidebar-collapse')<0 ) {
-            bodyEl.className = bodyClassName + ' sidebar-collapse';
-        }
+        // var bodyEl = document.querySelectorAll('body')[0];
+        // var bodyClassName = bodyEl.className;
+        // if ( window.outerWidth<1400 && bodyClassName.indexOf('sidebar-collapse')<0 ) {
+        //     bodyEl.className = bodyClassName + ' sidebar-collapse';
+        // }
     </script>
 
     <div class="wrapper">
@@ -94,20 +97,18 @@ desired effect
         <!-- Main Header -->
         <header class="main-header">
 
-            <!-- Logo -->
-            <a href="/stats" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">R<b>A</b></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">Radio<b>App</b></span>
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
             </a>
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
+                <!-- Logo -->
+                <a href="/stats" class="logo">
+                    <span><b>Radioflow Scheduler</b></span>
                 </a>
+                
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
@@ -153,22 +154,27 @@ desired effect
                         </li>
                 -->                     
                     <!-- User Account: style can be found in dropdown.less -->
+                    {% if request.user.is_authenticated %}                    
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="hidden-xs">radio-app</span>
+                            <span><i class="fa fa-user"></i> &nbsp;&nbsp;{{ request.user.config.station }}</span>
                             <span class="caret" style="margin-left: 10px"></span>
                             <!-- <img src="/static/dist/img/user2-160x160.jpg" class="user-image pull-right" alt="User Image" style="margin-left: 10px"> -->
                         </a>
                         <ul class="dropdown-menu">
                             <!-- Menu Footer-->
-                            <li class="">
+                            <!-- <li class="">
                                 <a href="#" class="">Editar</a>
+                            </li> -->
+                            <li class="">
+                                <a href="/accounts/password_change/">Cambiar contraseña</a>
                             </li>
                             <li class="">
-                                <a href="#" class="">Salir</a>
+                                <a href="/accounts/logout/">Salir</a>
                             </li>
                         </ul>
                     </li>
+                    {% endif %}
                     <!-- Control Sidebar Toggle Button -->
                     </ul>
                 </div>
@@ -181,54 +187,36 @@ desired effect
             <section class="sidebar">
 
                 <!-- Sidebar user panel (optional) -->
-
-            <!-- 
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="/static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    {% if request.user.config.logo_alpha %}
+                        <img src="{% thumbnail request.user.config.logo_alpha 160x160 %}" class="img-circle" alt="Logo" width="160">
+                    {% else %}
+                        <span class="span-circle"><i class="fa fa-user"></i></span>
+                    {% endif %}
                     </div>
                     <div class="pull-left info">
-                        <p>radio-app</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        <p>{{ request.user.config.station }}</p>
+                        <a><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
-            -->
-
-                <!-- search form (Optional) -->
-            <!-- 
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                        </button>
-                        </span>
-                    </div>
-                </form> 
-            -->
-                <!-- /.search form -->
-
+           
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <!-- <li class="header">Radio APP</li> -->
+                    <!-- <li class="header">{{ request.user.config.station }}</li> -->
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="/stats"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                    <li><a href="{% url 'program' %}"><i class="fa fa-list"></i> <span>Programación</span></a></li>
-                    <li><a href="javascript:void(0)" class="toggleClass" data-class="chat-active" data-target="body"><i class="ion ion-chatbubbles"></i> <span>Chat</span></a></li>
-                    <li><a href="{% url 'config_show' %}"><i class="fa fa-cog"></i> <span>Configuración</span></a></li>
-            <!--
-                     <li class="treeview">
-                        <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                        </a>
-                        <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                        </ul>
+                    <li class="{% if 'stats' in request.path %}active{% endif %}">
+                        <a href="/stats"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                     </li>
-            -->
+                    <li class="{% if 'program' in request.path or request.path == '/' %}active{% endif %}">
+                        <a href="{% url 'program' %}"><i class="fa fa-list"></i> <span>Programación</span></a>
+                    </li>
+                    <li class="{% if 'chat' in request.path %}active{% endif %}">
+                        <a href="javascript:void(0)" class="toggleClass" data-class="chat-active" data-target="body"><i class="ion ion-chatbubbles"></i> <span>Chat</span></a>
+                    </li>
+                    <li class="{% if 'config' in request.path %}active{% endif %}">
+                        <a href="{% url 'config_show' %}"><i class="fa fa-cog"></i> <span>Configuración</span></a>
+                    </li>
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
@@ -246,7 +234,7 @@ desired effect
         <footer class="main-footer">
             <!-- To the right -->
             <div class="pull-right hidden-xs">
-                Radio App
+                {{ request.user.config.station }}
             </div>
             <!-- Default to the left -->
             <strong>copyright &copy; 2018 <a href="http://studiodharma.com.br">Studio Dharma</a> | <a href="http://xicnet.com">XICNET</a></strong>
@@ -283,8 +271,8 @@ desired effect
                     <ul class="control-sidebar-menu">
                         <li>
                         <a href="javascript:;">
-                            <h4 class="control-sidebar-subheading">
-                  Custom Template Design
+                            <h4 class="control-sidebar-subheading"> 
+                                  Custom Template Design
                             <span class="pull-right-container">
                                 <span class="label label-danger pull-right">70%</span>
                             </span>
@@ -310,12 +298,12 @@ desired effect
 
                         <div class="form-group">
                         <label class="control-sidebar-subheading">
-                Report panel usage
+                             Report panel usage
                             <input type="checkbox" class="pull-right" checked>
                         </label>
 
                         <p>
-                Some information about this general settings option
+                            Some information about this general settings option
                         </p>
                         </div>
                         <!-- /.form-group -->
@@ -393,13 +381,9 @@ desired effect
     <script src="/static/extend/js/dharma-prototype.js"></script>
     <script src="/static/extend/js/jquery-extend.js"></script>
     <script src="/static/dist/js/radioflow.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <!-- <script src="/static/dist/js/demo.js"></script> -->
-
+    <script src="/static/dist/js/useragents.js"></script>
     <!-- Radio Flow -->
     <script src="/static/dist/js/pages/dashboard.js"></script>
-    <script src="/static/dist/js/useragents.js"></script>
-    <script src="/static/dist/js/pages/index.js"></script>
-    <script src="/static/dist/js/pages/programacion.js"></script>
+    <script src="/static/dist/js/pages/widgets.js"></script>
 </body>
 </html>

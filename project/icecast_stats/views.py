@@ -32,13 +32,7 @@ def index(request):
 @login_required
 def programacion(request):
 
-    return render_to_response(
-            'icecast_stats/programacion.html',
-            {
-             'weekly_programs': Program.get_weekly(request),
-            },
-            context_instance=RequestContext(request)
-        )
+    return redirect('/program/')
 
 
 # Serializers define the API representation.

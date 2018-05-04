@@ -11,78 +11,380 @@ function confirm_delete(f, msg) {
 
 {% block content %}
 
-<h3>Configuración</h3>
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+          			Configuración
+                </h1>
+                <ol class="breadcrumb">
+                    <!-- <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li> -->
+                    <li class="active"><i class="fa fa-dashboard"></i> panel de control</li>
+                </ol>
+            </section>
 
-<h5>IMPORTANTE: los campos marcados con * son obligatorios para el correcto funcionamiento de la app.</h5>
+            <!-- Main content -->
+            <section class="content container-fluid">
 
-    <form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-	<table id="config-container">
-	<tr>
-		<td>
+		    	<form id="program-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 
-			<table class="config-form">
-				{% for field in config_form %}
-				<tr class="{% cycle 'rowA' 'rowB' %}">
-					<td class="program-field-label">{{ field.label_tag }}</td>
-					<td class="config-form-field">{{ field }}<p class="help">{{ field.help_text }}</p></td>
-				</tr>
-				{% endfor %}
-				<tr>
-					<td colspan="2" class="program-image">
-						<input class="submit" type="submit" value="Guardar configuración" />
-					</td>
-				</tr>
-			</table>
+					<!-- Main row -->
+					<div class="row">
+				        <!-- Left col -->
+				        <section class="col-lg-6 connectedSortable">
 
-		</td>
-		<td valign="top">
+				        	<!-- quick email widget -->
+				        	<div class="box box-info" id="radio-form">
+				        		<div class="box-header">
+				        		  	<i class="fa fa-cog"></i>
 
-			<table class="program-listing">
-			{% if config.image %}
-			<tr>
-				<td colspan="2" class="program-image">
-					<b>Fondo</b><br/>
-					<img src="{{ config.image.url }}" width="160">
-				</td>
-			</tr>
-			{% endif %}
-			{% if config.logo %}
-			<tr>
-				<td colspan="2" class="program-image">
-					<b>Logo sin Alpha</b><br/>
-					<img src="{% thumbnail config.logo 160x160 %}">
-				</td>
-			</tr>
-			{% endif %}
-			{% if config.logo_alpha %}
-			<tr>
-				<td colspan="2" class="program-image">
-					<b>Logo con Alpha</b><br/>
-					<img src="{% thumbnail config.logo_alpha 160x160 %}">
-				</td>
-			</tr>
-			{% endif %}
-			{% if config.logo_home %}
-			<tr>
-				<td colspan="2" class="program-image">
-					<b>Logo Home</b><br/>
-					<img src="{% thumbnail config.logo_home 160x160 %}">
-				</td>
-			</tr>
-			{% endif %}
-			{% if config.feature_graphic %}
-			<tr>
-				<td colspan="2" class="program-image">
-					<b>Feature Graphic</b><br/>
-					<img src="{% thumbnail config.feature_graphic 256x125 %}">
-				</td>
-			</tr>
-			{% endif %}
-			</table>
+				        		  	<h3 class="box-title">Datos</h3>
 
-		</td>
-	</tr>
-	</table>
-	</form>
+
+				        		  	<!-- tools box -->
+				        		  	<div class="pull-right box-tools">
+				        		    	<!-- <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button> -->
+				        		  		<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+				        			</div>
+				        		  <!-- /. tools -->
+				        		</div>
+				        		<div class="box-body">
+
+			        			    <div class="config-form" id="radio-container">
+
+			        			    	<div class="fields">
+		        			    			
+		        			    			{% for field in field_groups.radio %}
+			        			    		<div class="form-group config-radio">
+			        			    			<div class="row-title">
+			        			    				<h4><b>{{ field.label_tag }}</b></h4>
+			        			    			</div>
+			        			    			<p class="help">{{ field.help_text }}</p>
+			        			    		</div>
+			        			    		<div class="form-group">
+				        			    		<div class="config-field-name">
+				        			    			{{ field }}
+				        			    		</div>
+			        			    		</div>
+			        			    		<hr>
+		        			    			{% endfor %}
+		        			    			
+		        			    			{% for field in field_groups.contact %}
+			        			    		<div class="form-group config-contact">
+			        			    			<div class="row-title">
+			        			    				<h4><b>{{ field.label_tag }}</b></h4>
+			        			    			</div>
+			        			    			<p class="help">{{ field.help_text }}</p>
+			        			    		</div>
+			        			    		<div class="form-group">
+				        			    		<div class="config-field-name">
+				        			    			{{ field }}
+				        			    		</div>
+			        			    		</div>
+			        			    		<hr>
+		        			    			{% endfor %}
+
+			        			    	</div>
+
+		        			    	</div>
+
+			        			</div>
+			        			<div class="box-footer bg-gray-light clearfix">
+			        				<div class="row">
+		        						<div class="col-xs-10"><b>IMPORTANTE: los campos marcados con * son obligatorios para el correcto funcionamiento de la app.</b></div>
+		        						<div class="col-xs-2">
+			        			  			<button type="submit" class="pull-right btn btn-primary"><i class="fa fa-save"></i> Guardar </button>		        							
+		        						</div>
+			        				</div>
+			        			</div>
+
+			        		</div>
+
+			        	</section>
+
+				        <!-- right col -->
+				        <section class="col-lg-6 connectedSortable">
+
+				        	<div class="box box-info" id="store-form">
+				        		<div class="box-header">
+				        		  	<i class="fa fa-mobile" style="font-size: 1.5em"></i>
+
+				        		  	<h3 class="box-title">App Store</h3>
+
+
+				        		  	<!-- tools box -->
+				        		  	<div class="pull-right box-tools">
+				        		    	<!-- <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button> -->
+				        		  		<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+				        			</div>
+				        		  <!-- /. tools -->
+				        		</div>
+				        		<div class="box-body">
+
+			        			    <div class="config-form" id="store-container">
+
+			        			    	<div class="fields">
+
+			        			    		{% for field in field_groups.store %}
+			        			    		<div class="form-group config-store">
+			        			    			<div class="row-title">
+			        			    				<h4><b>{{ field.label_tag }}</b></h4>
+			        			    			</div>
+			        			    			<p class="help">{{ field.help_text }}</p>
+			        			    		</div>
+			        			    		<div class="form-group">
+				        			    		<div class="config-field-name">
+				        			    			{{ field }}
+				        			    		</div>
+			        			    		</div>
+			        			    		<hr>
+			        			    		{% endfor %}
+
+
+			        			    	</div>
+
+		        			    	</div>
+
+			        			</div>
+			        			<div class="box-footer bg-gray-light clearfix">
+			        				<div class="row">
+		        						<div class="col-xs-10"><b>IMPORTANTE: los campos marcados con * son obligatorios para el correcto funcionamiento de la app.</b></div>
+		        						<div class="col-xs-2">
+			        			  			<button type="submit" class="pull-right btn btn-primary"><i class="fa fa-save"></i> Guardar </button>		        							
+		        						</div>
+			        				</div>
+			        			</div>
+
+			        		</div>
+
+			        	</section>
+
+				        <!-- full col -->
+				        <section class="col-lg-12 connectedSortable">
+
+				        	<!-- quick email widget -->
+				        	<div class="box box-info">
+				        		<div class="box-header">
+				        		  	<i class="fa fa-image"></i>
+
+				        		  	<h3 class="box-title">Imágenes</h3>
+
+				        		  	<!-- tools box -->
+				        		  	<div class="pull-right box-tools">
+				        		    	<!-- <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button> -->
+				        		  		<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+				        			</div>
+				        		  <!-- /. tools -->
+				        		</div>
+				        		<div class="box-body">
+
+			        			    <div class="config-form">
+
+			        			    	<div class="fields">
+			        			    		
+											<table class="program-listing table table-striped ">
+
+												<!-- Logo Home -->
+	        			    					<tr>
+	        			    						<td class="program-image-input">
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<h4><b>{{ image_groups.images.logo_home.label_tag }}</b></h4>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.images.logo_home.help_text }}</p>
+			        			    						<span class="btn btn-primary fileinput-button">
+			        			    			                <i class="ion-image"></i>
+			        			    							<span>Seleccionar Archivo</span>
+						        			    				{{ image_groups.images.logo_home }}
+			        			    						</span>
+						        			    		</div>
+	        			    						</td>
+	        			    						<td class="program-image-del">
+	        			    							{% if config.logo_home %}
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<b>{{ image_groups.del.logo_home_del.label_tag }}</b>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.del.logo_home_del.help_text }}</p>
+						        			    			<label class="btn toggleClass btn-default" data-class="btn-default btn-danger">
+						        			    				{{ image_groups.del.logo_home_del }}
+						        			    				<span class="field-label">Eliminar</span>
+						        			    			</label>
+						        			    		</div>
+						        			    		{% endif %}
+	        			    						</td>
+	        			    						<td class="" align="center" valign="middle" style="max-width: 200px">
+	    			    							{% if config.logo_home %}
+	        			    							<!-- <b>Logo Home</b><br/> -->
+	        			    							<img src="{% thumbnail config.logo_home 160x160 %}" style="max-width: 100%; height: auto;">
+	    			    							{% endif %}        			    						
+	        			    						</td>
+				    							</tr><!-- / END Logo Home -->
+
+				    							<!-- Logo con Alpha -->
+	        			    					<tr>
+	        			    						<td class="program-image-input">
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<h4><b>{{ image_groups.images.logo_alpha.label_tag }}</b></h4>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.images.logo_alpha.help_text }}</p>
+			        			    						<span class="btn btn-primary fileinput-button">
+			        			    			                <i class="ion-image"></i>
+			        			    							<span>Seleccionar Archivo</span>
+						        			    				{{ image_groups.images.logo_alpha }}
+			        			    						</span>
+						        			    		</div>
+	        			    						</td>
+	        			    						<td class="program-image-del">
+	        			    							{% if config.logo_alpha %}
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<b>{{ image_groups.del.logo_alpha_del.label_tag }}</b>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.del.logo_alpha_del.help_text }}</p>
+						        			    			<label class="btn toggleClass btn-default" data-class="btn-default btn-danger">
+						        			    				{{ image_groups.del.logo_alpha_del }}
+						        			    				<span class="field-label">Eliminar</span>
+						        			    			</label>
+						        			    		</div>
+						        			    		{% endif %}
+	        			    						</td>
+	        			    						<td class="" align="center" valign="middle" style="max-width: 200px">
+	    			    							{% if config.logo_alpha %}
+	        			    							<!-- <b>Logo con Alpha</b><br/> -->
+	        			    							<img src="{% thumbnail config.logo_alpha 160x160 %}" style="max-width: 100%; height: auto;">
+	    			    							{% endif %}
+	        			    						</td>
+	        			    					</tr><!-- / END Logo con Alpha -->
+
+	        			    					<!-- Logo sin Alpha -->
+	        			    					<tr>
+	        			    						<td class="program-image-input">
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<h4><b>{{ image_groups.images.logo.label_tag }}</b></h4>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.images.logo.help_text }}</p>
+			        			    						<span class="btn btn-primary fileinput-button">
+			        			    			                <i class="ion-image"></i>
+			        			    							<span>Seleccionar Archivo</span>
+						        			    				{{ image_groups.images.logo }}
+			        			    						</span>
+						        			    		</div>
+	        			    						</td>
+	        			    						<td class="program-image-del">
+	        			    							{% if config.logo %}
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<b>{{ image_groups.del.logo_del.label_tag }}</b>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.del.logo_del.help_text }}</p>
+						        			    			<label class="btn toggleClass btn-default" data-class="btn-default btn-danger">
+						        			    				{{ image_groups.del.logo_del }}
+						        			    				<span class="field-label">Eliminar</span>
+						        			    			</label>
+						        			    		</div>
+						        			    		{% endif %}
+	        			    						</td>
+	        			    						<td class="" align="center" valign="middle" style="max-width: 200px">
+	    			    							{% if config.logo %}
+	        			    							<!-- <b>Logo sin Alpha</b><br/> -->
+	        			    							<img src="{% thumbnail config.logo 160x160 %}" style="max-width: 100%; height: auto;">
+	    			    							{% endif %}
+	        			    						</td>
+	        			    					</tr><!-- / END Logo sin Alpha -->
+
+	        			    					<!-- Fondo -->
+	        			    					<tr>
+	        			    						<td class="program-image-input">
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<h4><b>{{ image_groups.images.image.label_tag }}</b></h4>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.images.image.help_text }}</p>
+			        			    						<span class="btn btn-primary fileinput-button">
+			        			    			                <i class="ion-image"></i>
+			        			    							<span>Seleccionar Archivo</span>
+						        			    				{{ image_groups.images.image }}
+			        			    						</span>
+						        			    		</div>
+	        			    						</td>
+	        			    						<td class="program-image-del">
+	        			    							{% if config.image %}
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<b>{{ image_groups.del.image_del.label_tag }}</b>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.del.image_del.help_text }}</p>
+						        			    			<label class="btn toggleClass btn-default" data-class="btn-default btn-danger">
+						        			    				{{ image_groups.del.image_del }}
+						        			    				<span class="field-label">Eliminar</span>
+						        			    			</label>
+						        			    		</div>
+						        			    		{% endif %}
+	        			    						</td>
+	        			    						<td class="" align="center" valign="middle" style="max-width: 200px">
+	    			    							{% if config.image %}
+	        			    							<!-- <b>Fondo</b><br/> -->
+	        			    							<img src="{{ config.image.url }}" width="160" style="max-width: 100%; height: auto;">
+	    			    							{% endif %}
+	        			    						</td>
+	        			    					</tr><!-- / END Fondo -->
+
+	        			    					<!-- Feature Graphic -->
+	        			    					<tr>
+	        			    						<td class="program-image-input">
+						        			    		<div class="form-group">
+						        			    			<div class="row-title">
+						        			    				<h4><b>{{ image_groups.images.feature_graphic.label_tag }}</b></h4>
+						        			    			</div>
+						        			    			<p class="help">{{ image_groups.images.feature_graphic.help_text }}</p>
+			        			    						<span class="btn btn-primary fileinput-button">
+			        			    			                <i class="ion-image"></i>
+			        			    							<span>Seleccionar Archivo</span>
+						        			    				{{ image_groups.images.feature_graphic }}
+			        			    						</span>
+						        			    		</div>
+	        			    						</td>
+	        			    						<td class="program-image-del">
+	        			    							{% if config.feature_graphic %}
+
+	        			    							{% endif %}
+	        			    						</td>
+	        			    						<td class="" align="center" valign="middle" style="max-width: 200px">
+	        			    						{% if config.feature_graphic %}
+	        			    							<!-- <b>Feature Graphic</b><br/> -->
+	        			    							<img src="{% thumbnail config.feature_graphic 256x125 %}" style="max-width: 100%; height: auto;">
+	    			    							{% endif %}
+	        			    						</td>
+	        			    					</tr><!-- / END Feature Graphic -->
+
+	    			    					</table>			        			    			
+
+			        			    	</div>
+
+				        			</div>
+
+								</div>
+								<div class="box-footer bg-gray-light clearfix">
+									<div class="row">
+										<div class="col-xs-10"><b>IMPORTANTE: los campos marcados con * son obligatorios para el correcto funcionamiento de la app.</b></div>
+										<div class="col-xs-2">
+								  			<button type="submit" class="pull-right btn btn-primary"><i class="fa fa-save"></i> Guardar </button>											
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</section>
+
+					</div>
+
+				</form>
+
+			</section>
+
+
 
 {% endblock %}

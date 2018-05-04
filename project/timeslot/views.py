@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.forms.models import model_to_dict
+from django.core import serializers
 
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -25,17 +26,66 @@ from constants import *
 
 
 @login_required
-def index(request):
+def index(request, program_id=None):
     #if request.user.is_superuser == True:
     #    return HttpResponseRedirect(reverse('admin:index'))
+
+    #    ***********************
+    #    AGREGADO POR MARCE 
+
+    if program_id:
+        program = Program.objects.get(id=program_id)
+        edit    = True
+    else:
+        program = None
+
+    is_new = not program
+    program_form = ProgramForm()
+    if request.method == 'POST':
+        program_form = ProgramForm(request.POST)
+        if program_form.is_valid():
+            image = request.FILES.get('image', None)
+            if not program:
+                program = Program.objects.create(user=request.user)
+            program.name         = program_form.cleaned_data['name']
+            program.moderator    = program_form.cleaned_data['moderator']
+            program.description  = program_form.cleaned_data['description']
+            program.show_labels  = program_form.cleaned_data['show_labels']
+            program.start        = program_form.cleaned_data['start']
+            program.end          = program_form.cleaned_data['end']
+            program.days         = program_form.cleaned_data['days']
+            if image:
+                program.image    = image
+            program.save()
+            redirect_target = '/program/'
+            if is_new: 
+                redirect_target += str(program.id)
+            return redirect(redirect_target)
+        else:
+            program_form = ProgramForm(request.POST)
+    else:
+        if program_id:
+            program_form = ProgramForm(data=model_to_dict(program))
+    
+    field_groups = {
+        "publicos"    : [ program_form['name'], program_form['moderator'], program_form['show_labels'], program_form['image'] ],
+        "internos"  : [ program_form['days'],  program_form['start'],  program_form['end'],  program_form['description'] ],
+    }
+
+    #    END AGREGADO POR MARCE 
+    #    ***********************
 
     return render_to_response(
             'timeslots/program.html',
             {
+             'program': program,
+             'program_form': program_form,
+             'field_groups': field_groups,
              'weekly_programs': Program.get_weekly(request),
             },
             context_instance=RequestContext(request)
     )
+
 @login_required
 def program(request, program_id=None):
     if program_id:
@@ -199,11 +249,24 @@ def config_show(request, station="nacionalrock"):
     else:
         config_form = ConfigForm(data=model_to_dict(config))
 
+    field_groups = {
+        "radio"    : [ config_form['station'], config_form['streamurl'] ],
+        "contact"  : [ config_form['email'], config_form['facebook'], config_form['twitter'], config_form['web'] ],
+        "store"    : [ config_form['app_name'], config_form['short_description'], config_form['description'], config_form['keywords'] ],
+    }
+
+    image_groups = {
+        "images" : { 'image': config_form['image'], 'logo': config_form['logo'], 'logo_alpha': config_form['logo_alpha'], 'logo_home': config_form['logo_home'], 'feature_graphic': config_form['feature_graphic'] },
+        "del" : { 'image_del': config_form['image_del'], 'logo_del': config_form['logo_del'], 'logo_alpha_del': config_form['logo_alpha_del'], 'logo_home_del': config_form['logo_home_del'] }
+    }
+
     return render_to_response(
             'timeslots/config.html',
             {
              'config': config,
              'config_form': config_form,
+             'image_groups': image_groups,
+             'field_groups': field_groups,
             },
             context_instance=RequestContext(request)
         )
