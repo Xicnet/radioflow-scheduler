@@ -229,7 +229,14 @@
 
 			        	            <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
 
-			        	            <ul class="pagination pagination-sm inline" style="margin-right: 5px;">
+			        	        </div>
+			        	        <!-- /. tools -->
+
+			        	        <i class="ion ion-clipboard"></i>
+			        	        <h3 class="box-title">Programación</h3>
+
+			        	        <div class="pagination-wrapper text-center">
+			        	            <ul class="pagination pagination-sm">
 			        	            	{% for week_day in weekly_programs %}
 		        	            	    	{% for day,programs in week_day.items %}
 		        	              			<li class="toggleSiblings {% if day.name == 'Lunes' %}active{% endif %}" data-class="active"><a data-table="{{ day }}" href="javascript:void(0)">{{ day.name|slice:"0:2" }}</a></li>
@@ -237,10 +244,6 @@
 	        	            	    	{% endfor %}
 			        	            </ul>
 			        	        </div>
-			        	        <!-- /. tools -->
-
-			        	        <i class="ion ion-clipboard"></i>
-			        	        <h3 class="box-title">Programación</h3>
 
 			        	    </div>
 			        	    <!-- /.box-header -->

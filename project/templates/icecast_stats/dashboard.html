@@ -293,13 +293,13 @@
 
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-xs-4">
+                                    <div class="col-sm-4 col-xs-12">
                                         <div class="chart tab-pane" id="devices-chart" style="position: relative; height: 240px;"></div>
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="col-sm-4 col-xs-12">
                                         <div class="chart tab-pane" id="browsers-chart" style="position: relative; height: 240px;"></div>
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="col-sm-4 col-xs-12">
                                         <div class="chart tab-pane" id="os-chart" style="position: relative; height: 240px;"></div>
                                     </div>
                                 </div>
@@ -383,20 +383,21 @@
                                     <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-widgets="ConexionesHora" data-api="programs"><i class="fa fa-calendar"></i></button>
                                     <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
 
-                                    <ul class="pagination pagination-sm inline" style="margin-right: 5px;">
-                                      <li class="toggleSiblings active" data-class="active"><a data-table="1" href="javascript:void(0)">lu</a></li>
-                                      <li class="toggleSiblings" data-class="active"><a data-table="2" href="javascript:void(0)">ma</a></li>
-                                      <li class="toggleSiblings" data-class="active"><a data-table="3" href="javascript:void(0)">mi</a></li>
-                                      <li class="toggleSiblings" data-class="active"><a data-table="4" href="javascript:void(0)">ju</a></li>
-                                      <li class="toggleSiblings" data-class="active"><a data-table="5" href="javascript:void(0)">vi</a></li>
-                                      <li class="toggleSiblings" data-class="active"><a data-table="6" href="javascript:void(0)">sa</a></li>
-                                      <li class="toggleSiblings" data-class="active"><a data-table="0" href="javascript:void(0)">do</a></li>
-                                    </ul>
                                 </div>
                                 <!-- /. tools -->
 
                                 <i class="ion ion-clipboard"></i>
                                 <h3 class="box-title"></h3>
+
+                                <div class="pagination-wrapper text-center">
+                                    <ul class="pagination pagination-sm">
+                                        {% for week_day in weekly_programs %}
+                                            {% for day,programs in week_day.items %}
+                                            <li class="toggleSiblings {% if day.name == 'Lunes' %}active{% endif %}" data-class="active"><a data-table="{{ day }}" href="javascript:void(0)">{{ day.name|slice:"0:2" }}</a></li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
 
                             </div>
                             <!-- /.box-header -->
@@ -451,4 +452,34 @@
 
             </section>
             <!-- /.content -->
+
+             <div id="chat-wrapper">
+                <div id="chat-header">
+                    <h4><span class="ion-chatbubbles"></span> <span class="logo">Radio<b>APP</b> Chat</span></h4>
+                    <div class="chat-btns">
+                        <a href="#" class="toggleClass" data-class="chat-workspace" data-target="body" data-event="resize">
+                            <i class="ion-android-contract"></i>
+                            <i class="ion-android-expand"></i>
+                        </a>
+                        <a href="#" class="close-chat toggleClass" data-class="chat-active" data-target="body" data-event="resize">
+                            <i class="ion-close"></i>
+                        </a>
+                    </div>
+                </div>
+                <div id="chat-iframe-wrapper">
+                    <iframe id="chat-iframe" src="https://dashboard.tawk.to/login?lang=es" width="100%" height="100%" style="display: none;"></iframe>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function() {
+                    if ( !isTablet() ) {   
+                        $('.navbar-static-top .navbar-custom-menu > .nav').prepend('\
+                                <li><a href="javascript:void(0)" class="addClass toggleClass" data-class="chat-active" data-add-class="chat-workspace" data-target="body"><i class="ion ion-chatbubbles"></i> <span>Chat</span></a></li>\
+                            ')
+                    }
+                });
+            </script>
+
+
 {% endblock %}

@@ -570,6 +570,12 @@ jQuery(function($){
 		$(this).siblings().removeClass( $(this).attr('data-class') );
   		$(this).addClass($(this).attr('data-class'))
   	});
+  	// Auto add class
+  	$(document).on('mousedown','.addClass[data-add-class]',function(e){ 
+  		e.preventDefault();
+  		var target = $(this).attr('data-target') || this;
+  		$(target).addClass($(this).attr('data-add-class'))
+  	});
   	// Auto toggle class
   	$(document).on('mousedown','.toggleClass[data-class]',function(e){ 
   		e.preventDefault();

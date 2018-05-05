@@ -34,6 +34,17 @@ def programacion(request):
 
     return redirect('/program/')
 
+@login_required
+def chat(request):
+
+    return render_to_response(
+            'icecast_stats/chat.html',
+            {
+             'weekly_programs': Program.get_weekly(request),
+            },
+            context_instance=RequestContext(request)
+        )
+
 
 # Serializers define the API representation.
 class IcecastLogSerializer(serializers.ModelSerializer):
