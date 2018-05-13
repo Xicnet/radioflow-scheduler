@@ -567,6 +567,9 @@ form .alert.alert-danger {
 		right: 55px;
 		top: 6px;
 	}
+	#ConexionesHora .pagination-wrapper {
+	    right: 90px;
+	}
 }
 
 @media (max-width: 767px){

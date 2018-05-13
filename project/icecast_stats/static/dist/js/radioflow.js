@@ -41,7 +41,7 @@ $(function () {
                 firstDay: moment.localeData().firstDayOfWeek()
             },
             maxDate: moment(),
-            startDate: moment().subtract(90, 'days'),
+            startDate: moment().subtract(30, 'days'),
             endDate  : moment()
 
         }, function (start, end, text) {

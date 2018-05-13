@@ -341,9 +341,11 @@ function DashBoard(widgets, requireLogs) {
         $.ajax({
             url: targetApiPath,
             type: 'GET',
-            // data: { format: 'json', mount: 'radioapp.mp3', start: startToISO, end: endToISO },
+            data: { format: 'json', mount: mount, start: startToISO, end: endToISO },
+            dataType: 'json',
             success: function(logs) {
                 // console.log(logs);
+                console.log(logs.length);
 
                 var programlogs = [];
 
@@ -394,14 +396,28 @@ function DashBoard(widgets, requireLogs) {
 
         $('.connectedSortable .box-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
 
-        var endDate = new Date();
-        var startDate = new Date();
         
-        endDate.setDate(endDate.getDate() - 1);
-        startDate.setMonth(startDate.getMonth() - 3);
+        var mainDateRange = $('#main-range');
+        var startDate = new Date();
+        var endDate = new Date();
+        
 
-        endToISO = endDate.toISOString().split('T')[0];
+        if (mainDateRange.length){
+
+            var dateRangeData = mainDateRange.data('daterangepicker');
+
+            startDate = dateRangeData.startDate._d;
+            endDate = dateRangeData.endDate._d;
+
+        }else{
+
+            startDate.setMonth(startDate.getMonth() - 1);
+            endDate.setDate(endDate.getDate() - 1);
+            
+        }
+
         startToISO = startDate.toISOString().split('T')[0];
+        endToISO = endDate.toISOString().split('T')[0];
 
         this.widgets.map(function(widget){    
             return new self.Widget(widget);
