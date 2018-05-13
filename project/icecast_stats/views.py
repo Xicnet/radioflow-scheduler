@@ -2,6 +2,7 @@ import os.path
 import datetime
 import pytz
 
+from django.conf import settings
 from django.db.models import F
 from datetime import timedelta
 
@@ -18,6 +19,8 @@ from rest_framework import serializers
 from timeslot.models import Program, Day, Config
 
 from icecast_stats.models import IcecastLog, ProgramStat
+
+from realtime_stats import StatsCollector
 
 @login_required
 def index(request):
@@ -36,6 +39,26 @@ def index(request):
 def programacion(request):
 
     return redirect('/program/')
+
+@login_required
+def realtime(request):
+    print settings.ICECAST_URL
+    stats = StatsCollector(
+            settings.ICECAST_URL,
+            settings.ICECAST_USER,
+            settings.ICECAST_PASS,
+            settings.ICECAST_REALM,
+            settings.ICECAST_MOUNT
+            )
+    stats_data = stats.run()
+
+    return render_to_response(
+            'icecast_stats/realtime.html',
+            {
+             'listeners': stats_data,
+            },
+            context_instance=RequestContext(request)
+        )
 
 @login_required
 def chat(request):
