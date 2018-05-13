@@ -134,7 +134,7 @@ var widgets = {
             $body: $('#auto-compare .box-body'),
             $boxTitle: $('#auto-compare .box-title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -146,16 +146,18 @@ var widgets = {
 
                 var tags = [];
                 var countries = [];
-                var devices = ['Desktop','Mobile','Tablet'];
+                var devices = [];
 
                 if ($.fn.tagsinput) {
 
+                    var thisWidget = this;
+
                     if ( !this.initialized ) {
 
-                        $("#auto-compare .tagsinput")
+                        thisWidget.$el.find(".tagsinput")
                         .on('itemRemoved', function(event) {
                           // event.item: contains the item
-                          dashBoard.widgets["auto-compare"].render(logs);
+                          thisWidget.render(logs);
                         })
                         .tagsinput({
                             allowDuplicates: false,
@@ -173,18 +175,18 @@ var widgets = {
 
                     }else{
 
-                        tags = $("#auto-compare .tagsinput").tagsinput('items');
+                        tags = thisWidget.$el.find(".tagsinput").tagsinput('items');
                     }
                 
                     if (!tags.length) {
-                        $("#auto-compare .tagsinput-wrapper").hide();
+                        thisWidget.$el.find(".tagsinput-wrapper").hide();
                     }else{
-                        $("#auto-compare .tagsinput-wrapper").show();
+                        thisWidget.$el.find(".tagsinput-wrapper").show();
                     }
 
                 }else{
 
-                    $("#auto-compare .tagsinput-wrapper").remove();
+                    thisWidget.$el.find(".tagsinput-wrapper").remove();
 
                 }
 
@@ -311,6 +313,8 @@ var widgets = {
 
                 if ($.fn.tagsinput) {
 
+                    var thisWidget = this;
+
                     if (countries.length) {
                         countries.sort();
                         $('#auto-compare ul[data-filter="cc"]').html('<li><a href="-filter">'+countries.join('</a></li><li><a href="-filter">')+'</a></li>')    
@@ -342,12 +346,12 @@ var widgets = {
                             $(this).toggleClass('added');
 
                             if ( !arrayHasVal(tags,{text: thisTag.text}) ) {
-                                $("#auto-compare .tagsinput").tagsinput('add', thisTag);
+                                thisWidget.$el.find(".tagsinput").tagsinput('add', thisTag);
                             }else{
-                                $("#auto-compare .tagsinput").tagsinput('remove', thisTag);                             
+                                thisWidget.$el.find(".tagsinput").tagsinput('remove', thisTag);                             
                             }
 
-                            dashBoard.widgets["auto-compare"].render(logs);
+                            thisWidget.render(logs);
 
                         });
 
@@ -371,7 +375,7 @@ var widgets = {
             $body: $('#geo-audiencia .box-body'),
             $boxTitle: $('#geo-audiencia .box-title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -579,69 +583,74 @@ var widgets = {
                     var pendingIpRequests = logs.length;
                     var geoIpData = localJSON.get('geoIpData');
 
-                    for (var i = 0; i < logs.length; i++) {
+
+
+
+                    $('#geo-tabla').closest('.table-wrapper').hide()
+
+                    // for (var i = 0; i < logs.length; i++) {
                         
-                        var thisIp = logs[i].ip;
+                    //     var thisIp = logs[i].ip;
 
-                        if ( geoIpData[thisIp] ) {
+                    //     if ( geoIpData[thisIp] ) {
 
-                            var data = geoIpData[thisIp];
-                            if (typeof data == 'object'  && data.city) {
-                                if (!regionsData[data.city]) regionsData[data.city] = {count:0, data:data};
-                                regionsData[data.city].count++;
-                            }
+                    //         var data = geoIpData[thisIp];
+                    //         if (typeof data == 'object'  && data.city) {
+                    //             if (!regionsData[data.city]) regionsData[data.city] = {count:0, data:data};
+                    //             regionsData[data.city].count++;
+                    //         }
 
-                            pendingIpRequests--;
-                            if (pendingIpRequests==0) buildTable('#geo-tabla',regionsData);
+                    //         pendingIpRequests--;
+                    //         if (pendingIpRequests==0) buildTable('#geo-tabla',regionsData);
 
-                            continue;
-                        }
+                    //         continue;
+                    //     }
 
-                        setTimeout( function(asyncIp){ 
+                    //     setTimeout( function(asyncIp){ 
 
-                            // city             "Buenos Aires"
-                            // country_code     "AR"
-                            // country_name     "Argentina"
-                            // ip               "190.192.64.102"
-                            // latitude         -34.6033
-                            // longitude        -58.3816
-                            // metro_code       0
-                            // region_code      "C"
-                            // region_name      "Buenos Aires F.D."
-                            // time_zone        "America/Argentina/Buenos_Aires"
-                            // zip_code         "34034"
+                    //         // city             "Buenos Aires"
+                    //         // country_code     "AR"
+                    //         // country_name     "Argentina"
+                    //         // ip               "190.192.64.102"
+                    //         // latitude         -34.6033
+                    //         // longitude        -58.3816
+                    //         // metro_code       0
+                    //         // region_code      "C"
+                    //         // region_name      "Buenos Aires F.D."
+                    //         // time_zone        "America/Argentina/Buenos_Aires"
+                    //         // zip_code         "34034"
 
-                            var geoip = 'https://freegeoip.net/json/'+asyncIp;
+                    //         var geoip = 'https://freegeoip.net/json/'+asyncIp;
 
-                            $.ajax({
-                                url: geoip,
-                                type: 'GET',
-                                success: function(data) {
-                                    // console.log(data);
+                    //         $.ajax({
+                    //             url: geoip,
+                    //             type: 'GET',
+                    //             success: function(data) {
+                    //                 // console.log(data);
 
-                                    if (typeof data == 'object'  && data.city) {
-                                        if (!regionsData[data.city]) regionsData[data.city] = {count:0, data:data};
-                                        regionsData[data.city].count++;
-                                    }
+                    //                 if (typeof data == 'object'  && data.city) {
+                    //                     if (!regionsData[data.city]) regionsData[data.city] = {count:0, data:data};
+                    //                     regionsData[data.city].count++;
+                    //                 }
 
-                                    pendingIpRequests--;
-                                    if (pendingIpRequests==0) buildTable('#geo-tabla',regionsData);
+                    //                 pendingIpRequests--;
+                    //                 if (pendingIpRequests==0) buildTable('#geo-tabla',regionsData);
 
-                                    localJSON.update('geoIpData',asyncIp,data);
+                    //                 localJSON.update('geoIpData',asyncIp,data);
 
-                                },
-                               error: function(error){
-                                    console.log(error.statusText);
+                    //             },
+                    //            error: function(error){
+                    //                 console.log(error.statusText);
 
-                                    pendingIpRequests--;
-                                    if (pendingIpRequests==0) buildTable('geo-tabla',regionsData);
+                    //                 pendingIpRequests--;
+                    //                 if (pendingIpRequests==0) buildTable('geo-tabla',regionsData);
 
-                               }                            
-                            });
+                    //            }                            
+                    //         });
 
-                        }, 500, thisIp );
+                    //     }, 500, thisIp );
                         
-                    }
+                    // }
 
                 };
 
@@ -668,9 +677,11 @@ var widgets = {
             $body: $('#ConexionesHora .box-body'),
             $boxTitle: $('#ConexionesHora .box-title'),
             validate: function(logs, programlogs){
-                return  ( $.isArray(logs) && logs.length ) 
-                        || 
-                        ( $.isArray(programlogs) && programlogs.length )
+                return this.$el.length && (
+                    ( $.isArray(logs) && logs.length ) 
+                    || 
+                    ( $.isArray(programlogs) && programlogs.length )
+                )
             },
             render: function(logs, programlogs){
 
@@ -767,7 +778,7 @@ var widgets = {
 
                                 });
 
-                                tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(day)+'">';
+                                tableDataToHtml += '<table class="table table-striped table-bordered" data-page="'+(weekDay)+'">';
 
                                 for (var hour in visitorsData[day]) {
 
@@ -899,9 +910,11 @@ var widgets = {
             $body: $('#programs-stats .box-body'),
             $boxTitle: $('#programs-stats .box-title'),
             validate: function(logs, programlogs){
-                return  ( $.isArray(logs) && logs.length ) 
-                        || 
-                        ( $.isArray(programlogs) && programlogs.length )
+                return this.$el.length && (
+                    ( $.isArray(logs) && logs.length ) 
+                    || 
+                    ( $.isArray(programlogs) && programlogs.length )
+                )
             },
             render: function(logs, programlogs){
 
@@ -1144,7 +1157,7 @@ var widgets = {
             $body: $('#devices .box-body'),
             $boxTitle: $('#devices .box-title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -1301,7 +1314,7 @@ var widgets = {
             $body: $('#sent-bytes .box-body'),
             $boxTitle: $('#sent-bytes .box-title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -1319,16 +1332,18 @@ var widgets = {
 
                 var tags = [];
                 var countries = [];
-                var devices = ['Desktop','Mobile','Tablet'];
+                var devices = [];
 
                 if ($.fn.tagsinput) {
 
+                    var thisWidget = this;
+
                     if ( !this.initialized ) {
 
-                        $("#sent-bytes .tagsinput")
+                        thisWidget.$el.find(".tagsinput")
                         .on('itemRemoved', function(event) {
                           // event.item: contains the item
-                          dashBoard.widgets["sent-bytes"].render(logs);
+                          thisWidget.render(logs);
                         })
                         .tagsinput({
                             allowDuplicates: false,
@@ -1346,18 +1361,18 @@ var widgets = {
 
                     }else{
 
-                        tags = $("#sent-bytes .tagsinput").tagsinput('items');
+                        tags = thisWidget.$el.find(".tagsinput").tagsinput('items');
                     }
                 
                     if (!tags.length) {
-                        $("#sent-bytes .tagsinput-wrapper").hide();
+                        thisWidget.$el.find(".tagsinput-wrapper").hide();
                     }else{
-                        $("#sent-bytes .tagsinput-wrapper").show();
+                        thisWidget.$el.find(".tagsinput-wrapper").show();
                     }
 
                 }else{
 
-                    $("#sent-bytes .tagsinput-wrapper").remove();
+                    thisWidget.$el.find(".tagsinput-wrapper").remove();
 
                 }
 
@@ -1472,6 +1487,8 @@ var widgets = {
 
                 if ($.fn.tagsinput) {
 
+                    var thisWidget = this;
+
                     if (countries.length) {
                         countries.sort();
                         $('#sent-bytes ul[data-filter="cc"]').html('<li><a href="-filter">'+countries.join('</a></li><li><a href="-filter">')+'</a></li>')  
@@ -1503,12 +1520,12 @@ var widgets = {
                             $(this).toggleClass('added');
 
                             if ( !arrayHasVal(tags,{text: thisTag.text}) ) {
-                                $("#sent-bytes .tagsinput").tagsinput('add', thisTag);
+                                thisWidget.$el.find(".tagsinput").tagsinput('add', thisTag);
                             }else{
-                                $("#sent-bytes .tagsinput").tagsinput('remove', thisTag);                               
+                                thisWidget.$el.find(".tagsinput").tagsinput('remove', thisTag);                               
                             }
 
-                            dashBoard.widgets["sent-bytes"].render(logs);
+                            thisWidget.render(logs);
 
                         });
 
@@ -1532,7 +1549,7 @@ var widgets = {
             $body: $('#small-box-aqua .inner'),
             $boxTitle: $('#small-box-aqua .title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -1561,7 +1578,7 @@ var widgets = {
             $body: $('#small-box-green .inner'),
             $boxTitle: $('#small-box-green .title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -1595,7 +1612,7 @@ var widgets = {
             $body: $('#small-box-yellow .inner'),
             $boxTitle: $('#small-box-yellow .title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -1631,7 +1648,7 @@ var widgets = {
             $body: $('#small-box-red .inner'),
             $boxTitle: $('#small-box-red .title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 
@@ -1668,7 +1685,7 @@ var widgets = {
             $body: $('#small-box-blue .inner'),
             $boxTitle: $('#small-box-blue .title'),
             validate: function(logs, programlogs){
-                return $.isArray(logs) && logs.length 
+                return this.$el.length && $.isArray(logs) && logs.length 
             },
             render: function(logs, programlogs){
 

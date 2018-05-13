@@ -2,6 +2,9 @@ import os.path
 import datetime
 import pytz
 
+from django.db.models import F
+from datetime import timedelta
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -79,7 +82,7 @@ class IcecastLogViewSet( generics.ListAPIView):
         if mount:
             logs = logs.filter(mount=mount)
         if start and end:
-            logs = logs.filter(datetime_start__gte=start, datetime_end__lte=end)
+            logs = logs.filter(datetime_start__gte=start, datetime_end__lte=end, datetime_end__gt=F('datetime_start') + timedelta(seconds=5) )
 
         return logs[:limit]
 
