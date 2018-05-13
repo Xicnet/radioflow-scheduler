@@ -71,7 +71,8 @@ class IcecastLogViewSet( generics.ListAPIView):
         limit  = self.request.query_params.get('limit', None)
 
         if self.request.user.is_superuser:
-            logs = IcecastLog.objects.all()
+            #logs = IcecastLog.objects.all()
+            logs = IcecastLog.objects.filter(mount=mount)
         else:
             #mount = os.path.basename(User.objects.get(username=self.request.user.username).config.streamurl)
             logs = IcecastLog.objects.filter(mount=mount)
@@ -106,7 +107,8 @@ class ProgramStatViewSet( generics.ListAPIView):
         limit  = self.request.query_params.get('limit', None)
 
         if self.request.user.is_superuser:
-            program_stat = ProgramStat.objects.all()
+            #program_stat = ProgramStat.objects.all()
+            program_stat = ProgramStat.objects.filter(log_entry__mount=mount)
         else:
             program_stat = ProgramStat.objects.filter(log_entry__mount=mount)
 
