@@ -1,0 +1,10 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h2>Raltime Stats</h2>
+
+{% for l in listeners %}
+  (mountpoint: {{ l.mount }}) | IP: {{ l.ip }} | Time connected: {{ l.duration }} | User Agent: {{ l.user_agent }} | Country Code: {{ l.country.0 }} | Country Name: {{ l.country.1 }} <br/>
+{% endfor %}
+
+{% endblock %}

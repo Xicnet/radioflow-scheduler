@@ -211,6 +211,13 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL=True
 
+# Icecast server settings (for realtime stats)
+ICECAST_URL   = "http://stream.yourserver.com:8000"
+ICECAST_USER  = "admin"
+ICECAST_PASS  = "hackme"
+ICECAST_REALM = "Icecast2 Server"
+ICECAST_MOUNT = "test.mp3"
+
 try:
     from local_settings import *
 except ImportError, e:
